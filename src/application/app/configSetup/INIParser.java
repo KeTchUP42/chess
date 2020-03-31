@@ -1,6 +1,6 @@
-package app.src.configSetup;
+package application.app.configSetup;
 
-import objects.figures.src.colors.GameColors;
+import objects.src.colors.GameColors;
 import org.ini4j.Wini;
 
 import java.awt.*;
@@ -35,10 +35,13 @@ public class INIParser {
      */
     public boolean setColorConfig() {
         try {
-            GameColors.firstColor = (Color) Color.class.getField(
+            Color firstColor = (Color) Color.class.getField(
                     this.ini.get("colorSettings", "FirstColor", String.class)).get(null);
-            GameColors.secondColor = (Color) Color.class.getField(
+            Color secondColor = (Color) Color.class.getField(
                     this.ini.get("colorSettings", "SecondColor", String.class)).get(null);
+            if (firstColor == secondColor) return false;
+            GameColors.firstColor = firstColor;
+            GameColors.secondColor = secondColor;
             return true;
         } catch (Exception ignored) {
             return false;

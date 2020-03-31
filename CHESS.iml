@@ -2,10 +2,9 @@
 <module type="WEB_MODULE" version="4">
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
-    <content url="file://$MODULE_DIR$/../CHESS">
-      <sourceFolder url="file://$MODULE_DIR$/src1" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../CHESS/Tests" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/../CHESS/src" isTestSource="false" />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/Tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -18,7 +17,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="ini4j-0.5.41" level="project" />
     <orderEntry type="module" module-name="gameCore" />
     <orderEntry type="module-library">
       <library>
@@ -29,5 +27,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="ini4j-0.5.4" level="project" />
   </component>
 </module>

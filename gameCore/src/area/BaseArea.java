@@ -3,6 +3,7 @@ package area;
 import area.src.Abstract.AbstractArea;
 import area.src.Interfaces.IArea;
 import objects.src.Interfaces.IObject;
+import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 
@@ -19,7 +20,7 @@ public abstract class BaseArea extends AbstractArea implements IArea {
      * @param object Объект
      * @return boolean
      */
-    public boolean setObject(IObject object) {
+    public boolean setObject(@NotNull IObject object) {
         boolean isValid = this.isValidNumber(object.getSquareNumber()) &&
                 this.getObjectFromList(object.getSquareNumber()) == null;
         if (isValid)
@@ -53,6 +54,4 @@ public abstract class BaseArea extends AbstractArea implements IArea {
                 this.ObjectList[ObjectSquareNumber].getColor() == objectColor &&
                 this.ObjectList[ObjectSquareNumber].move(SquareNumber, this);
     }
-
-
 }

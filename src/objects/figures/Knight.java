@@ -3,6 +3,7 @@ package objects.figures;
 import area.src.Interfaces.IArea;
 import objects.figures.src.Abstract.AbstractFigure;
 import objects.src.Interfaces.IObject;
+import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 
@@ -18,7 +19,7 @@ public class Knight extends AbstractFigure implements IObject {
 
 
     @Override
-    public boolean isInRange(int SquareNumber, IArea Board) {
+    public boolean isInRange(int SquareNumber, @NotNull IArea Board) {
         return this.knightStepValid(SquareNumber, Board) &&
                 super.isInRange(SquareNumber, Board);
     }
@@ -30,9 +31,9 @@ public class Knight extends AbstractFigure implements IObject {
      * @param Board        Доска
      * @return Возможно это или нет
      */
-    private boolean knightStepValid(int SquareNumber, IArea Board) {
+    private boolean knightStepValid(int SquareNumber, @NotNull IArea Board) {
         int absY = Math.abs(Board.getYCoordinate(this.getSquareNumber()) - Board.getYCoordinate(SquareNumber));
         int absX = Math.abs(Board.getXCoordinate(this.getSquareNumber()) - Board.getXCoordinate(SquareNumber));
-        return absY + absX == 3;
+        return (absY == 2 && absX == 1) || (absX == 2 && absY == 1);
     }
 }

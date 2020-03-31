@@ -2,8 +2,9 @@ package objects.figures;
 
 import area.src.Interfaces.IArea;
 import objects.figures.src.Abstract.AbstractFigure;
-import objects.figures.src.colors.GameColors;
+import objects.src.colors.GameColors;
 import objects.src.Interfaces.IObject;
+import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 
@@ -25,7 +26,7 @@ public class Pawn extends AbstractFigure implements IObject {
 
 
     @Override
-    public boolean isInRange(int SquareNumber, IArea Board) {
+    public boolean isInRange(int SquareNumber, @NotNull IArea Board) {
         return this.pawnStepValid(SquareNumber, Board) &&
                 super.isInRange(SquareNumber, Board);
     }
@@ -37,7 +38,7 @@ public class Pawn extends AbstractFigure implements IObject {
      * @param Board        Доска
      * @return Возможно ли это
      */
-    private boolean pawnStepValid(int SquareNumber, IArea Board) {
+    private boolean pawnStepValid(int SquareNumber, @NotNull IArea Board) {
         //Множитель решающий в каком направлении идет пешка
         int multiplier = this.color == GameColors.firstColor ? 1 : -1;
         //Один стандартный шаг

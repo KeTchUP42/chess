@@ -1,8 +1,9 @@
-package app.src.Abstract;
+package application.app.Abstract;
 
-import app.src.configSetup.INIParser;
+import application.app.configSetup.INIParser;
 import brains.src.Interfaces.IPlayer;
-import objects.figures.src.colors.GameColors;
+import objects.src.colors.GameColors;
+import org.jetbrains.annotations.NotNull;
 import visual.Interfaces.IVisual;
 
 import java.io.IOException;
@@ -27,7 +28,7 @@ public abstract class AbstractApplication extends AbstractConfigSetter {
      * @throws IOException Вызывает ошибку при отсутствии файла
      */
     protected void gameSetup() throws IOException {
-        INIParser parser = new INIParser("src/app/configs/config.ini"); //TODO
+        INIParser parser = new INIParser("src/application/configs/config.ini");
         parser.setColorConfig();
         this.setConfig(parser.getConfig());
     }
@@ -36,13 +37,16 @@ public abstract class AbstractApplication extends AbstractConfigSetter {
      * Основной игровой цикл
      */
     protected void gameRun() {
+        //Начальная отрисовка области
+        this.visual.Draw(this.area);//TODO
         //Решение порядка ходов
-        IPlayer firstPlayer = this.firstPlayer.getColor() == GameColors.firstColor ? this.firstPlayer : this.secondPlayer;
-        IPlayer secondPlayer = !(this.firstPlayer.getColor() == GameColors.firstColor) ? this.firstPlayer : this.secondPlayer;
+        IPlayer firstPlayer = this.brains[0].getColor() == GameColors.firstColor ? this.brains[0] : this.brains[1];
+        IPlayer secondPlayer = !(this.brains[0].getColor() == GameColors.firstColor) ? this.brains[0] : this.brains[1];
         while (true) {
             // 0 - норма, 1 - проиграл, 2 - ход невозможен
             boolean exit = false;
             while (true) {
+                this.visual.Draw(this.area);//TODO
                 int stepResult = firstPlayer.step();
                 if (stepResult == 1) {
                     exit = true;
@@ -52,6 +56,7 @@ public abstract class AbstractApplication extends AbstractConfigSetter {
             }
             if (exit) break;
             while (true) {
+                this.visual.Draw(this.area);//TODO
                 int stepResult = secondPlayer.step();
                 if (stepResult == 1) {
                     exit = true;
@@ -69,7 +74,7 @@ public abstract class AbstractApplication extends AbstractConfigSetter {
      *
      * @return Массив для setConfig
      */
-    protected String[] playerConfig(String[] configItems) {
+    protected String[] playerConfig(@NotNull String[] configItems) {
         String[] configData = new String[configItems.length];
         for (int index = 0; index < configItems.length; index++) {
             configData[index] = this.visual.sendMessage("Введи параметр " + configItems[index], true, false).trim();
@@ -77,21 +82,19 @@ public abstract class AbstractApplication extends AbstractConfigSetter {
         return configData;
     }
 
-
     /**
      * @throws IOException Вызывает ошибку при отсутствии файла
      */
-    protected void loadConfigFromFile(boolean variable) throws IOException {
-        if (variable) {
+    protected void loadConfigFromFile(boolean doLoad) throws IOException {
+        if (doLoad) {
             this.gameSetup();
         } else {
             this.setConfig(this.playerConfig(
                     new String[]{
                             "areaType", "firstPlayerColor", "firstPlayerType",
                             "secondPlayerType", "secondPlayerNickName",
-                            "firstPlayerNickName" //При добавлении новых параметров в конфиге добавить их имена в массив
-                    }));
+                            "firstPlayerNickName"
+                    })); //При добавлении новых параметров в конфиге добавить их имена в массив
         }
-        this.visual.reDraw(this.area); //TODO
     }
 }

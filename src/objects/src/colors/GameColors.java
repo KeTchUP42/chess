@@ -1,4 +1,4 @@
-package objects.figures.src.colors;
+package objects.src.colors;
 
 import java.awt.*;
 

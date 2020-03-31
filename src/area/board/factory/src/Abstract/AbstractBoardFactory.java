@@ -1,9 +1,10 @@
-package objects.board.factory.Abstract;
+package area.board.factory.src.Abstract;
 
 import area.src.Interfaces.IArea;
-import objects.board.BoardArea;
+import area.board.BoardArea;
 import objects.figures.*;
-import objects.figures.src.colors.GameColors;
+import objects.src.colors.GameColors;
+
 
 public abstract class AbstractBoardFactory {
     /**

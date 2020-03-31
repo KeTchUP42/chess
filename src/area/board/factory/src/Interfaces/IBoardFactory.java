@@ -1,4 +1,4 @@
-package objects.board.factory.Interfaces;
+package area.board.factory.src.Interfaces;
 
 import area.src.Interfaces.IArea;
 

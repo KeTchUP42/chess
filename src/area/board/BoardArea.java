@@ -1,4 +1,4 @@
-package objects.board;
+package area.board;
 
 import area.BaseArea;
 import area.src.Interfaces.IArea;
@@ -13,6 +13,6 @@ public class BoardArea extends BaseArea implements IArea {
     public BoardArea(int areaSize) {
         super(areaSize);
     }
-
+    //TODO Добавить функционал для проверок различных ситуаций на доске
 
 }

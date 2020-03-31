@@ -6,10 +6,8 @@ public interface IVisual {
 
     /**
      * Перерисовка области
-     *
-     * @return лог цифра
      */
-    int reDraw(IArea area);
+    void Draw(IArea area);
 
     /**
      * Метод реализует логику общания с игроком

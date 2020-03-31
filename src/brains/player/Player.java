@@ -21,10 +21,12 @@ public class Player extends AbstractPlayer implements IPlayer {
      */
     @Override
     public int step() {
+        if (this.isKingAlive(this.nickName)) return 1;
 
         int squareNumber;
         int figureSquareNumber;
         try {
+            this.visual.sendMessage("Очередь " + this.nickName, false, false);
             String input = this.visual.sendMessage(
                     "Введи номер клетки на которой вы хотите двинуть фигуру.", true, false);
             if (input.toUpperCase().equals("EXIT") || input.toUpperCase().equals("DIE")) return 1;
@@ -39,10 +41,9 @@ public class Player extends AbstractPlayer implements IPlayer {
             this.visual.sendMessage("Неправильный ввод!", false, false);
             return 2;
         }
-        this.visual.reDraw(this.Area);
         //Движение фигуры
-        boolean isValidStep = this.Area.moveObjectSafe(squareNumber, figureSquareNumber, this.Color);
+        boolean isValidStep = this.boardArea.moveObjectSafe(squareNumber, figureSquareNumber, this.Color);
         if (isValidStep) this.visual.sendMessage(this.nickName + " сделал ход", false, false);
-        return isValidStep ? 0 : 2; //TODO !!!
+        return isValidStep ? 0 : 2;
     }
 }

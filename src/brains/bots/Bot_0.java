@@ -9,17 +9,35 @@ import java.awt.*;
 
 public class Bot_0 extends AbstractPlayer implements IPlayer {
 
-    public Bot_0(IArea area, Color color, IVisual visual) {
-        super(area, color, visual);
+    public Bot_0(IArea boardArea, Color color, IVisual visual) {
+        super(boardArea, color, visual);
     }
 
     /**
-     * @return // 0 - норма, 1 - проиграл, 2 - ход невозможен
+     * @return 0 - норма, 1 - проиграл, 2 - ход невозможен
      */
     @Override
     public int step() {
-        //TODO
-        this.visual.sendMessage("Bot_0 сделал ход", false, false);
-        return 0;
+        if (!this.isKingAlive("Bot_0")) return 1;
+
+        while (true) {
+            if (this.boardArea.moveObjectSafe((int) (Math.random() * this.boardArea.getMaxSquareNumber())
+                    , (int) (Math.random() * this.boardArea.getMaxSquareNumber()), this.Color))
+                return this.sleepReturn(0, 2000);
+        }
+    }
+
+    /**
+     * @param value       То что нужно вернуть после задержки
+     * @param timeMilSecs Кол во миллисекунд
+     * @return value
+     */
+    private int sleepReturn(int value, int timeMilSecs) {
+        try {
+            Thread.sleep(timeMilSecs);
+        } catch (Exception e) {
+        }
+        this.stepNumber++;
+        return value;
     }
 }
