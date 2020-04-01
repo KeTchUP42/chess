@@ -1,41 +1,28 @@
 package area.src.Abstract;
 
+import area.src.Interfaces.IArea;
 import objects.src.Interfaces.IObject;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * @author Roman
  */
-public abstract class AbstractArea {
-    protected int maxSquareNumber;
+public abstract class AbstractArea extends AbstractAreaCore implements IArea {
 
-    protected int AreaSize;
+    // Работают в связке чтобы восстанавливать последний ход
+    protected ArrayList<IObject> lastMovedObjectArrayList = new ArrayList<>();
 
-    protected IObject[] ObjectList;
+    protected ArrayList<IObject> lastKilledObjectArrayList = new ArrayList<>();
 
     /**
      * @param areaSize Размер области
      */
     public AbstractArea(int areaSize) {
-        this.AreaSize = areaSize;
-        this.maxSquareNumber = this.AreaSize * this.AreaSize;
-        this.ObjectList = new IObject[this.maxSquareNumber];
+        super(areaSize);
     }
-
-    /**
-     * @param object Объект
-     * @return Возвращает удачно ли прошла установка
-     */
-    public abstract boolean setObject(IObject object);
-
-
-    /**
-     * @param ObjectSquareNumber Номер клетки с объектом
-     * @param SquareNumber       Номер клетки куда нужно переместить объект
-     * @return Возвращает удачно ли прошло движение
-     */
-    public abstract boolean moveObject(int ObjectSquareNumber, int SquareNumber);
 
     /**
      * @param ObjectSquareNumber Номер клетки с объектом
@@ -43,79 +30,90 @@ public abstract class AbstractArea {
      * @param objectColor        Цвет объекта
      * @return Возвращает удачно ли прошло движение
      */
-    public abstract boolean moveObjectSafe(int ObjectSquareNumber, int SquareNumber, Color objectColor);
+    public boolean moveObjectSafe(int ObjectSquareNumber, int SquareNumber, Color objectColor) {
+
+        return this.isValidNumber(ObjectSquareNumber) && this.isValidNumber(SquareNumber)
+                && this.ObjectList[ObjectSquareNumber] != null && ObjectSquareNumber != SquareNumber &&
+                this.ObjectList[ObjectSquareNumber].getColor() == objectColor &&
+                this.ObjectList[ObjectSquareNumber].move(SquareNumber, this);
+    }
+
 
     /**
-     * Проверка может ли существовать такая клетка
+     * Задаем последний объект который двигался удаленный объект
      *
-     * @param SquareNumber Номер клетки
-     * @return Возвращает валиден ли номер клетки
+     * @param SquareNumber номер клетки в которой будет удален объект
      */
-    protected boolean isValidNumber(int SquareNumber) {
-        return SquareNumber >= 0 && SquareNumber < this.maxSquareNumber;
+    public boolean setLastMovedObject(int SquareNumber) {
+        if (this.isValidNumber(SquareNumber))
+            try {
+                this.lastMovedObjectArrayList.add(this.getObjectFromList(SquareNumber).clone());
+            } catch (CloneNotSupportedException e) {
+                return false;
+            }
+        return this.isValidNumber(SquareNumber);
     }
 
     /**
-     * @param ObjectSquareNumber Номер клетки на которой нужно удалить объект
-     * @return Возвращает удачно ли прошло удаление
+     * Получаем последний объект который двигался
+     *
+     * @return IObject
      */
-    public boolean deleteObject(int ObjectSquareNumber) {
-        if (this.isValidNumber(ObjectSquareNumber)) {
-            this.ObjectList[ObjectSquareNumber] = null;
+    public Iterator<IObject> getLastMovedObjectIterator() {
+        return this.lastMovedObjectArrayList.iterator();
+    }
+
+    /**
+     * Задаем последний объект который двигался удаленный объект
+     *
+     * @param SquareNumber номер клетки в которой будет удален объект
+     */
+    public boolean setLastKilledObject(int SquareNumber) {
+        if (this.isValidNumber(SquareNumber))
+            try {
+                this.lastKilledObjectArrayList.add(this.getObjectFromList(SquareNumber) != null ? this.getObjectFromList(SquareNumber).clone() : null);
+            } catch (CloneNotSupportedException e) {
+                return false;
+            }
+        return this.isValidNumber(SquareNumber);
+    }
+
+    /**
+     * Получаем последний объект которого убили
+     *
+     * @return IObject
+     */
+    public Iterator<IObject> getLastKilledObjectIterator() {
+        return lastKilledObjectArrayList.iterator();
+    }
+
+
+    /**
+     * Восстанавливает несколько последних ходов
+     */
+    public void recallLastStep(int loopTimes) {
+        for (int loopT = 0; loopT < loopTimes; loopT++) {
+            //Проверка списков
+            if (this.lastKilledObjectArrayList.size() == 0 || this.lastMovedObjectArrayList.size() == 0) {
+                this.lastKilledObjectArrayList.clear();
+                this.lastMovedObjectArrayList.clear();
+                return;
+            }
+            //Ищем объект отпечаток которого остался
+            for (int index = 0; index < this.maxSquareNumber; index++) {
+                if (this.getObjectFromList(index) != null &&
+                        this.lastMovedObjectArrayList.get((this.lastMovedObjectArrayList.size() - 1)).getSquareNumber() == this.getObjectFromList(index).getLastPosition()) {
+                    //Соответствующие передвижения на доске
+                    this.setObject(this.lastMovedObjectArrayList.get((this.lastMovedObjectArrayList.size() - 1)));
+                    this.deleteObject(this.getObjectFromList(index).getSquareNumber());
+                    this.setObject(this.lastKilledObjectArrayList.get(this.lastKilledObjectArrayList.size() - 1));
+                    //Очищаем списки отпечатков
+                    this.lastMovedObjectArrayList.remove(this.lastMovedObjectArrayList.size() - 1);
+                    this.lastKilledObjectArrayList.remove(this.lastKilledObjectArrayList.size() - 1);
+
+                    break;
+                }
+            }
         }
-        return this.isValidNumber(ObjectSquareNumber);
-    }
-
-    /**
-     * @return Возвращает размер области
-     */
-    public int getAreaSize() {
-        return this.AreaSize;
-    }
-
-    /**
-     * @return Возвращает макс кол-во клеток
-     */
-    public int getMaxSquareNumber() {
-        return this.maxSquareNumber;
-    }
-
-    /**
-     * @param ObjectSquareNumber Номер клетки с объектом
-     * @return Возвращает нужный объект
-     */
-    public IObject getObjectFromList(int ObjectSquareNumber) {
-        return this.isValidNumber(ObjectSquareNumber) ? this.ObjectList[ObjectSquareNumber] : null;
-    }
-
-    /**
-     * Возвращает координату X
-     *
-     * @param SquareNumber Номер клетки
-     * @return X
-     */
-    public int getXCoordinate(int SquareNumber) {
-        return SquareNumber % this.getAreaSize();
-    }
-
-    /**
-     * Возвращает координату Y
-     *
-     * @param SquareNumber Номер клетки
-     * @return Y
-     */
-    public int getYCoordinate(int SquareNumber) {
-        return SquareNumber / this.getAreaSize();
-    }
-
-    /**
-     * Конвертирует координаты в номер клетки
-     *
-     * @param XCoordinate X
-     * @param YCoordinate Y
-     * @return Номер клетки
-     */
-    public int getSquareNumber(int XCoordinate, int YCoordinate) {
-        return YCoordinate * this.getAreaSize() + XCoordinate;
     }
 }

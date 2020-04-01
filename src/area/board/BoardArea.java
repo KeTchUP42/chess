@@ -1,12 +1,11 @@
 package area.board;
 
-import area.BaseArea;
-import area.src.Interfaces.IArea;
+import area.src.Abstract.AbstractArea;
 
 /**
  * @author Roman
  */
-public class BoardArea extends BaseArea implements IArea {
+public class BoardArea extends AbstractArea {
     /**
      * @param areaSize Размер области
      */

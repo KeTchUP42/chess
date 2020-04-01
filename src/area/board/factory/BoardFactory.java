@@ -1,9 +1,9 @@
 package area.board.factory;
 
-import area.src.Interfaces.IArea;
 import area.board.BoardArea;
 import area.board.factory.src.Abstract.AbstractBoardFactory;
 import area.board.factory.src.Interfaces.IBoardFactory;
+import area.src.Interfaces.IArea;
 import objects.figures.King;
 import objects.figures.Queen;
 import objects.src.colors.GameColors;

@@ -1,13 +1,13 @@
-package application.app.Abstract;
+package app.src.Abstract;
 
+import area.board.factory.BoardFactory;
 import area.src.Interfaces.IArea;
 import brains.bots.Bot_0;
 import brains.player.Player;
 import brains.src.Interfaces.IPlayer;
-import area.board.factory.BoardFactory;
 import objects.src.colors.GameColors;
 import org.jetbrains.annotations.NotNull;
-import visual.Interfaces.IVisual;
+import visual.src.Interfaces.IVisual;
 
 abstract class AbstractConfigSetter {
     protected IVisual visual;
@@ -44,13 +44,15 @@ abstract class AbstractConfigSetter {
         switch (chooseConfig.toLowerCase()) {
 
             case "bot_0":
-                this.brains[0] = new Bot_0(this.area, colorConfig.equals("0") ? GameColors.firstColor :
-                        GameColors.secondColor, this.visual);
+                this.brains[0] = new Bot_0(this.area, colorConfig.equals("") || colorConfig.equals("standard")
+                        ? GameColors.firstColor :
+                        GameColors.secondColor, this.visual, nickName);
                 break;
             case "standard":
             case "player":
             default:
-                this.brains[0] = new Player(this.area, colorConfig.equals("0") ? GameColors.firstColor :
+                this.brains[0] = new Player(this.area, colorConfig.equals("") || colorConfig.equals("standard")
+                        ? GameColors.firstColor :
                         GameColors.secondColor, this.visual, nickName);
                 break;
         }
@@ -66,14 +68,16 @@ abstract class AbstractConfigSetter {
         switch (chooseConfig.toLowerCase()) {
 
             case "player":
-                this.brains[1] = new Player(this.area, !colorConfig.equals("0") ? GameColors.firstColor :
+                this.brains[1] = new Player(this.area, !(colorConfig.equals("") || colorConfig.equals("standard"))
+                        ? GameColors.firstColor :
                         GameColors.secondColor, this.visual, nickName);
                 break;
             case "standard":
             case "bot_0":
             default:
-                this.brains[1] = new Bot_0(this.area, !colorConfig.equals("0") ? GameColors.firstColor :
-                        GameColors.secondColor, this.visual);
+                this.brains[1] = new Bot_0(this.area, !(colorConfig.equals("") || colorConfig.equals("standard"))
+                        ? GameColors.firstColor :
+                        GameColors.secondColor, this.visual, nickName);
                 break;
         }
     }

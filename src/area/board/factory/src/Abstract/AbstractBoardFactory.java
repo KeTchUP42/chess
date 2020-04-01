@@ -1,7 +1,7 @@
 package area.board.factory.src.Abstract;
 
-import area.src.Interfaces.IArea;
 import area.board.BoardArea;
+import area.src.Interfaces.IArea;
 import objects.figures.*;
 import objects.src.colors.GameColors;
 

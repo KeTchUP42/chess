@@ -2,7 +2,7 @@ package brains.src.Abstract;
 
 import area.src.Interfaces.IArea;
 import objects.figures.King;
-import visual.Interfaces.IVisual;
+import visual.src.Interfaces.IVisual;
 
 import java.awt.*;
 
@@ -11,11 +11,13 @@ public abstract class AbstractPlayer {
     protected Color Color;
     protected IVisual visual;
     protected int stepNumber = 0;
+    protected String nickName;
 
-    public AbstractPlayer(IArea boardArea, Color color, IVisual visual) {
+    public AbstractPlayer(IArea boardArea, Color color, IVisual visual, String nickName) {
         this.boardArea = boardArea;
         this.Color = color;
         this.visual = visual;
+        this.nickName = nickName;
     }
 
     /**
@@ -37,15 +39,28 @@ public abstract class AbstractPlayer {
      *
      * @return Жив ли
      */
-    protected boolean isKingAlive(String botName) {
+    protected boolean isKingDead() {
         //Проверка на проигрыш
-        boolean isGameValid = false;
-        for (int i = 0; i < this.boardArea.getMaxSquareNumber(); i++) {
-            if (this.boardArea.getObjectFromList(i) instanceof King && this.boardArea.getObjectFromList(i).getColor() == this.Color)
-                isGameValid = true;
+        boolean isKingDead = true;
+        for (int index = 0; index < this.boardArea.getMaxSquareNumber(); index++) {
+            if (this.boardArea.getObjectFromList(index) instanceof King && this.boardArea.getObjectFromList(index).getColor() == this.Color)
+                isKingDead = false;
         }
-        if (!isGameValid) this.visual.sendMessage(botName + " проиграл на " + this.stepNumber + " ходе.", false, false);
+        return isKingDead;
+    }
 
-        return isGameValid;
+    /**
+     * @param value       То что нужно вернуть после задержки
+     * @param timeMilSecs Кол-во миллисекунд
+     * @return value
+     */
+    protected int sleepReturn(int value, int timeMilSecs) {
+        try {
+            Thread.sleep(timeMilSecs);
+        } catch (Exception e) {
+            this.visual.sendMessage(e.getMessage(), true, true);
+        }
+        this.stepNumber++;
+        return value;
     }
 }

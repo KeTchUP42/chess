@@ -2,11 +2,11 @@ package visual.standard;
 
 import area.src.Interfaces.IArea;
 import objects.figures.*;
-import objects.src.colors.GameColors;
 import objects.src.Interfaces.IObject;
+import objects.src.colors.GameColors;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-import visual.Interfaces.IVisual;
+import visual.src.Interfaces.IVisual;
 
 import java.util.Scanner;
 

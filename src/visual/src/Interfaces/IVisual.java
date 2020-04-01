@@ -1,4 +1,4 @@
-package visual.Interfaces;
+package visual.src.Interfaces;
 
 import area.src.Interfaces.IArea;
 

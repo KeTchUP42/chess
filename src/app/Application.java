@@ -1,7 +1,7 @@
-package application;
+package app;
 
-import application.app.Abstract.AbstractApplication;
-import visual.Interfaces.IVisual;
+import app.src.Abstract.AbstractApplication;
+import visual.src.Interfaces.IVisual;
 
 class Application extends AbstractApplication {
 

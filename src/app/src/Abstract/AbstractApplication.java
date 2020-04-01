@@ -1,10 +1,10 @@
-package application.app.Abstract;
+package app.src.Abstract;
 
-import application.app.configSetup.INIParser;
+import app.src.configSetup.INIParser;
 import brains.src.Interfaces.IPlayer;
 import objects.src.colors.GameColors;
 import org.jetbrains.annotations.NotNull;
-import visual.Interfaces.IVisual;
+import visual.src.Interfaces.IVisual;
 
 import java.io.IOException;
 
@@ -28,7 +28,7 @@ public abstract class AbstractApplication extends AbstractConfigSetter {
      * @throws IOException Вызывает ошибку при отсутствии файла
      */
     protected void gameSetup() throws IOException {
-        INIParser parser = new INIParser("src/application/configs/config.ini");
+        INIParser parser = new INIParser("src/app/configs/config.ini");
         parser.setColorConfig();
         this.setConfig(parser.getConfig());
     }
@@ -37,8 +37,6 @@ public abstract class AbstractApplication extends AbstractConfigSetter {
      * Основной игровой цикл
      */
     protected void gameRun() {
-        //Начальная отрисовка области
-        this.visual.Draw(this.area);//TODO
         //Решение порядка ходов
         IPlayer firstPlayer = this.brains[0].getColor() == GameColors.firstColor ? this.brains[0] : this.brains[1];
         IPlayer secondPlayer = !(this.brains[0].getColor() == GameColors.firstColor) ? this.brains[0] : this.brains[1];
@@ -46,7 +44,7 @@ public abstract class AbstractApplication extends AbstractConfigSetter {
             // 0 - норма, 1 - проиграл, 2 - ход невозможен
             boolean exit = false;
             while (true) {
-                this.visual.Draw(this.area);//TODO
+                this.visual.Draw(this.area);
                 int stepResult = firstPlayer.step();
                 if (stepResult == 1) {
                     exit = true;
@@ -56,7 +54,7 @@ public abstract class AbstractApplication extends AbstractConfigSetter {
             }
             if (exit) break;
             while (true) {
-                this.visual.Draw(this.area);//TODO
+                this.visual.Draw(this.area);
                 int stepResult = secondPlayer.step();
                 if (stepResult == 1) {
                     exit = true;

@@ -22,6 +22,13 @@ public interface IObject {
     Color getColor();
 
     /**
+     * Получаем номер клетки последней позиции
+     *
+     * @return SquareNumber
+     */
+    int getLastPosition();
+
+    /**
      * Метод отвечает за перемещение объектов на области, работает в связке с this.isInRange
      *
      * @param SquareNumber Куда объект хочет ударить/попасть
@@ -39,5 +46,11 @@ public interface IObject {
      */
     boolean isInRange(int SquareNumber, IArea Board);
 
-
+    /**
+     * Метод клонирования
+     *
+     * @return IObject
+     * @throws CloneNotSupportedException Ошибка
+     */
+    IObject clone() throws CloneNotSupportedException;
 }

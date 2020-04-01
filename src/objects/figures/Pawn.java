@@ -3,13 +3,12 @@ package objects.figures;
 import area.src.Interfaces.IArea;
 import objects.figures.src.Abstract.AbstractFigure;
 import objects.src.colors.GameColors;
-import objects.src.Interfaces.IObject;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 
 
-public class Pawn extends AbstractFigure implements IObject {
+public class Pawn extends AbstractFigure {
     /**
      * Стартовая позиция пешки
      */

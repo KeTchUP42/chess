@@ -3,6 +3,7 @@ package area.src.Interfaces;
 import objects.src.Interfaces.IObject;
 
 import java.awt.*;
+import java.util.Iterator;
 
 /**
  * @author Roman
@@ -11,7 +12,7 @@ public interface IArea {
     /**
      * Удаление объекта с области
      *
-     * @param ObjectSquareNumber Номер клетки на которой нужно удалить объект
+     * @param ObjectSquareNumber Номер клетки на которой нужно передвинуть объект
      * @return Возвращает удачно ли прошло удаление
      */
     boolean deleteObject(int ObjectSquareNumber);
@@ -81,4 +82,38 @@ public interface IArea {
      * @return Номер клетки
      */
     int getSquareNumber(int XCoordinate, int YCoordinate);
+
+    /**
+     * Получаем последний объект который двигался
+     *
+     * @return IObject
+     */
+    Iterator<IObject> getLastMovedObjectIterator();
+
+    /**
+     * последний объект который двигался
+     *
+     * @param SquareNumber int
+     */
+    boolean setLastMovedObject(int SquareNumber);
+
+    /**
+     * Получаем последний объект которого убили
+     *
+     * @return IObject
+     */
+    Iterator<IObject> getLastKilledObjectIterator();
+
+    /**
+     * последний объект которого убили
+     *
+     * @param SquareNumber int
+     */
+    boolean setLastKilledObject(int SquareNumber);
+
+
+    /**
+     * Восстанавливает последний ход
+     */
+    void recallLastStep(int loopTimes);
 }

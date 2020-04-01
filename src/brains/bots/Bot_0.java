@@ -3,14 +3,13 @@ package brains.bots;
 import area.src.Interfaces.IArea;
 import brains.src.Abstract.AbstractPlayer;
 import brains.src.Interfaces.IPlayer;
-import visual.Interfaces.IVisual;
-
-import java.awt.*;
+import visual.src.Interfaces.IVisual;
 
 public class Bot_0 extends AbstractPlayer implements IPlayer {
 
-    public Bot_0(IArea boardArea, Color color, IVisual visual) {
-        super(boardArea, color, visual);
+
+    public Bot_0(IArea boardArea, java.awt.Color color, IVisual visual, String nickName) {
+        super(boardArea, color, visual, nickName);
     }
 
     /**
@@ -18,26 +17,14 @@ public class Bot_0 extends AbstractPlayer implements IPlayer {
      */
     @Override
     public int step() {
-        if (!this.isKingAlive("Bot_0")) return 1;
-
+        if (this.isKingDead()) {
+            this.visual.sendMessage(this.nickName + " проиграл на " + this.stepNumber + " ходе.", false, false);
+            return 1;
+        }
         while (true) {
             if (this.boardArea.moveObjectSafe((int) (Math.random() * this.boardArea.getMaxSquareNumber())
                     , (int) (Math.random() * this.boardArea.getMaxSquareNumber()), this.Color))
-                return this.sleepReturn(0, 2000);
+                return super.sleepReturn(0, 1000);
         }
-    }
-
-    /**
-     * @param value       То что нужно вернуть после задержки
-     * @param timeMilSecs Кол во миллисекунд
-     * @return value
-     */
-    private int sleepReturn(int value, int timeMilSecs) {
-        try {
-            Thread.sleep(timeMilSecs);
-        } catch (Exception e) {
-        }
-        this.stepNumber++;
-        return value;
     }
 }

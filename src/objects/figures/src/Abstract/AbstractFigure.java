@@ -9,7 +9,6 @@ import java.awt.*;
 
 public abstract class AbstractFigure extends AbstractObject {
 
-
     /**
      * @param squareNumber Номер клетки
      * @param color        Цвет
@@ -27,5 +26,4 @@ public abstract class AbstractFigure extends AbstractObject {
         return super.isInRange(SquareNumber, area) ||
                 area.getObjectFromList(SquareNumber).getColor() != this.getColor();
     }
-
 }

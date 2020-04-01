@@ -1,4 +1,4 @@
-package application.app.configSetup;
+package app.src.configSetup;
 
 import objects.src.colors.GameColors;
 import org.ini4j.Wini;

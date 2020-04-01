@@ -1,4 +1,4 @@
-package application;
+package app;
 
 import visual.standard.CommandLine;
 
@@ -8,7 +8,6 @@ public class EntryPoint {
      */
     public static void main(String[] args) {
         //Запуск  приложения
-        Application app = new Application(new CommandLine());
-        app.run();
+        new Application(new CommandLine()).run();
     }
 }
