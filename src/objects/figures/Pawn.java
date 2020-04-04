@@ -1,6 +1,6 @@
 package objects.figures;
 
-import area.src.Interfaces.IArea;
+import area.Interfaces.IArea;
 import objects.figures.src.Abstract.AbstractFigure;
 import objects.src.colors.GameColors;
 import org.jetbrains.annotations.NotNull;
@@ -9,10 +9,6 @@ import java.awt.*;
 
 
 public class Pawn extends AbstractFigure {
-    /**
-     * Стартовая позиция пешки
-     */
-    private int startPosition;
 
     /**
      * @param squareNumber Номер клетки куда поставить фигуру
@@ -20,7 +16,6 @@ public class Pawn extends AbstractFigure {
      */
     public Pawn(int squareNumber, Color color) {
         super(squareNumber, color);
-        this.startPosition = squareNumber;
     }
 
 

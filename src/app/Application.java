@@ -20,7 +20,7 @@ class Application extends AbstractApplication {
      */
     public void run() {
         try {
-            this.loadConfigFromFile(this.visual.ConfigClarification());
+            this.loadConfigFromFile(this.visual.configClarification());
             this.gameRun();
         } catch (Exception | Error e) {
             this.visual.sendMessage(e.getMessage(), false, false);

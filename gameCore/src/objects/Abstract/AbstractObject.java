@@ -1,7 +1,7 @@
-package objects.src.Abstract;
+package objects.Abstract;
 
-import area.src.Interfaces.IArea;
-import objects.src.Interfaces.IObject;
+import area.Interfaces.IArea;
+import objects.Interfaces.IObject;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
@@ -22,6 +22,9 @@ public abstract class AbstractObject extends AbstractObjectCore implements Clone
 
 
     /**
+     * Метод реализует движение фигуры на области, предварительно проверяя возможность хода
+     * Также дозаписывается история ходов для откатов
+     *
      * @param SquareNumber Куда фигура хочет ударить
      * @param area         Доска где стоит фигура
      * @return Возвращает возможно ли это
@@ -29,12 +32,12 @@ public abstract class AbstractObject extends AbstractObjectCore implements Clone
     public boolean move(int SquareNumber, IArea area) {
         boolean isInRange = this.isInRange(SquareNumber, area);
         if (isInRange) {
-            area.setLastMovedObject(this.squareNumber);
-            this.lastPosition = this.squareNumber;
+            area.setLastMovedObject(this.getSquareNumber());
+            this.lastPosition = this.getSquareNumber();
             this.squareNumber = SquareNumber;
-            area.setLastKilledObject(this.getSquareNumber());
+            area.setLastKilledObject(SquareNumber);
             area.setObject(this);
-            area.deleteObject(this.lastPosition); // не забываем передвинуть себя
+            area.deleteObject(this.lastPosition);
         }
         return isInRange;
     }
@@ -114,7 +117,6 @@ public abstract class AbstractObject extends AbstractObjectCore implements Clone
             }
         }
         return wayIsFree;
-
     }
 
     /**

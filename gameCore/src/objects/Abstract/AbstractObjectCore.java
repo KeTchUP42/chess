@@ -1,14 +1,23 @@
-package objects.src.Abstract;
+package objects.Abstract;
 
-import area.src.Interfaces.IArea;
+import area.Interfaces.IArea;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 
 abstract class AbstractObjectCore {
+
     protected int lastPosition;
+
     protected int squareNumber;
+
     protected Color color;
+
+    /**
+     * Стартовая позиция объекта
+     * Используется для роллбэков
+     */
+    protected int startPosition;
 
     /**
      * @param squareNumber Номер клетки
@@ -16,6 +25,7 @@ abstract class AbstractObjectCore {
      */
     public AbstractObjectCore(int squareNumber, Color color) {
         this.squareNumber = squareNumber;
+        this.startPosition = squareNumber;
         this.color = color;
     }
 
@@ -26,6 +36,13 @@ abstract class AbstractObjectCore {
      */
     public boolean isInRange(int SquareNumber, @NotNull IArea area) {
         return area.getObjectFromList(SquareNumber) == null;
+    }
+
+    /**
+     * @return startPosition
+     */
+    public int getStartPosition() {
+        return startPosition;
     }
 
     /**

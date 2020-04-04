@@ -1,6 +1,6 @@
-package objects.src.Interfaces;
+package objects.Interfaces;
 
-import area.src.Interfaces.IArea;
+import area.Interfaces.IArea;
 
 import java.awt.*;
 
@@ -27,6 +27,13 @@ public interface IObject {
      * @return SquareNumber
      */
     int getLastPosition();
+
+    /**
+     * Получаем стартовую позицию объекта
+     *
+     * @return SquareNumber
+     */
+    int getStartPosition();
 
     /**
      * Метод отвечает за перемещение объектов на области, работает в связке с this.isInRange

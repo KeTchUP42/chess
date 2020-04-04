@@ -1,7 +1,7 @@
-package area.src.Abstract;
+package area.Abstract;
 
-import area.src.Interfaces.IArea;
-import objects.src.Interfaces.IObject;
+import area.Interfaces.IArea;
+import objects.Interfaces.IObject;
 
 abstract class AbstractAreaCore {
 
@@ -85,16 +85,16 @@ abstract class AbstractAreaCore {
 
 
     /**
+     * Проверка на null не может быть замененна на аннотацию так как медот должен работать с null значениями
+     *
      * @param object Объект
-     * @return Возвращает удачно ли прошла установка
      */
-    public boolean setObject(IObject object) {
+    public void setObject(IObject object) {
         boolean isOk = object != null &&
                 this.isValidNumber(object.getSquareNumber());
         if (isOk) {
             this.ObjectList[object.getSquareNumber()] = object;
         }
-        return isOk;
     }
 
 
@@ -111,14 +111,12 @@ abstract class AbstractAreaCore {
 
 
     /**
-     * @param ObjectSquareNumber Номер клетки на которой нужно "удалить"  объект
-     * @return Возвращает удачно ли прошло удаление
+     * @param ObjectSquareNumber Номер клетки на которой нужно "удалить" объект
      */
-    public boolean deleteObject(int ObjectSquareNumber) {
+    public void deleteObject(int ObjectSquareNumber) {
         if (this.isValidNumber(ObjectSquareNumber)) {
             this.ObjectList[ObjectSquareNumber] = null;
         }
-        return this.isValidNumber(ObjectSquareNumber);
     }
 
 

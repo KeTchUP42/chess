@@ -1,7 +1,7 @@
-package area.src.Abstract;
+package area.Abstract;
 
-import area.src.Interfaces.IArea;
-import objects.src.Interfaces.IObject;
+import area.Interfaces.IArea;
+import objects.Interfaces.IObject;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ import java.util.Iterator;
  */
 public abstract class AbstractArea extends AbstractAreaCore implements IArea {
 
-    // Работают в связке чтобы восстанавливать последний ход
+    //Работают в связке чтобы восстанавливать последний ход
     protected ArrayList<IObject> lastMovedObjectArrayList = new ArrayList<>();
 
     protected ArrayList<IObject> lastKilledObjectArrayList = new ArrayList<>();
@@ -44,14 +44,12 @@ public abstract class AbstractArea extends AbstractAreaCore implements IArea {
      *
      * @param SquareNumber номер клетки в которой будет удален объект
      */
-    public boolean setLastMovedObject(int SquareNumber) {
+    public void setLastMovedObject(int SquareNumber) {
         if (this.isValidNumber(SquareNumber))
             try {
                 this.lastMovedObjectArrayList.add(this.getObjectFromList(SquareNumber).clone());
-            } catch (CloneNotSupportedException e) {
-                return false;
+            } catch (CloneNotSupportedException ignored) {
             }
-        return this.isValidNumber(SquareNumber);
     }
 
     /**
@@ -64,18 +62,33 @@ public abstract class AbstractArea extends AbstractAreaCore implements IArea {
     }
 
     /**
+     * Возвращает последний сдвинутый объект
+     *
+     * @return IObject
+     */
+    public IObject getLastMoved() {
+        return this.lastMovedObjectArrayList.get(this.getLastMovedObjectArrayListSize() - 1);
+    }
+
+    /**
+     * @return Size
+     */
+    public int getLastMovedObjectArrayListSize() {
+        return this.lastMovedObjectArrayList.size();
+    }
+
+
+    /**
      * Задаем последний объект который двигался удаленный объект
      *
      * @param SquareNumber номер клетки в которой будет удален объект
      */
-    public boolean setLastKilledObject(int SquareNumber) {
+    public void setLastKilledObject(int SquareNumber) {
         if (this.isValidNumber(SquareNumber))
             try {
                 this.lastKilledObjectArrayList.add(this.getObjectFromList(SquareNumber) != null ? this.getObjectFromList(SquareNumber).clone() : null);
-            } catch (CloneNotSupportedException e) {
-                return false;
+            } catch (CloneNotSupportedException ignored) {
             }
-        return this.isValidNumber(SquareNumber);
     }
 
     /**
@@ -87,33 +100,60 @@ public abstract class AbstractArea extends AbstractAreaCore implements IArea {
         return lastKilledObjectArrayList.iterator();
     }
 
+    /**
+     * Возвращает последний уничтоженый объект
+     *
+     * @return IObject
+     */
+    public IObject getLastKilled() {
+        return this.lastKilledObjectArrayList.get(this.getLastKilledObjectArrayListSize() - 1);
+    }
+
+    /**
+     * @return Size
+     */
+    public int getLastKilledObjectArrayListSize() {
+        return this.lastKilledObjectArrayList.size();
+    }
 
     /**
      * Восстанавливает несколько последних ходов
      */
-    public void recallLastStep(int loopTimes) {
+    public void recallStep(int loopTimes) {
         for (int loopT = 0; loopT < loopTimes; loopT++) {
             //Проверка списков
-            if (this.lastKilledObjectArrayList.size() == 0 || this.lastMovedObjectArrayList.size() == 0) {
-                this.lastKilledObjectArrayList.clear();
-                this.lastMovedObjectArrayList.clear();
-                return;
-            }
-            //Ищем объект отпечаток
+            if (!this.arrayListsValid()) return;
+            //Ищем объект под отпечаток
             for (int index = 0; index < this.maxSquareNumber; index++) {
                 if (this.getObjectFromList(index) != null &&
-                        this.lastMovedObjectArrayList.get((this.lastMovedObjectArrayList.size() - 1)).getSquareNumber() == this.getObjectFromList(index).getLastPosition()) {
+                        this.getLastMoved().getStartPosition() == this.getObjectFromList(index).getStartPosition()) {
+                    //TODO допроверить
                     //Соответствующие передвижения на доске
-                    this.setObject(this.lastMovedObjectArrayList.get((this.lastMovedObjectArrayList.size() - 1)));
                     this.deleteObject(this.getObjectFromList(index).getSquareNumber());
-                    this.setObject(this.lastKilledObjectArrayList.get(this.lastKilledObjectArrayList.size() - 1));
-                    //Очищаем списки отпечатков
-                    this.lastMovedObjectArrayList.remove(this.lastMovedObjectArrayList.size() - 1);
-                    this.lastKilledObjectArrayList.remove(this.lastKilledObjectArrayList.size() - 1);
+                    this.setObject(this.getLastMoved());
+                    this.setObject(this.getLastKilled());
+                    //Очищаем списки последних отпечатков
+                    this.lastMovedObjectArrayList.remove(this.getLastMovedObjectArrayListSize() - 1);
+                    this.lastKilledObjectArrayList.remove(this.getLastKilledObjectArrayListSize() - 1);
 
                     break;
                 }
             }
         }
     }
+
+    /**
+     * @return boolean
+     */
+    protected boolean arrayListsValid() {
+        if (this.getLastKilledObjectArrayListSize() == 0 ||
+                this.getLastMovedObjectArrayListSize() == 0 ||
+                this.getLastKilledObjectArrayListSize() != this.getLastMovedObjectArrayListSize()) {
+            this.lastKilledObjectArrayList.clear();
+            this.lastMovedObjectArrayList.clear();
+            return false;
+        }
+        return true;
+    }
 }
+

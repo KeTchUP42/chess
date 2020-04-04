@@ -2,7 +2,7 @@
 Небольшая система на основе которой сделаны шахматы, но можно реализовать и другие настольные игры.
 
 ### Точка входа
-Класс точка-входа находится в src/app/EntryPoint.java. При дальнейшем усовершенствовании основной класс Application можно использовать где-либо еще. 
+Класс точка-входа находится в app/EntryPoint.java. При дальнейшем усовершенствовании основной класс Application можно использовать где-либо еще. 
 
 ## Пример стандартной области в которой могут ноходиться объекты:
         
@@ -22,19 +22,32 @@
 ### Для добавления новых ботов: 
  Для добавления новых ботов нужно прописать их логику в brains/bots и 
  в AbstractConfigSetter.java добавить вариант выбора для создания бота.
-
+#### Пример:
     /**
      * @return 0 - норма, 1 - проиграл, 2 - ход невозможен
      */
     @Override
     public int step() {
-        if (this.isKingDead(this.nickName)) return 1;
-        
-        //Логика бота 
-        
-        return 0; 
+        if (this.scanner.isKingDead(this.Color)) {
+            this.visual.sendMessage(this.nickName + " проиграл на " + this.stepNumber + " ходе.", false, false);
+            return 1;
+        }
+        int index = 0;
+        do {
+            if (index == 1000) {
+                this.visual.sendMessage(this.nickName + " проиграл на " + this.stepNumber + " ходе.", false, false);
+                return 1;
+            } else index++;
+
+            while (true) {
+                if (this.boardArea.moveObjectSafe((int) (Math.random() * this.boardArea.getMaxSquareNumber()),
+                        (int) (Math.random() * this.boardArea.getMaxSquareNumber()),
+                        this.Color))
+                    break;
+            }
+        } while (this.scanner.kingUnderAttack(this.Color));
+        return this.returnZero(2000);
     }
-   
 ### Для добавления новых фигур или других игровых объектов:
  Новые классы объектов прописавыются в каталоге objects. Предварительно для этой новой группы объектов создается родительский абстрактный класс который наследуется от aбстрактного класса объекта в gameCore.
  Для добавления новых фигур или изменения их логики поведения
@@ -53,22 +66,23 @@
  Изменять файл app/configs/config.ini
 
 #### Настройки по умолчанию:
-
+    
     [defaultSettings]
-   
+
     firstPlayerColor = standard
-    firstPlayerType  = player
+    firstPlayerType  = bot_0
     firstPlayerNickName = Player_1
-   
+
     secondPlayerType = bot_0
-    secondPlayerNickName = bot
+    secondPlayerNickName = BOT
 
     areaType     = standard
 
     [colorSettings]
-   
+
     FirstColor   = white
     SecondColor  = black
-   
+
+
 
 

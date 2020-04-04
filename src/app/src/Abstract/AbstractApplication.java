@@ -31,6 +31,7 @@ public abstract class AbstractApplication extends AbstractConfigSetter {
         INIParser parser = new INIParser(configPath);
         parser.setColorConfig();
         this.setConfig(parser.getConfig());
+
     }
 
     /**
@@ -89,9 +90,9 @@ public abstract class AbstractApplication extends AbstractConfigSetter {
         } else {
             this.setConfig(this.playerConfig(
                     new String[]{
-                            "areaType", "firstPlayerColor", "firstPlayerType",
-                            "secondPlayerType", "secondPlayerNickName",
-                            "firstPlayerNickName"
+                            "areaType", "firstBrainColor", "firstBrainType",
+                            "secondBrainType", "secondBrainNickName",
+                            "firstBrainNickName"
                     }));
         }
     }

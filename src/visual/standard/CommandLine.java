@@ -1,14 +1,17 @@
 package visual.standard;
 
-import area.src.Interfaces.IArea;
+import area.Interfaces.IArea;
+import objects.Interfaces.IObject;
 import objects.figures.*;
-import objects.src.Interfaces.IObject;
 import objects.src.colors.GameColors;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import visual.src.Interfaces.IVisual;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class CommandLine implements IVisual {
@@ -82,11 +85,22 @@ public class CommandLine implements IVisual {
      *
      * @param input вводимая строка
      */
-    private boolean consoleAction(String input) {
+    public boolean consoleAction(String input) {
 
         if (input.equals("exit") || input.equals("die")) System.exit(0);
         if (input.equals("help")) {
-            this.sendMessage("\nAreaTypes:\n-standard\n-test\nPlayer types:\n-bot_0\n-player\nColorConf:\n-standard - first\n-other - second", false, false);
+            try {
+                File file = new File("README.md");
+                FileReader fr = new FileReader(file);
+                BufferedReader reader = new BufferedReader(fr);
+                String line = reader.readLine();
+                while (line != null) {
+                    this.sendMessage(line, false, false);
+                    line = reader.readLine();
+                }
+            } catch (IOException e) {
+                this.sendMessage(e.getMessage(), false, false);
+            }
             return true;
         }
         return false;
@@ -97,13 +111,13 @@ public class CommandLine implements IVisual {
      *
      * @return boolean
      */
-    public String ConfigClarification() {
+    public String configClarification() {
         if (!this.sendMessage("ЗАГРУЗИТЬ ПАРАМЕТРЫ ИЗ КОНФИГА?\nY/N", true, false)
                 .toUpperCase()
                 .equals("N")) {
             while (true) {
                 String filePath = this.sendMessage("Введи путь к ini файлу конфига.", true, false);
-                File file = new File(filePath);
+                File file = new File(filePath.trim());
                 if (file.isFile() && file.exists() && file.canRead())
                     return filePath;
             }
@@ -114,7 +128,7 @@ public class CommandLine implements IVisual {
      * Очистка консоли
      */
     private void clearScreen() {
-        for (int clear = 0; clear < 25; clear++) {
+        for (int clear = 0; clear < 100; clear++) {
             System.out.println("\b");
         }
     }

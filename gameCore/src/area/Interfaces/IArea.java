@@ -1,6 +1,6 @@
-package area.src.Interfaces;
+package area.Interfaces;
 
-import objects.src.Interfaces.IObject;
+import objects.Interfaces.IObject;
 
 import java.awt.*;
 import java.util.Iterator;
@@ -12,18 +12,16 @@ public interface IArea {
     /**
      * Удаление объекта с области
      *
-     * @param ObjectSquareNumber Номер клетки на которой нужно передвинуть объект
-     * @return Возвращает удачно ли прошло удаление
+     * @param ObjectSquareNumber Номер клетки на которой нужно удалить объект
      */
-    boolean deleteObject(int ObjectSquareNumber);
+    void deleteObject(int ObjectSquareNumber);
 
     /**
      * Помещаем объект на область если клетка пустая
      *
      * @param object Объект
-     * @return Возвращает удачно ли прошла установка
      */
-    boolean setObject(IObject object);
+    void setObject(IObject object);
 
     /**
      * Движение объекта на области
@@ -84,6 +82,18 @@ public interface IArea {
     int getSquareNumber(int XCoordinate, int YCoordinate);
 
     /**
+     * @return Size
+     */
+    int getLastMovedObjectArrayListSize();
+
+    /**
+     * Возвращает последний сдвинутый объект
+     *
+     * @return IObject
+     */
+    IObject getLastMoved();
+
+    /**
      * Получаем последний объект который двигался
      *
      * @return IObject
@@ -95,7 +105,19 @@ public interface IArea {
      *
      * @param SquareNumber int
      */
-    boolean setLastMovedObject(int SquareNumber);
+    void setLastMovedObject(int SquareNumber);
+
+    /**
+     * @return Size
+     */
+    int getLastKilledObjectArrayListSize();
+
+    /**
+     * Возвращает последний уничтоженый объект
+     *
+     * @return IObject
+     */
+    IObject getLastKilled();
 
     /**
      * Получаем последний объект которого убили
@@ -109,11 +131,11 @@ public interface IArea {
      *
      * @param SquareNumber int
      */
-    boolean setLastKilledObject(int SquareNumber);
+    void setLastKilledObject(int SquareNumber);
 
 
     /**
      * Восстанавливает последний ход
      */
-    void recallLastStep(int loopTimes);
+    void recallStep(int loopTimes);
 }

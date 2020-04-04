@@ -1,7 +1,6 @@
 package brains.src.Abstract;
 
-import area.src.Interfaces.IArea;
-import objects.figures.King;
+import area.Interfaces.IArea;
 import visual.src.Interfaces.IVisual;
 
 import java.awt.*;
@@ -35,32 +34,15 @@ public abstract class AbstractPlayer {
     }
 
     /**
-     * Проверка короля
-     *
-     * @return Жив ли
-     */
-    protected boolean isKingDead() {
-        //Проверка на проигрыш
-        boolean isKingDead = true;
-        for (int index = 0; index < this.boardArea.getMaxSquareNumber(); index++) {
-            if (this.boardArea.getObjectFromList(index) instanceof King && this.boardArea.getObjectFromList(index).getColor() == this.Color)
-                isKingDead = false;
-        }
-        return isKingDead;
-    }
-
-    /**
-     * @param value       То что нужно вернуть после задержки
      * @param timeMilSecs Кол-во миллисекунд
-     * @return value
      */
-    protected int sleepReturn(int value, int timeMilSecs) {
+    protected int returnZero(int timeMilSecs) {
         try {
             Thread.sleep(timeMilSecs);
         } catch (Exception e) {
             this.visual.sendMessage(e.getMessage(), true, true);
         }
         this.stepNumber++;
-        return value;
+        return 0;
     }
 }

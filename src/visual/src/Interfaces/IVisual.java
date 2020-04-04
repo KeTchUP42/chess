@@ -1,6 +1,6 @@
 package visual.src.Interfaces;
 
-import area.src.Interfaces.IArea;
+import area.Interfaces.IArea;
 
 public interface IVisual {
 
@@ -10,7 +10,7 @@ public interface IVisual {
     void Draw(IArea area);
 
     /**
-     * Метод реализует логику общания с игроком
+     * Метод реализует логику общения с игроком
      *
      * @param message   Сообщение
      * @param getAnswer Получить ответ?
@@ -23,5 +23,5 @@ public interface IVisual {
      *
      * @return boolean
      */
-    String ConfigClarification();
+    String configClarification();
 }

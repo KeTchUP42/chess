@@ -22,29 +22,27 @@ public class INIParser {
     public String[] getConfig() {
         return new String[]{
                 this.ini.get("defaultSettings", "areaType", String.class),
-                this.ini.get("defaultSettings", "firstPlayerColor", String.class),
-                this.ini.get("defaultSettings", "firstPlayerType", String.class),
-                this.ini.get("defaultSettings", "secondPlayerType", String.class),
-                this.ini.get("defaultSettings", "secondPlayerNickName", String.class),
-                this.ini.get("defaultSettings", "firstPlayerNickName", String.class),
+                this.ini.get("defaultSettings", "firstBrainColor", String.class),
+                this.ini.get("defaultSettings", "firstBrainType", String.class),
+                this.ini.get("defaultSettings", "secondBrainType", String.class),
+                this.ini.get("defaultSettings", "secondBrainNickName", String.class),
+                this.ini.get("defaultSettings", "firstBrainNickName", String.class),
         };
     }
 
     /**
      * Метод настройки базовых цветов в GameColors
      */
-    public boolean setColorConfig() {
+    public void setColorConfig() {
         try {
             Color firstColor = (Color) Color.class.getField(
                     this.ini.get("colorSettings", "FirstColor", String.class)).get(null);
             Color secondColor = (Color) Color.class.getField(
                     this.ini.get("colorSettings", "SecondColor", String.class)).get(null);
-            if (firstColor == secondColor) return false;
+            if (firstColor == secondColor) return;
             GameColors.firstColor = firstColor;
             GameColors.secondColor = secondColor;
-            return true;
         } catch (Exception ignored) {
-            return false;
         }
     }
 

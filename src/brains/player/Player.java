@@ -1,8 +1,9 @@
 package brains.player;
 
-import area.src.Interfaces.IArea;
+import area.Interfaces.IArea;
 import brains.src.Abstract.AbstractPlayer;
 import brains.src.Interfaces.IPlayer;
+import brains.src.sranners.ChessScanner;
 import visual.src.Interfaces.IVisual;
 
 public class Player extends AbstractPlayer implements IPlayer {
@@ -17,7 +18,8 @@ public class Player extends AbstractPlayer implements IPlayer {
      */
     @Override
     public int step() {
-        if (this.isKingDead()) {
+        ChessScanner chessScanner = new ChessScanner(this.boardArea);
+        if (chessScanner.isKingDead(this.Color)) {
             this.visual.sendMessage(this.nickName + " проиграл на " + this.stepNumber + " ходе.", false, false);
             return 1;
         }
@@ -29,8 +31,8 @@ public class Player extends AbstractPlayer implements IPlayer {
             String input = this.visual.sendMessage(
                     "Введи номер клетки на которой вы хотите двинуть фигуру.", true, false);
 
-            if (input.toUpperCase().equals("RECALL")) {
-                this.boardArea.recallLastStep(2);
+            if (input.toLowerCase().equals("recall")) {
+                this.boardArea.recallStep(2);
                 return 2;
             }
             squareNumber = Integer.parseInt(input);
@@ -38,8 +40,8 @@ public class Player extends AbstractPlayer implements IPlayer {
             input = this.visual.sendMessage(
                     "Введи номер клетки на которую вы хотите двинуть фигуру.", true, false);
 
-            if (input.toUpperCase().equals("RECALL")) {
-                this.boardArea.recallLastStep(2);
+            if (input.toLowerCase().equals("recall")) {
+                this.boardArea.recallStep(2);
                 return 2;
             }
             figureSquareNumber = Integer.parseInt(input);
@@ -50,6 +52,6 @@ public class Player extends AbstractPlayer implements IPlayer {
         //Движение фигуры
         boolean isValidStep = this.boardArea.moveObjectSafe(squareNumber, figureSquareNumber, this.Color);
         if (isValidStep) this.visual.sendMessage(this.nickName + " сделал ход", false, false);
-        return isValidStep ? this.sleepReturn(0, 0) : this.sleepReturn(2, 0);
+        return isValidStep ? this.returnZero(0) : 2;
     }
 }

@@ -1,7 +1,8 @@
 package app.src.Abstract;
 
-import area.board.factory.BoardFactory;
-import area.src.Interfaces.IArea;
+import app.src.ConfigFields;
+import area.Interfaces.IArea;
+import area.factory.BoardFactory;
 import brains.bots.Bot_0;
 import brains.player.Player;
 import brains.src.Interfaces.IPlayer;
@@ -10,8 +11,11 @@ import org.jetbrains.annotations.NotNull;
 import visual.src.Interfaces.IVisual;
 
 abstract class AbstractConfigSetter {
+
     protected IVisual visual;
+
     protected IArea area;
+
     protected IPlayer[] brains;
 
     /**
@@ -23,11 +27,11 @@ abstract class AbstractConfigSetter {
 
         switch (factoryConfig.toLowerCase()) {
             case "test":
-                this.area = new BoardFactory().getTestBoard();
+                this.area = new BoardFactory().getTestArea();
                 break;
             case "standard":
             default:
-                this.area = new BoardFactory().getStandardBoard();
+                this.area = new BoardFactory().getStandardArea();
                 break;
         }
     }
@@ -35,21 +39,21 @@ abstract class AbstractConfigSetter {
     /**
      * Создаем соответствующего бота или игрока - соответствующего цвета
      *
-     * @param chooseConfig Основной конфиг решающий бот или игрок
-     * @param colorConfig  Конфиг цвета
+     * @param typeConfig  Основной конфиг решающий бот или игрок
+     * @param colorConfig Конфиг цвета
      */
-    protected void setFirstPlayerOrBot(@NotNull String chooseConfig, String nickName, String colorConfig) {
-        switch (chooseConfig.toLowerCase()) {
+    protected void setFirstBrain(@NotNull String typeConfig, String nickName, boolean colorConfig) {
+        switch (typeConfig.toLowerCase()) {
 
             case "bot_0":
-                this.brains[0] = new Bot_0(this.area, colorConfig.equals("") || colorConfig.equals("standard")
+                this.brains[0] = new Bot_0(this.area, colorConfig
                         ? GameColors.firstColor :
                         GameColors.secondColor, this.visual, nickName);
                 break;
             case "standard":
             case "player":
             default:
-                this.brains[0] = new Player(this.area, colorConfig.equals("") || colorConfig.equals("standard")
+                this.brains[0] = new Player(this.area, colorConfig
                         ? GameColors.firstColor :
                         GameColors.secondColor, this.visual, nickName);
                 break;
@@ -59,21 +63,21 @@ abstract class AbstractConfigSetter {
     /**
      * Создаем соответствующего бота с цветом не равным цвета игрока\другого бота
      *
-     * @param chooseConfig Основной конфиг решиющий какого бота или игрока создать
-     * @param colorConfig  Конфиг цвета
+     * @param typeConfig  Основной конфиг решиющий какого бота или игрока создать
+     * @param colorConfig Конфиг цвета
      */
-    protected void setSecondBotOrPlayer(@NotNull String chooseConfig, String nickName, String colorConfig) {
-        switch (chooseConfig.toLowerCase()) {
+    protected void setSecondBrain(@NotNull String typeConfig, String nickName, boolean colorConfig) {
+        switch (typeConfig.toLowerCase()) {
 
             case "player":
-                this.brains[1] = new Player(this.area, !(colorConfig.equals("") || colorConfig.equals("standard"))
+                this.brains[1] = new Player(this.area, colorConfig
                         ? GameColors.firstColor :
                         GameColors.secondColor, this.visual, nickName);
                 break;
             case "standard":
             case "bot_0":
             default:
-                this.brains[1] = new Bot_0(this.area, !(colorConfig.equals("") || colorConfig.equals("standard"))
+                this.brains[1] = new Bot_0(this.area, colorConfig
                         ? GameColors.firstColor :
                         GameColors.secondColor, this.visual, nickName);
                 break;
@@ -84,9 +88,9 @@ abstract class AbstractConfigSetter {
      * @param configData Массив параметров
      */
     protected void setConfig(@NotNull String[] configData) {
-        this.setArea(configData[0]);
+        this.setArea(configData[ConfigFields.areaType]);
         this.brains = new IPlayer[2];
-        this.setFirstPlayerOrBot(configData[2], configData[5], configData[1]);
-        this.setSecondBotOrPlayer(configData[3], configData[4], configData[1]);
+        this.setFirstBrain(configData[ConfigFields.firstBrainType], configData[ConfigFields.firstBrainNickName], configData[ConfigFields.firstBrainColor].equals("") || configData[1].equals("standard"));
+        this.setSecondBrain(configData[ConfigFields.secondBrainType], configData[ConfigFields.secondBrainNickName], !(configData[ConfigFields.firstBrainColor].equals("") || configData[1].equals("standard")));
     }
 }

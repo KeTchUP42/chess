@@ -1,6 +1,6 @@
 package objects.figures;
 
-import area.src.Interfaces.IArea;
+import area.Interfaces.IArea;
 import objects.figures.src.Abstract.AbstractFigure;
 import org.jetbrains.annotations.NotNull;
 

@@ -1,18 +1,18 @@
-package area.board.factory.src.Abstract;
+package area.factory;
 
+import area.Interfaces.IArea;
 import area.board.BoardArea;
-import area.src.Interfaces.IArea;
+import area.factory.src.Interfaces.IAreaFactory;
 import objects.figures.*;
 import objects.src.colors.GameColors;
 import org.jetbrains.annotations.NotNull;
 
-
-public abstract class AbstractChessBoardFactory {
+public class BoardFactory implements IAreaFactory {
 
     /**
      * @return Возвращает заполненную доску
      */
-    public IArea getStandardBoard() {
+    public IArea getStandardArea() {
         IArea Board = new BoardArea(8);
 
         Board.setObject(new Castle(0, GameColors.firstColor));
@@ -46,12 +46,23 @@ public abstract class AbstractChessBoardFactory {
         for (int iterator = Board.getAreaSize(); iterator < Board.getAreaSize() * 2; iterator++) {
             Board.setObject(new Pawn(iterator, GameColors.firstColor));
         }
-
         for (int iterator = Board.getMaxSquareNumber() - Board.getAreaSize() * 2;
              iterator < Board.getAreaSize() * (Board.getAreaSize() - 1);
              iterator++
         ) {
             Board.setObject(new Pawn(iterator, GameColors.secondColor));
         }
+    }
+
+    /**
+     * @return Возвращает тестовую доску
+     */
+    public IArea getTestArea() {
+        IArea desk = new BoardArea(8);
+        desk.setObject(new Queen(34, GameColors.secondColor));
+        desk.setObject(new Queen(25, GameColors.firstColor));
+        desk.setObject(new King(54, GameColors.secondColor));
+        desk.setObject(new King(5, GameColors.firstColor));
+        return desk;
     }
 }
