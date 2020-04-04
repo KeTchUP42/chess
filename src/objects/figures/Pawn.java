@@ -49,7 +49,7 @@ public class Pawn extends AbstractFigure {
         //Проверка пустоты клетки
         boolean nullSquare = Board.getObjectFromList(SquareNumber) == null;
 
-        return ((SquareNumber == this.getSquareNumber() + step * 2) && this.getSquareNumber() == this.startPosition && nullSquare) ||
+        return ((SquareNumber == this.getSquareNumber() + step * 2) && this.getSquareNumber() == this.startPosition && nullSquare && this.isWayFreePerpendicular(SquareNumber, Board)) ||
                 (attackValid && SquareNumber == ordStep + 1 && Board.getXCoordinate(ordStep + 1) == Board.getXCoordinate(this.squareNumber) + 1) ||
                 (attackValid && SquareNumber == ordStep - 1 && Board.getXCoordinate(ordStep - 1) == Board.getXCoordinate(this.squareNumber) - 1) ||
                 (SquareNumber == ordStep && nullSquare);

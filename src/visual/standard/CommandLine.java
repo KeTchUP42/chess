@@ -8,10 +8,11 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import visual.src.Interfaces.IVisual;
 
+import java.io.File;
 import java.util.Scanner;
 
 public class CommandLine implements IVisual {
-    //Цвет вывода для вервого цвета
+    //Цвет вывода для первого цвета
     private static final String ANSI_RED = "\u001B[31m";
     //Цвет вывода для второго цвета
     private static final String ANSI_BLUE = "\u001B[34m";
@@ -63,6 +64,9 @@ public class CommandLine implements IVisual {
         if (getAnswer) {
             Scanner in = new Scanner(System.in);
             dialogResult = in.nextLine().trim();
+            if (dialogResult.toUpperCase().equals("EXIT") || dialogResult.toUpperCase().equals("DIE"))
+                System.exit(0);
+            //Базовый функционал в консоли
         }
         if (afterClear) this.clearScreen();
         return dialogResult;
@@ -73,8 +77,17 @@ public class CommandLine implements IVisual {
      *
      * @return boolean
      */
-    public boolean ConfigClarification() {
-        return !this.sendMessage("ЗАГРУЗИТЬ ПАРАМЕТРЫ ИЗ КОНФИГА?\nY/N", true, false).toUpperCase().equals("N");
+    public String ConfigClarification() {
+        if (!this.sendMessage("ЗАГРУЗИТЬ ПАРАМЕТРЫ ИЗ КОНФИГА?\nY/N", true, false)
+                .toUpperCase()
+                .equals("N")) {
+            while (true) {
+                String filePath = this.sendMessage("Введи путь к ini файлу конфига.", true, false);
+                File file = new File(filePath);
+                if (file.isFile() && file.exists() && file.canRead())
+                    return filePath;
+            }
+        } else return null;
     }
 
     /**

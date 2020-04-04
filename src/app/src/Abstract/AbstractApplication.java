@@ -27,8 +27,8 @@ public abstract class AbstractApplication extends AbstractConfigSetter {
     /**
      * @throws IOException Вызывает ошибку при отсутствии файла
      */
-    protected void gameSetup() throws IOException {
-        INIParser parser = new INIParser("src/app/configs/config.ini");
+    protected void gameSetup(String configPath) throws IOException {
+        INIParser parser = new INIParser(configPath);
         parser.setColorConfig();
         this.setConfig(parser.getConfig());
     }
@@ -83,16 +83,16 @@ public abstract class AbstractApplication extends AbstractConfigSetter {
     /**
      * @throws IOException Вызывает ошибку при отсутствии файла
      */
-    protected void loadConfigFromFile(boolean doLoad) throws IOException {
-        if (doLoad) {
-            this.gameSetup();
+    protected void loadConfigFromFile(String playersConfigAw) throws IOException {
+        if (playersConfigAw != null) {
+            this.gameSetup(playersConfigAw);
         } else {
             this.setConfig(this.playerConfig(
                     new String[]{
                             "areaType", "firstPlayerColor", "firstPlayerType",
                             "secondPlayerType", "secondPlayerNickName",
                             "firstPlayerNickName"
-                    })); //При добавлении новых параметров в конфиге добавить их имена в массив
+                    }));
         }
     }
 }

@@ -4,11 +4,13 @@ import area.board.BoardArea;
 import area.src.Interfaces.IArea;
 import objects.figures.*;
 import objects.src.colors.GameColors;
+import org.jetbrains.annotations.NotNull;
 
 
-public abstract class AbstractBoardFactory {
+public abstract class AbstractChessBoardFactory {
+
     /**
-     * @return Возвращает готовую доску
+     * @return Возвращает заполненную доску
      */
     public IArea getStandardBoard() {
         IArea Board = new BoardArea(8);
@@ -39,7 +41,7 @@ public abstract class AbstractBoardFactory {
      *
      * @param Board Объект доска
      */
-    protected void fillPawns(IArea Board) {
+    protected void fillPawns(@NotNull IArea Board) {
 
         for (int iterator = Board.getAreaSize(); iterator < Board.getAreaSize() * 2; iterator++) {
             Board.setObject(new Pawn(iterator, GameColors.firstColor));

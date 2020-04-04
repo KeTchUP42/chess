@@ -29,7 +29,6 @@ public class Player extends AbstractPlayer implements IPlayer {
             String input = this.visual.sendMessage(
                     "Введи номер клетки на которой вы хотите двинуть фигуру.", true, false);
 
-            if (input.toUpperCase().equals("EXIT") || input.toUpperCase().equals("DIE")) return 1;
             if (input.toUpperCase().equals("RECALL")) {
                 this.boardArea.recallLastStep(2);
                 return 2;
@@ -39,7 +38,6 @@ public class Player extends AbstractPlayer implements IPlayer {
             input = this.visual.sendMessage(
                     "Введи номер клетки на которую вы хотите двинуть фигуру.", true, false);
 
-            if (input.toUpperCase().equals("EXIT") || input.toUpperCase().equals("DIE")) return 1;
             if (input.toUpperCase().equals("RECALL")) {
                 this.boardArea.recallLastStep(2);
                 return 2;

@@ -23,5 +23,5 @@ public interface IVisual {
      *
      * @return boolean
      */
-    boolean ConfigClarification();
+    String ConfigClarification();
 }
