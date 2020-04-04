@@ -63,13 +63,33 @@ public class CommandLine implements IVisual {
         String dialogResult = null;
         if (getAnswer) {
             Scanner in = new Scanner(System.in);
-            dialogResult = in.nextLine().trim();
-            if (dialogResult.toUpperCase().equals("EXIT") || dialogResult.toUpperCase().equals("DIE"))
-                System.exit(0);
             //Базовый функционал в консоли
+            while (true) {
+                dialogResult = in.nextLine().trim();
+                if (this.consoleAction(dialogResult.toLowerCase())) {
+                    System.out.println("\n" + message);
+                    continue;
+                }
+                break;
+            }
         }
         if (afterClear) this.clearScreen();
         return dialogResult;
+    }
+
+    /**
+     * Метод реализующий реакцию консоли на определенные строки ввода
+     *
+     * @param input вводимая строка
+     */
+    private boolean consoleAction(String input) {
+
+        if (input.equals("exit") || input.equals("die")) System.exit(0);
+        if (input.equals("help")) {
+            this.sendMessage("\nAreaTypes:\n-standard\n-test\nPlayer types:\n-bot_0\n-player\nColorConf:\n-standard - first\n-other - second", false, false);
+            return true;
+        }
+        return false;
     }
 
     /**

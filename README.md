@@ -47,6 +47,8 @@
   Application с объектом нового визуала в конструкторе.
   Для изменения стандартного визуала заменить класс в пакете visual/standard. 
 
+ ### Для добавления новых стандартных консольных комманд:
+  Для добавления новых стандартных консольных комманд править метод consoleAction в standard/CommandLine. 
  ### Для изменения стандартной конфигурации:
  Изменять файл app/configs/config.ini
 
@@ -59,7 +61,7 @@
     firstPlayerNickName = Player_1
    
     secondPlayerType = bot_0
-    secondPlayerNickName = bot_0
+    secondPlayerNickName = bot
 
     areaType     = standard
 

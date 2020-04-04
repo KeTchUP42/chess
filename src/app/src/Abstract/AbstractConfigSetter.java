@@ -23,11 +23,9 @@ abstract class AbstractConfigSetter {
 
         switch (factoryConfig.toLowerCase()) {
             case "test":
-            case "1":
                 this.area = new BoardFactory().getTestBoard();
                 break;
             case "standard":
-            case "0":
             default:
                 this.area = new BoardFactory().getStandardBoard();
                 break;

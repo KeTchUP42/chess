@@ -55,7 +55,7 @@ public abstract class AbstractArea extends AbstractAreaCore implements IArea {
     }
 
     /**
-     * Получаем последний объект который двигался
+     * Получаем итератор последних объектов которых двигали
      *
      * @return IObject
      */
@@ -79,7 +79,7 @@ public abstract class AbstractArea extends AbstractAreaCore implements IArea {
     }
 
     /**
-     * Получаем последний объект которого убили
+     * Получаем итератор последних объектов которых убили
      *
      * @return IObject
      */
@@ -99,7 +99,7 @@ public abstract class AbstractArea extends AbstractAreaCore implements IArea {
                 this.lastMovedObjectArrayList.clear();
                 return;
             }
-            //Ищем объект отпечаток которого остался
+            //Ищем объект отпечаток
             for (int index = 0; index < this.maxSquareNumber; index++) {
                 if (this.getObjectFromList(index) != null &&
                         this.lastMovedObjectArrayList.get((this.lastMovedObjectArrayList.size() - 1)).getSquareNumber() == this.getObjectFromList(index).getLastPosition()) {
