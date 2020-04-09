@@ -9,10 +9,11 @@ import java.util.Iterator;
  * @author Roman
  */
 public interface IArea {
+
     /**
-     * Удаление объекта с области
+     * Метод удаляет объект на заданной клетке
      *
-     * @param ObjectSquareNumber Номер клетки на которой нужно удалить объект
+     * @param ObjectSquareNumber Номер клетки на которой нужно "удалить" объект
      */
     void deleteObject(int ObjectSquareNumber);
 
@@ -24,7 +25,7 @@ public interface IArea {
     void setObject(IObject object);
 
     /**
-     * Движение объекта на области
+     * Небезопасное движение объекта по области
      *
      * @param ObjectSquareNumber Номер клетки с объектом
      * @param SquareNumber       Номер клетки куда нужно переместить объект
@@ -33,6 +34,9 @@ public interface IArea {
     boolean moveObject(int ObjectSquareNumber, int SquareNumber);
 
     /**
+     * Безопасное движение объекта по области
+     * Добавлено дополнительное сравниевание цветов для ограничения управления другими игроками
+     *
      * @param ObjectSquareNumber Номер клетки с объектом
      * @param SquareNumber       Номер клетки куда нужно переместить объект
      * @param objectColor        Цвет объекта
@@ -41,9 +45,30 @@ public interface IArea {
     boolean moveObjectSafe(int ObjectSquareNumber, int SquareNumber, Color objectColor);
 
     /**
-     * @return Возвращает размер области
+     * Метод активирует action объекта на заданной клетке
+     *
+     * @param ObjectSquareNumber Область где стоит объект
+     * @param SquareNumber       Номер клетки для action объекта
+     * @return Возвращает возможно ли это
      */
-    int getAreaSize();
+    boolean runObjectAction(int ObjectSquareNumber, int SquareNumber);
+
+    /**
+     * Метод возвращает уникальный накопленный номер
+     *
+     * @return getObjectId
+     */
+    long getObjectId();
+
+    /**
+     * @return Возвращает ширину облатсти
+     */
+    int getAreaWidth();
+
+    /**
+     * @return Возвращает высоту облатсти
+     */
+    int getAreaHeight();
 
     /**
      * @return Возвращает макс кол-во клеток
@@ -51,7 +76,7 @@ public interface IArea {
     int getMaxSquareNumber();
 
     /**
-     * @param ObjectSquareNumber Номер клутки на которой находится объект
+     * @param ObjectSquareNumber Номер клетки на которой находится объект
      * @return Возвращает нужный объект или null
      */
     IObject getObjectFromList(int ObjectSquareNumber);
@@ -87,55 +112,87 @@ public interface IArea {
     int getLastMovedObjectArrayListSize();
 
     /**
-     * Возвращает последний сдвинутый объект
+     * Метод возвращает последний сдвинутый объект
      *
      * @return IObject
      */
-    IObject getLastMoved();
+    IObject getLastMovedObject();
 
     /**
-     * Получаем последний объект который двигался
+     * Метод возвращает итератор последних объектов которые двигались
      *
      * @return IObject
      */
     Iterator<IObject> getLastMovedObjectIterator();
 
     /**
-     * последний объект который двигался
+     * Метод задает последний объект который двигался
+     * Удаляем первый при переполнении
      *
      * @param SquareNumber int
      */
     void setLastMovedObject(int SquareNumber);
 
     /**
-     * @return Size
+     * Задаем последний объект который двигался
+     * Удаляем первый при переполнении
+     *
+     * @param object IObject
      */
-    int getLastKilledObjectArrayListSize();
+    void setLastMovedObject(IObject object);
 
     /**
-     * Возвращает последний уничтоженый объект
+     * @return LastKilledObjectArrayListSize
+     */
+    int getLastDestroyedObjectArrayListSize();
+
+    /**
+     * Метод возвращает последний уничтоженый объект
      *
      * @return IObject
      */
-    IObject getLastKilled();
+    IObject getLastDestroyedObject();
 
     /**
-     * Получаем последний объект которого убили
+     * Метод возвращает итератор последних объектов которых уничтожили
      *
      * @return IObject
      */
-    Iterator<IObject> getLastKilledObjectIterator();
+    Iterator<IObject> getLastDestroyedObjectIterator();
 
     /**
-     * последний объект которого убили
+     * Метод задает последний объект которого уничтожили
+     * Удаляем первый при переполнении
      *
      * @param SquareNumber int
      */
-    void setLastKilledObject(int SquareNumber);
-
+    void setLastDestroyedObject(int SquareNumber);
 
     /**
-     * Восстанавливает последний ход
+     * Метод задает последний объект которого уничтожили
+     * Удаляем первый при переполнении
+     *
+     * @param object int
+     */
+    void setLastDestroyedObject(IObject object);
+
+    /**
+     * Восстанавливает несколько последних ходов
      */
     void recallStep(int loopTimes);
+
+    /**
+     * Метод удалает последнюю полноценную запись клонов
+     */
+    void lastDestroyedObjectDelete();
+
+    /**
+     * Метод удалает последнюю полноценную запись клонов
+     */
+    void lastMovedObjectDelete();
+
+    /**
+     * Метод очищает ArrayLists с клонами объектов
+     */
+    void lastObjectArrayListsClear();
 }

@@ -11,7 +11,6 @@ import java.awt.*;
  */
 public abstract class AbstractObject extends AbstractObjectCore implements Cloneable, IObject {
 
-
     /**
      * @param squareNumber Номер клетки
      * @param color        Цвет
@@ -20,26 +19,52 @@ public abstract class AbstractObject extends AbstractObjectCore implements Clone
         super(squareNumber, color);
     }
 
-
     /**
-     * Метод реализует движение фигуры на области, предварительно проверяя возможность хода
+     * Метод реализует движение объекта на области, предварительно проверяя возможность хода
      * Также дозаписывается история ходов для откатов
      *
-     * @param SquareNumber Куда фигура хочет ударить
-     * @param area         Доска где стоит фигура
+     * @param SquareNumber Куда объект хочет ударить
+     * @param area         Доска где стоит объект
      * @return Возвращает возможно ли это
      */
-    public boolean move(int SquareNumber, IArea area) {
-        boolean isInRange = this.isInRange(SquareNumber, area);
+    public boolean move(int SquareNumber, IArea area, boolean rangeCheck) {
+        boolean isInRange = !rangeCheck || this.isInRange(SquareNumber, area);
+        //Проверяем нет ли нового объекта под нами
+        if (isInRange && area.getObjectFromList(this.squareNumber) != null &&
+                area.getObjectFromList(this.squareNumber).getObjectId() != this.objectId) {
+            //Правильно заполняем очередь клонов
+            area.setLastDestroyedObject(SquareNumber);
+            area.setLastMovedObject(this);
+            //Меняемся id так как нашего объекта на области нет, топерь новый объект это мы
+            area.getObjectFromList(this.squareNumber).setObjectIdUnsafe(this.getObjectId());
+            //Двигаем новый объект на нужную клетку без проверки на валидность хода с его стороны
+            area.getObjectFromList(this.squareNumber).move(SquareNumber, area, false);
+            //Очищаем историю хода
+            area.lastDestroyedObjectDelete();
+            area.lastMovedObjectDelete();
+            return true;
+        }
         if (isInRange) {
             area.setLastMovedObject(this.getSquareNumber());
             this.lastPosition = this.getSquareNumber();
             this.squareNumber = SquareNumber;
-            area.setLastKilledObject(SquareNumber);
+            area.setLastDestroyedObject(SquareNumber);
             area.setObject(this);
             area.deleteObject(this.lastPosition);
         }
         return isInRange;
+    }
+
+    /**
+     * Метод может реализовывать какое либо действие, работает в связке с this.isInRange
+     * Реализация предполагается в классах потомках
+     *
+     * @param SquareNumber Номер клетки над которой производится действие
+     * @param Area         Область где стоит объект
+     * @return Возвращает возможно ли это
+     */
+    public boolean action(int SquareNumber, IArea Area) {
+        return false;
     }
 
     /**
@@ -66,11 +91,11 @@ public abstract class AbstractObject extends AbstractObjectCore implements Clone
 
         boolean wayIsFree = true;
 
-        for (int i = this.getSquareNumber() + sizeMn * area.getAreaSize() + numMn;
-             i != SquareNumber;
-             i += sizeMn * area.getAreaSize() + numMn
+        for (int index = this.getSquareNumber() + sizeMn * area.getAreaWidth() + numMn;
+             index != SquareNumber;
+             index += sizeMn * area.getAreaWidth() + numMn
         ) {
-            if (area.getObjectFromList(i) != null) {
+            if (area.getObjectFromList(index) != null) {
                 wayIsFree = false;
                 break;
             }
@@ -105,13 +130,13 @@ public abstract class AbstractObject extends AbstractObjectCore implements Clone
 
         boolean wayIsFree = true;
 
-        for (int i = numAlg ?
-                this.getSquareNumber() + numMn * area.getAreaSize() :
+        for (int index = numAlg ?
+                this.getSquareNumber() + numMn * area.getAreaWidth() :
                 this.getSquareNumber() + numMn;
-             i != SquareNumber;
-             i += numAlg ? numMn * area.getAreaSize() : numMn
+             index != SquareNumber;
+             index += numAlg ? numMn * area.getAreaWidth() : numMn
         ) {
-            if (area.getObjectFromList(i) != null) {
+            if (area.getObjectFromList(index) != null) {
                 wayIsFree = false;
                 break;
             }

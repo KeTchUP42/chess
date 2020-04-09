@@ -5,19 +5,36 @@ import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 
+/**
+ * @author Roman
+ */
 abstract class AbstractObjectCore {
 
+    /**
+     * Стартовый id объекта
+     */
+    public static final long DEFAULT_START_OBJECT_ID = -1;
+
+    /**
+     * Последняя позиция объекта
+     */
     protected int lastPosition;
 
+    /**
+     * Номер клетки объекта
+     */
     protected int squareNumber;
 
+    /**
+     * Цвет объекта
+     */
     protected Color color;
 
     /**
-     * Стартовая позиция объекта
+     * Уникальный номер объекта, задается в setObject
      * Используется для роллбэков
      */
-    protected int startPosition;
+    protected long objectId = DEFAULT_START_OBJECT_ID;
 
     /**
      * @param squareNumber Номер клетки
@@ -25,7 +42,6 @@ abstract class AbstractObjectCore {
      */
     public AbstractObjectCore(int squareNumber, Color color) {
         this.squareNumber = squareNumber;
-        this.startPosition = squareNumber;
         this.color = color;
     }
 
@@ -39,10 +55,37 @@ abstract class AbstractObjectCore {
     }
 
     /**
+     * Метод возвращает уникальный id объекта на области
+     *
      * @return startPosition
      */
-    public int getStartPosition() {
-        return startPosition;
+    public long getObjectId() {
+        return objectId;
+    }
+
+    /**
+     * Метод задает уникальный id на конкретной облсти
+     *
+     * @param area objectId
+     */
+    public void setObjectIdSafe(@NotNull IArea area) {
+        if (this.objectId == DEFAULT_START_OBJECT_ID) this.objectId = area.getObjectId();
+    }
+
+    /**
+     * Метод задает уникальный id на конкретной облсти
+     *
+     * @param objectId IObject
+     */
+    public void setObjectIdUnsafe(long objectId) {
+        this.objectId = objectId;
+    }
+
+    /**
+     * Reset индентефикатора объекта
+     */
+    public void resetObjectId() {
+        this.objectId = DEFAULT_START_OBJECT_ID;
     }
 
     /**
@@ -65,5 +108,4 @@ abstract class AbstractObjectCore {
     public int getLastPosition() {
         return this.lastPosition;
     }
-
 }

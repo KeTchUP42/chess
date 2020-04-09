@@ -14,22 +14,31 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * @author Roman
+ */
 public class CommandLine implements IVisual {
-    //Цвет вывода для первого цвета
+    /**
+     * Цвет вывода для первого цвета
+     */
     private static final String ANSI_RED = "\u001B[31m";
-    //Цвет вывода для второго цвета
+    /**
+     * Цвет вывода для второго цвета
+     */
     private static final String ANSI_BLUE = "\u001B[34m";
-    //Ресет на стандартный цвет консоли
+
+    /**
+     * Ресет на стандартный цвет консоли
+     */
     private static final String ANSI_RESET = "\u001B[0m";
 
 
     @Override
     public void Draw(@NotNull IArea area) {
         this.clearScreen();
-
-        for (int i_Y = area.getAreaSize() - 1; i_Y >= 0; i_Y--) {
+        for (int i_Y = area.getAreaHeight() - 1; i_Y >= 0; i_Y--) {
             System.out.print(CommandLine.ANSI_RESET + "|");
-            for (int i_X = 0; i_X < area.getAreaSize(); i_X++) {
+            for (int i_X = 0; i_X < area.getAreaWidth(); i_X++) {
                 int SquareNumber = area.getSquareNumber(i_X, i_Y);
                 System.out.print(this.choseVisual(area.getObjectFromList(SquareNumber)));
                 System.out.print(CommandLine.ANSI_RESET + "|");
@@ -103,6 +112,7 @@ public class CommandLine implements IVisual {
             }
             return true;
         }
+        //
         return false;
     }
 
@@ -132,5 +142,4 @@ public class CommandLine implements IVisual {
             System.out.println("\b");
         }
     }
-
 }

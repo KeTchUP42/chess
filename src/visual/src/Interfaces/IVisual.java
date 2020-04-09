@@ -2,6 +2,9 @@ package visual.src.Interfaces;
 
 import area.Interfaces.IArea;
 
+/**
+ * @author Roman
+ */
 public interface IVisual {
 
     /**
@@ -19,7 +22,7 @@ public interface IVisual {
     String sendMessage(String message, boolean getAnswer, boolean afterClear);
 
     /**
-     * Вопрос по поводу конфигов
+     * config Clarification
      *
      * @return boolean
      */

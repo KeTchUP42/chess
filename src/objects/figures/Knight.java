@@ -6,7 +6,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 
-
+/**
+ * @author Roman
+ */
 public class Knight extends AbstractFigure {
     /**
      * @param squareNumber Номер клетки куда поставить фигуру

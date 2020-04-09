@@ -7,13 +7,16 @@ import objects.figures.*;
 import objects.src.colors.GameColors;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * @author Roman
+ */
 public class BoardFactory implements IAreaFactory {
 
     /**
      * @return Возвращает заполненную доску
      */
     public IArea getStandardArea() {
-        IArea Board = new BoardArea(8);
+        IArea Board = new BoardArea(8, 8);
 
         Board.setObject(new Castle(0, GameColors.firstColor));
         Board.setObject(new Knight(1, GameColors.firstColor));
@@ -43,11 +46,11 @@ public class BoardFactory implements IAreaFactory {
      */
     protected void fillPawns(@NotNull IArea Board) {
 
-        for (int iterator = Board.getAreaSize(); iterator < Board.getAreaSize() * 2; iterator++) {
+        for (int iterator = Board.getAreaWidth(); iterator < Board.getAreaWidth() * 2; iterator++) {
             Board.setObject(new Pawn(iterator, GameColors.firstColor));
         }
-        for (int iterator = Board.getMaxSquareNumber() - Board.getAreaSize() * 2;
-             iterator < Board.getAreaSize() * (Board.getAreaSize() - 1);
+        for (int iterator = Board.getMaxSquareNumber() - Board.getAreaWidth() * 2;
+             iterator < Board.getAreaWidth() * (Board.getAreaWidth() - 1);
              iterator++
         ) {
             Board.setObject(new Pawn(iterator, GameColors.secondColor));
@@ -58,11 +61,10 @@ public class BoardFactory implements IAreaFactory {
      * @return Возвращает тестовую доску
      */
     public IArea getTestArea() {
-        IArea desk = new BoardArea(8);
-        desk.setObject(new Queen(34, GameColors.secondColor));
-        desk.setObject(new Queen(25, GameColors.firstColor));
-        desk.setObject(new King(54, GameColors.secondColor));
-        desk.setObject(new King(5, GameColors.firstColor));
+        IArea desk = new BoardArea(4, 4);
+        desk.setObject(new King(15, GameColors.secondColor));
+        desk.setObject(new Pawn(4, GameColors.firstColor));
+        desk.setObject(new King(0, GameColors.firstColor));
         return desk;
     }
 }

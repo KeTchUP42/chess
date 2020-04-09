@@ -1,7 +1,9 @@
 package area.factory.src.Interfaces;
 
 import area.Interfaces.IArea;
-
+/**
+ * @author Roman
+ */
 public interface IAreaFactory {
     /**
      * @return Возвращает готовую доску

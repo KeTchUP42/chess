@@ -1,12 +1,15 @@
 package app.src;
 
+/**
+ * @author Roman
+ */
 public interface ConfigFields {
-    int areaType = 0;
+    int AREA_TYPE = 0;
 
-    int firstBrainType = 2;
-    int firstBrainNickName = 5;
-    int firstBrainColor = 1;
+    int FIRST_BRAIN_TYPE = 2;
+    int FIRST_BRAIN_NAME = 5;
+    int FIRST_BRAIN_COLOR = 1;
 
-    int secondBrainType = 3;
-    int secondBrainNickName = 4;
+    int SECOND_BRAIN_TYPE = 3;
+    int SECOND_BRAIN_NAME = 4;
 }

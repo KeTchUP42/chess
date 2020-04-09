@@ -8,15 +8,18 @@ import visual.src.Interfaces.IVisual;
 
 import java.io.IOException;
 
+/**
+ * @author Roman
+ */
 public abstract class AbstractApplication extends AbstractConfigSetter {
 
     /**
      * Задается визуал
      *
-     * @param visual Объект заключающий в себе функционал визуала
+     * @param Visual Объект заключающий в себе функционал визуала
      */
-    public AbstractApplication(IVisual visual) {
-        this.visual = visual;
+    public AbstractApplication(IVisual Visual) {
+        this.Visual = Visual;
     }
 
     /**
@@ -39,14 +42,14 @@ public abstract class AbstractApplication extends AbstractConfigSetter {
      */
     protected void gameRun() {
         //Решение порядка ходов
-        IPlayer firstPlayer = this.brains[0].getColor() == GameColors.firstColor ? this.brains[0] : this.brains[1];
-        IPlayer secondPlayer = !(this.brains[0].getColor() == GameColors.firstColor) ? this.brains[0] : this.brains[1];
+        IPlayer firstBrain = this.Brains[0].getColor() == GameColors.firstColor ? this.Brains[0] : this.Brains[1];
+        IPlayer secondBrain = !(this.Brains[0].getColor() == GameColors.firstColor) ? this.Brains[0] : this.Brains[1];
         while (true) {
             // 0 - норма, 1 - проиграл, 2 - ход невозможен
             boolean exit = false;
             while (true) {
-                this.visual.Draw(this.area);
-                int stepResult = firstPlayer.step();
+                this.Visual.Draw(this.Area);
+                int stepResult = firstBrain.step();
                 if (stepResult == 1) {
                     exit = true;
                 }
@@ -55,8 +58,8 @@ public abstract class AbstractApplication extends AbstractConfigSetter {
             }
             if (exit) break;
             while (true) {
-                this.visual.Draw(this.area);
-                int stepResult = secondPlayer.step();
+                this.Visual.Draw(this.Area);
+                int stepResult = secondBrain.step();
                 if (stepResult == 1) {
                     exit = true;
                 }
@@ -76,7 +79,7 @@ public abstract class AbstractApplication extends AbstractConfigSetter {
     protected String[] playerConfig(@NotNull String[] configItems) {
         String[] configData = new String[configItems.length];
         for (int index = 0; index < configItems.length; index++) {
-            configData[index] = this.visual.sendMessage("Введи параметр " + configItems[index], true, false).trim();
+            configData[index] = this.Visual.sendMessage("Введи параметр " + configItems[index], true, false).trim();
         }
         return configData;
     }
@@ -91,8 +94,8 @@ public abstract class AbstractApplication extends AbstractConfigSetter {
             this.setConfig(this.playerConfig(
                     new String[]{
                             "areaType", "firstBrainColor", "firstBrainType",
-                            "secondBrainType", "secondBrainNickName",
-                            "firstBrainNickName"
+                            "secondBrainType", "secondBrainName",
+                            "firstBrainName"
                     }));
         }
     }

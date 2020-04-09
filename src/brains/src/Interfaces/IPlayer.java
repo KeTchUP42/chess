@@ -2,6 +2,9 @@ package brains.src.Interfaces;
 
 import java.awt.*;
 
+/**
+ * @author Roman
+ */
 public interface IPlayer {
     /**
      * Ход данного игрока

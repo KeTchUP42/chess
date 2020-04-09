@@ -3,20 +3,44 @@ package area.Abstract;
 import area.Interfaces.IArea;
 import objects.Interfaces.IObject;
 
+/**
+ * @author Roman
+ */
 abstract class AbstractAreaCore {
 
+    /**
+     * Максимальное кол-во клеток в области
+     */
     protected int maxSquareNumber;
 
-    protected int AreaSize;
+    /**
+     * Ширина области
+     */
+    protected int areaWidth;
 
+    /**
+     * Высота области
+     */
+    protected int areaHeight;
+
+    /**
+     * Массив объектов области
+     */
     protected IObject[] ObjectList;
 
     /**
-     * @param areaSize Размер области
+     * Уникальный id задаваемого объекта
      */
-    public AbstractAreaCore(int areaSize) {
-        this.AreaSize = areaSize;
-        this.maxSquareNumber = this.AreaSize * this.AreaSize;
+    protected long objectId = 0;
+
+    /**
+     * @param areaWidth  Ширина области
+     * @param areaHeight Высота области
+     */
+    public AbstractAreaCore(int areaWidth, int areaHeight) {
+        this.areaWidth = areaWidth;
+        this.areaHeight = areaHeight;
+        this.maxSquareNumber = this.areaWidth * this.areaHeight;
         this.ObjectList = new IObject[this.maxSquareNumber];
     }
 
@@ -31,10 +55,25 @@ abstract class AbstractAreaCore {
     }
 
     /**
-     * @return Возвращает размер области
+     * @return getObjectId
      */
-    public int getAreaSize() {
-        return this.AreaSize;
+    public long getObjectId() {
+        this.objectId++;
+        return objectId;
+    }
+
+    /**
+     * @return Возвращает ширину облатсти
+     */
+    public int getAreaWidth() {
+        return areaWidth;
+    }
+
+    /**
+     * @return Возвращает высоту области
+     */
+    public int getAreaHeight() {
+        return areaHeight;
     }
 
     /**
@@ -45,6 +84,8 @@ abstract class AbstractAreaCore {
     }
 
     /**
+     * Метод возвращает ссылку на объект под номером клетки
+     *
      * @param ObjectSquareNumber Номер клетки с объектом
      * @return Возвращает нужный объект
      */
@@ -59,7 +100,7 @@ abstract class AbstractAreaCore {
      * @return X
      */
     public int getXCoordinate(int SquareNumber) {
-        return SquareNumber % this.getAreaSize();
+        return SquareNumber % this.getAreaWidth();
     }
 
     /**
@@ -69,7 +110,7 @@ abstract class AbstractAreaCore {
      * @return Y
      */
     public int getYCoordinate(int SquareNumber) {
-        return SquareNumber / this.getAreaSize();
+        return SquareNumber / getAreaWidth();
     }
 
     /**
@@ -80,9 +121,8 @@ abstract class AbstractAreaCore {
      * @return Номер клетки
      */
     public int getSquareNumber(int XCoordinate, int YCoordinate) {
-        return YCoordinate * this.getAreaSize() + XCoordinate;
+        return YCoordinate * getAreaWidth() + XCoordinate;
     }
-
 
     /**
      * Проверка на null не может быть замененна на аннотацию так как медот должен работать с null значениями
@@ -94,11 +134,13 @@ abstract class AbstractAreaCore {
                 this.isValidNumber(object.getSquareNumber());
         if (isOk) {
             this.ObjectList[object.getSquareNumber()] = object;
+            object.setObjectIdSafe((IArea) this);
         }
     }
 
-
     /**
+     * Небезопасное движение объекта по области
+     *
      * @param ObjectSquareNumber Номер клетки с объектом
      * @param SquareNumber       Номер клетки куда нужно переместить объект
      * @return Возвращает удачно ли прошло движение
@@ -106,11 +148,12 @@ abstract class AbstractAreaCore {
     public boolean moveObject(int ObjectSquareNumber, int SquareNumber) {
         return this.isValidNumber(ObjectSquareNumber) && this.isValidNumber(SquareNumber)
                 && this.ObjectList[ObjectSquareNumber] != null && ObjectSquareNumber != SquareNumber &&
-                this.ObjectList[ObjectSquareNumber].move(SquareNumber, (IArea) this);
+                this.ObjectList[ObjectSquareNumber].move(SquareNumber, (IArea) this, true);
     }
 
-
     /**
+     * Метод удаляет объект на заданной клетке
+     *
      * @param ObjectSquareNumber Номер клетки на которой нужно "удалить" объект
      */
     public void deleteObject(int ObjectSquareNumber) {
@@ -118,6 +161,4 @@ abstract class AbstractAreaCore {
             this.ObjectList[ObjectSquareNumber] = null;
         }
     }
-
-
 }

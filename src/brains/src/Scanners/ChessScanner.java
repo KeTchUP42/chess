@@ -1,4 +1,4 @@
-package brains.src.sranners;
+package brains.src.Scanners;
 
 import area.Interfaces.IArea;
 import objects.figures.King;
@@ -8,10 +8,12 @@ import java.util.ArrayList;
 
 /**
  * Класс содержит функционал для скана доски на определенные комбинации
+ *
+ * @author Roman
  */
 public class ChessScanner {
 
-    protected IArea Area;
+    private final IArea Area;
 
     /**
      * Конструктор
@@ -24,7 +26,7 @@ public class ChessScanner {
 
 
     /**
-     * Проверка короля
+     * Метод проверяет наличие короля на области
      *
      * @return Жив ли
      */
@@ -39,14 +41,17 @@ public class ChessScanner {
     }
 
     /**
+     * Метод проверяет является ход безопасным для королей
+     * Если нет то ход отменяется
+     *
      * @param color Color
      * @return boolean
      */
-    public boolean kingUnderAttack(Color color) {
+    public boolean isKingUnderAttack(Color color) {
         for (King king : this.searchKings(color)) {
-            for (int i = 0; i < this.Area.getMaxSquareNumber(); i++) {
-                if (this.Area.getObjectFromList(i) != null &&
-                        this.Area.getObjectFromList(i).isInRange(king.getSquareNumber(), this.Area)) {
+            for (int index = 0; index < this.Area.getMaxSquareNumber(); index++) {
+                if (this.Area.getObjectFromList(index) != null &&
+                        this.Area.getObjectFromList(index).isInRange(king.getSquareNumber(), this.Area)) {
                     this.Area.recallStep(1);
                     return true;
                 }
@@ -56,10 +61,12 @@ public class ChessScanner {
     }
 
     /**
+     * Метод ищет всех королей с заданным цветом и возвращает ArrayList<King>
+     *
      * @param color Color
      * @return ArrayList<King>
      */
-    protected ArrayList<King> searchKings(Color color) {
+    private ArrayList<King> searchKings(Color color) {
         ArrayList<King> kings = new ArrayList<>();
 
         for (int index = 0; index < this.Area.getMaxSquareNumber(); index++) {

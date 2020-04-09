@@ -7,8 +7,11 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * @author Roman
+ */
 public class INIParser {
-    private Wini ini;
+    private final Wini ini;
 
     public INIParser(String filepath) throws IOException {
         this.ini = new Wini(new File(filepath));
@@ -25,8 +28,8 @@ public class INIParser {
                 this.ini.get("defaultSettings", "firstBrainColor", String.class),
                 this.ini.get("defaultSettings", "firstBrainType", String.class),
                 this.ini.get("defaultSettings", "secondBrainType", String.class),
-                this.ini.get("defaultSettings", "secondBrainNickName", String.class),
-                this.ini.get("defaultSettings", "firstBrainNickName", String.class),
+                this.ini.get("defaultSettings", "secondBrainName", String.class),
+                this.ini.get("defaultSettings", "firstBrainName", String.class),
         };
     }
 

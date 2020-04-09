@@ -2,15 +2,23 @@ package brains.player;
 
 import area.Interfaces.IArea;
 import brains.src.Abstract.AbstractPlayer;
-import brains.src.Interfaces.IPlayer;
-import brains.src.sranners.ChessScanner;
+import brains.src.Scanners.ChessScanner;
 import visual.src.Interfaces.IVisual;
 
-public class Player extends AbstractPlayer implements IPlayer {
+import java.awt.*;
 
+/**
+ * @author Roman
+ */
+public class Player extends AbstractPlayer {
 
-    public Player(IArea boardArea, java.awt.Color color, IVisual visual, String nickName) {
-        super(boardArea, color, visual, nickName);
+    /**
+     * Сканер области
+     */
+    protected ChessScanner scanner = new ChessScanner(this.Area);
+
+    public Player(IArea area, Color color, IVisual visual, String Name) {
+        super(area, color, visual, Name);
     }
 
     /**
@@ -18,40 +26,39 @@ public class Player extends AbstractPlayer implements IPlayer {
      */
     @Override
     public int step() {
-        ChessScanner chessScanner = new ChessScanner(this.boardArea);
-        if (chessScanner.isKingDead(this.Color)) {
-            this.visual.sendMessage(this.nickName + " проиграл на " + this.stepNumber + " ходе.", false, false);
+        if (this.scanner.isKingDead(this.Color)) {
+            this.Visual.sendMessage(this.Name + " проиграл на " + this.stepNumber + " ходе.", false, false);
             return 1;
         }
 
         int squareNumber;
         int figureSquareNumber;
         try {
-            this.visual.sendMessage("Очередь " + this.nickName, false, false);
-            String input = this.visual.sendMessage(
+            this.Visual.sendMessage("Очередь " + this.Name, false, false);
+            String input = this.Visual.sendMessage(
                     "Введи номер клетки на которой вы хотите двинуть фигуру.", true, false);
 
             if (input.toLowerCase().equals("recall")) {
-                this.boardArea.recallStep(2);
+                this.Area.recallStep(2);
                 return 2;
             }
             squareNumber = Integer.parseInt(input);
-            //
-            input = this.visual.sendMessage(
+
+            input = this.Visual.sendMessage(
                     "Введи номер клетки на которую вы хотите двинуть фигуру.", true, false);
 
             if (input.toLowerCase().equals("recall")) {
-                this.boardArea.recallStep(2);
+                this.Area.recallStep(2);
                 return 2;
             }
             figureSquareNumber = Integer.parseInt(input);
-            //
+
         } catch (NumberFormatException e) {
             return 2;
         }
         //Движение фигуры
-        boolean isValidStep = this.boardArea.moveObjectSafe(squareNumber, figureSquareNumber, this.Color);
-        if (isValidStep) this.visual.sendMessage(this.nickName + " сделал ход", false, false);
+        boolean isValidStep = this.Area.moveObjectSafe(squareNumber, figureSquareNumber, this.Color);
+        if (isValidStep) this.Visual.sendMessage(this.Name + " сделал ход", false, false);
         return isValidStep ? this.returnZero(0) : 2;
     }
 }

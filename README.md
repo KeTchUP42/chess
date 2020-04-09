@@ -15,46 +15,32 @@
     | 08 | 09 | 10 | 11 | 12 | 13 | 14 | 15 |
     | 00 | 01 | 02 | 03 | 04 | 05 | 06 | 07 |
 
-### Для просмотра или изменения последовательности параметров в массиве:
+ ### Для просмотра или изменения последовательности параметров в массиве:
 Смотрите файл INIParser.java, потом AbstractConfigSetter.java.
 Для изменения последовательности параметров для ручного ввода изменить массив входящих параметром в AbstractApplication.java и AbstractConfigSetter.java. 
 
-### Для добавления новых ботов: 
+ ### Для добавления новых ботов: 
  Для добавления новых ботов нужно прописать их логику в brains/bots и 
  в AbstractConfigSetter.java добавить вариант выбора для создания бота.
-#### Пример:
-    /**
-     * @return 0 - норма, 1 - проиграл, 2 - ход невозможен
-     */
-    @Override
-    public int step() {
-        if (this.scanner.isKingDead(this.Color)) {
-            this.visual.sendMessage(this.nickName + " проиграл на " + this.stepNumber + " ходе.", false, false);
-            return 1;
-        }
-        int index = 0;
-        do {
-            if (index == 1000) {
-                this.visual.sendMessage(this.nickName + " проиграл на " + this.stepNumber + " ходе.", false, false);
-                return 1;
-            } else index++;
+ #### Пример: src/brains/bots/Bot_0.java
 
-            while (true) {
-                if (this.boardArea.moveObjectSafe((int) (Math.random() * this.boardArea.getMaxSquareNumber()),
-                        (int) (Math.random() * this.boardArea.getMaxSquareNumber()),
-                        this.Color))
-                    break;
-            }
-        } while (this.scanner.kingUnderAttack(this.Color));
-        return this.returnZero(2000);
-    }
-### Для добавления новых фигур или других игровых объектов:
+ ### Для добавления новых фигур или других игровых объектов:
  Новые классы объектов прописавыются в каталоге objects. Предварительно для этой новой группы объектов создается родительский абстрактный класс который наследуется от aбстрактного класса объекта в gameCore.
  Для добавления новых фигур или изменения их логики поведения
  изменять/добавлять классы фигур в пакет figures + добавлять методы
  в фабрику area/board/factory. В AbstractConfigSetter.java добавить вариант выбора для 
  создания конкретной конфигурации области.
+ ### Для динамической замены объектов:
+ Пример правильной замены пешки на королеву в методе isInRange:
 
+     if (stepValid && (Board.getYCoordinate(SquareNumber) == Board.getAreaHeight() - 1 ||
+             Board.getYCoordinate(SquareNumber) == 0)) {
+              //////////////////////////////////////////////////////////
+               Board.setObject(new Queen(this.squareNumber, this.color));
+               return true;
+              //////////////////////////////////////////////////////////
+            }
+              
  ### Для добавления нового визуала:
   Для добавления нового визуала добавлять классы исполняющие интерфейс IVisual в пакет visual. Создавать класс 
   Application с объектом нового визуала в конструкторе.
@@ -65,24 +51,20 @@
  ### Для изменения стандартной конфигурации:
  Изменять файл app/configs/config.ini
 
-#### Настройки по умолчанию:
+ #### Настройки по умолчанию:
     
     [defaultSettings]
+    firstBrainColor = standard
+    firstBrainType  = bot_0
+    firstBrainName = Player_1
 
-    firstPlayerColor = standard
-    firstPlayerType  = bot_0
-    firstPlayerNickName = Player_1
-
-    secondPlayerType = bot_0
-    secondPlayerNickName = BOT
+    secondBrainType = bot_0
+    secondBrainName = BOT
 
     areaType     = standard
 
     [colorSettings]
-
     FirstColor   = white
     SecondColor  = black
-
-
 
 

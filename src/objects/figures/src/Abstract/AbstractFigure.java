@@ -6,8 +6,15 @@ import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 
-
+/**
+ * @author Roman
+ */
 public abstract class AbstractFigure extends AbstractObject {
+
+    /**
+     * Стартовая позиция фигуры
+     */
+    protected int startPosition;
 
     /**
      * @param squareNumber Номер клетки
@@ -15,6 +22,7 @@ public abstract class AbstractFigure extends AbstractObject {
      */
     public AbstractFigure(int squareNumber, Color color) {
         super(squareNumber, color);
+        this.startPosition = squareNumber;
     }
 
     /**

@@ -2,19 +2,23 @@ package brains.bots;
 
 import area.Interfaces.IArea;
 import brains.src.Abstract.AbstractPlayer;
-import brains.src.Interfaces.IPlayer;
-import brains.src.sranners.ChessScanner;
+import brains.src.Scanners.ChessScanner;
 import visual.src.Interfaces.IVisual;
 
-public class Bot_0 extends AbstractPlayer implements IPlayer {
+import java.awt.*;
+
+/**
+ * @author Roman
+ */
+public class Bot_0 extends AbstractPlayer {
 
     /**
-     * Сканер области, помощник бота
+     * Сканер области
      */
-    ChessScanner scanner = new ChessScanner(this.boardArea);
+    protected ChessScanner scanner = new ChessScanner(this.Area);
 
-    public Bot_0(IArea boardArea, java.awt.Color color, IVisual visual, String nickName) {
-        super(boardArea, color, visual, nickName);
+    public Bot_0(IArea area, Color color, IVisual visual, String Name) {
+        super(area, color, visual, Name);
     }
 
     /**
@@ -23,22 +27,22 @@ public class Bot_0 extends AbstractPlayer implements IPlayer {
     @Override
     public int step() {
         if (this.scanner.isKingDead(this.Color)) {
-            this.visual.sendMessage(this.nickName + " проиграл на " + this.stepNumber + " ходе.", false, false);
+            this.Visual.sendMessage(this.Name + " проиграл на " + this.stepNumber + " ходе.", false, false);
             return 1;
         }
         int index = 0;
         do {
             if (index == 1000) {
-                this.visual.sendMessage(this.nickName + " проиграл на " + this.stepNumber + " ходе.", false, false);
+                this.Visual.sendMessage(this.Name + " проиграл на " + this.stepNumber + " ходе.", false, false);
                 return 1;
             } else index++;
 
             while (true) {
-                if (this.boardArea.moveObjectSafe((int) (Math.random() * this.boardArea.getMaxSquareNumber()),
-                        (int) (Math.random() * this.boardArea.getMaxSquareNumber()),
+                if (this.Area.moveObjectSafe((int) (Math.random() * this.Area.getMaxSquareNumber()),
+                        (int) (Math.random() * this.Area.getMaxSquareNumber()),
                         this.Color)) break;
             }
-        } while (this.scanner.kingUnderAttack(this.Color));
-        return this.returnZero(1500);
+        } while (this.scanner.isKingUnderAttack(this.Color));
+        return this.returnZero(2500);
     }
 }
