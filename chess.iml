@@ -27,5 +27,8 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="ini4j-0.5.4" level="project" />
+    <orderEntry type="library" name="junit:junit:4.12" level="project" />
+    <orderEntry type="library" name="openjfx-11.0.2_linux-x64_bin-sdk" level="project" />
+    <orderEntry type="library" name="scenebuilder-kit-11.0.0" level="project" />
   </component>
 </module>

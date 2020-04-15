@@ -8,7 +8,7 @@ import java.awt.*;
 /**
  * @author Roman
  */
-abstract class AbstractObjectCore {
+abstract class AbstractObjectBase {
 
     /**
      * Стартовый id объекта
@@ -31,7 +31,7 @@ abstract class AbstractObjectCore {
     protected Color color;
 
     /**
-     * Уникальный номер объекта, задается в setObject
+     * Уникальный номер объекта, задается в putObject
      * Используется для роллбэков
      */
     protected long objectId = DEFAULT_START_OBJECT_ID;
@@ -40,7 +40,7 @@ abstract class AbstractObjectCore {
      * @param squareNumber Номер клетки
      * @param color        Цвет
      */
-    public AbstractObjectCore(int squareNumber, Color color) {
+    public AbstractObjectBase(int squareNumber, Color color) {
         this.squareNumber = squareNumber;
         this.color = color;
     }
@@ -60,11 +60,11 @@ abstract class AbstractObjectCore {
      * @return startPosition
      */
     public long getObjectId() {
-        return objectId;
+        return this.objectId;
     }
 
     /**
-     * Метод задает уникальный id на конкретной облсти
+     * Метод задает уникальный id на конкретной области
      *
      * @param area objectId
      */
@@ -73,7 +73,7 @@ abstract class AbstractObjectCore {
     }
 
     /**
-     * Метод задает уникальный id на конкретной облсти
+     * Метод задает уникальный id на конкретной области
      *
      * @param objectId IObject
      */
@@ -82,7 +82,7 @@ abstract class AbstractObjectCore {
     }
 
     /**
-     * Reset индентефикатора объекта
+     * Reset идентификатора объекта
      */
     public void resetObjectId() {
         this.objectId = DEFAULT_START_OBJECT_ID;

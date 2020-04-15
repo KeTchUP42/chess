@@ -2,6 +2,7 @@ package brains.src.Scanners;
 
 import area.Interfaces.IArea;
 import objects.figures.King;
+import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
  */
 public class ChessScanner {
 
-    private final IArea Area;
+    protected final IArea Area;
 
     /**
      * Конструктор
@@ -24,20 +25,17 @@ public class ChessScanner {
         this.Area = area;
     }
 
-
     /**
      * Метод проверяет наличие короля на области
      *
      * @return Жив ли
      */
     public boolean isKingDead(Color color) {
-        //Проверка на проигрыш
-        boolean isKingDead = true;
         for (int index = 0; index < this.Area.getMaxSquareNumber(); index++) {
             if (this.Area.getObjectFromList(index) instanceof King && this.Area.getObjectFromList(index).getColor() == color)
-                isKingDead = false;
+                return false;
         }
-        return isKingDead;
+        return true;
     }
 
     /**
@@ -52,7 +50,7 @@ public class ChessScanner {
             for (int index = 0; index < this.Area.getMaxSquareNumber(); index++) {
                 if (this.Area.getObjectFromList(index) != null &&
                         this.Area.getObjectFromList(index).isInRange(king.getSquareNumber(), this.Area)) {
-                    this.Area.recallStep(1);
+                    this.Area.undoStep(1);
                     return true;
                 }
             }
@@ -66,9 +64,8 @@ public class ChessScanner {
      * @param color Color
      * @return ArrayList<King>
      */
-    private ArrayList<King> searchKings(Color color) {
+    protected ArrayList<King> searchKings(@NotNull Color color) {
         ArrayList<King> kings = new ArrayList<>();
-
         for (int index = 0; index < this.Area.getMaxSquareNumber(); index++) {
             if (this.Area.getObjectFromList(index) != null && this.Area.getObjectFromList(index) instanceof King &&
                     this.Area.getObjectFromList(index).getColor() == color) {

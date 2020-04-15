@@ -3,6 +3,8 @@ package brains.player;
 import area.Interfaces.IArea;
 import brains.src.Abstract.AbstractPlayer;
 import brains.src.Scanners.ChessScanner;
+import brains.src.StepLog;
+import brains.src.TimeSpan;
 import visual.src.Interfaces.IVisual;
 
 import java.awt.*;
@@ -22,43 +24,43 @@ public class Player extends AbstractPlayer {
     }
 
     /**
-     * @return 0 - норма, 1 - проиграл, 2 - ход невозможен
+     * @return StepLog
      */
     @Override
-    public int step() {
+    public StepLog step() {
         if (this.scanner.isKingDead(this.Color)) {
-            this.Visual.sendMessage(this.Name + " проиграл на " + this.stepNumber + " ходе.", false, false);
-            return 1;
+            this.Visual.showMessage(this.Name + " проиграл на " + this.stepNumber + " ходе.", false, false);
+            return StepLog.DEFEAT;
         }
 
         int squareNumber;
         int figureSquareNumber;
         try {
-            this.Visual.sendMessage("Очередь " + this.Name, false, false);
-            String input = this.Visual.sendMessage(
+            this.Visual.showMessage("Очередь " + this.Name, false, false);
+            String input = this.Visual.showMessage(
                     "Введи номер клетки на которой вы хотите двинуть фигуру.", true, false);
 
-            if (input.toLowerCase().equals("recall")) {
-                this.Area.recallStep(2);
-                return 2;
+            if (input.toLowerCase().equals("undo")) {
+                this.Area.undoStep(2);
+                return StepLog.STEP_IS_IMPOSSIBLE;
             }
             squareNumber = Integer.parseInt(input);
 
-            input = this.Visual.sendMessage(
+            input = this.Visual.showMessage(
                     "Введи номер клетки на которую вы хотите двинуть фигуру.", true, false);
 
-            if (input.toLowerCase().equals("recall")) {
-                this.Area.recallStep(2);
-                return 2;
+            if (input.toLowerCase().equals("undo")) {
+                this.Area.undoStep(2);
+                return StepLog.STEP_IS_IMPOSSIBLE;
             }
             figureSquareNumber = Integer.parseInt(input);
 
         } catch (NumberFormatException e) {
-            return 2;
+            return StepLog.STEP_IS_IMPOSSIBLE;
         }
         //Движение фигуры
-        boolean isValidStep = this.Area.moveObjectSafe(squareNumber, figureSquareNumber, this.Color);
-        if (isValidStep) this.Visual.sendMessage(this.Name + " сделал ход", false, false);
-        return isValidStep ? this.returnZero(0) : 2;
+        return this.Area.moveObjectSafe(squareNumber, figureSquareNumber, this.Color)
+                ? this.finalize(squareNumber, figureSquareNumber, TimeSpan.NO_TIME_SPAN)
+                : StepLog.STEP_IS_IMPOSSIBLE;
     }
 }

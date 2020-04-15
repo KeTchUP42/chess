@@ -1,9 +1,10 @@
 package app.src.Abstract;
 
-import app.src.configSetup.INIParser;
+import app.src.setup.ConfigRecipient;
+import app.src.setup.INI.INIParser;
+import area.factory.src.GameColors;
 import brains.src.Interfaces.IPlayer;
-import objects.src.colors.GameColors;
-import org.jetbrains.annotations.NotNull;
+import brains.src.StepLog;
 import visual.src.Interfaces.IVisual;
 
 import java.io.IOException;
@@ -11,7 +12,7 @@ import java.io.IOException;
 /**
  * @author Roman
  */
-public abstract class AbstractApplication extends AbstractConfigSetter {
+public abstract class AbstractApplication extends AbstractApplicationBase {
 
     /**
      * Задается визуал
@@ -25,78 +26,65 @@ public abstract class AbstractApplication extends AbstractConfigSetter {
     /**
      * Запуск приложения
      */
-    public abstract void run();
-
-    /**
-     * @throws IOException Вызывает ошибку при отсутствии файла
-     */
-    protected void gameSetup(String configPath) throws IOException {
-        INIParser parser = new INIParser(configPath);
-        parser.setColorConfig();
-        this.setConfig(parser.getConfig());
-
+    public void run(String configFilePathOrNull) {
+        try {
+            this.loadSettings(configFilePathOrNull, new String[]{
+                    "areaType",
+                    "firstPlayerColor", "firstPlayerType", "firstPlayerName",
+                    "secondPlayerType", "secondPlayerName",
+                    "logFilePath"
+            });
+            this.runGame();
+        } catch (Exception | Error e) {
+            this.Visual.showMessage(e.getMessage(), false, false);
+        } finally {
+            this.Visual.showMessage("Завершение работы...", false, false);
+        }
     }
 
     /**
      * Основной игровой цикл
      */
-    protected void gameRun() {
+    protected void runGame() {
         //Решение порядка ходов
-        IPlayer firstBrain = this.Brains[0].getColor() == GameColors.firstColor ? this.Brains[0] : this.Brains[1];
-        IPlayer secondBrain = !(this.Brains[0].getColor() == GameColors.firstColor) ? this.Brains[0] : this.Brains[1];
+        boolean stepPriority = this.Players[0].getColor() == GameColors.firstStepColor;
+        IPlayer firstPlayer = stepPriority ? this.Players[0] : this.Players[1];
+        IPlayer secondPlayer = !stepPriority ? this.Players[0] : this.Players[1];
         while (true) {
-            // 0 - норма, 1 - проиграл, 2 - ход невозможен
             boolean exit = false;
             while (true) {
                 this.Visual.Draw(this.Area);
-                int stepResult = firstBrain.step();
-                if (stepResult == 1) {
+                StepLog stepResult = firstPlayer.step();
+                if (stepResult == StepLog.DEFEAT) {
                     exit = true;
                 }
-                if (stepResult == 2) continue;
+                if (stepResult == StepLog.STEP_IS_IMPOSSIBLE) continue;
                 break;
             }
             if (exit) break;
             while (true) {
                 this.Visual.Draw(this.Area);
-                int stepResult = secondBrain.step();
-                if (stepResult == 1) {
+                StepLog stepResult = secondPlayer.step();
+                if (stepResult == StepLog.DEFEAT) {
                     exit = true;
                 }
-                if (stepResult == 2) continue;
+                if (stepResult == StepLog.STEP_IS_IMPOSSIBLE) continue;
                 break;
             }
             if (exit) break;
         }
     }
 
-
     /**
-     * Метод реализует логику полученя информации от игрока
+     * null - ввод настроек вручную
      *
-     * @return Массив для setConfig
-     */
-    protected String[] playerConfig(@NotNull String[] configItems) {
-        String[] configData = new String[configItems.length];
-        for (int index = 0; index < configItems.length; index++) {
-            configData[index] = this.Visual.sendMessage("Введи параметр " + configItems[index], true, false).trim();
-        }
-        return configData;
-    }
-
-    /**
      * @throws IOException Вызывает ошибку при отсутствии файла
      */
-    protected void loadConfigFromFile(String playersConfigAw) throws IOException {
-        if (playersConfigAw != null) {
-            this.gameSetup(playersConfigAw);
+    protected void loadSettings(String configPath, String[] configFields) throws IOException {
+        if (configPath != null) {
+            this.applySettings(new INIParser(configPath).loadConfig(configFields));
         } else {
-            this.setConfig(this.playerConfig(
-                    new String[]{
-                            "areaType", "firstBrainColor", "firstBrainType",
-                            "secondBrainType", "secondBrainName",
-                            "firstBrainName"
-                    }));
+            this.applySettings(new ConfigRecipient(this.Visual).getPlayerConfigs(configFields));
         }
     }
 }

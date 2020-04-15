@@ -3,6 +3,8 @@ package brains.bots;
 import area.Interfaces.IArea;
 import brains.src.Abstract.AbstractPlayer;
 import brains.src.Scanners.ChessScanner;
+import brains.src.StepLog;
+import brains.src.TimeSpan;
 import visual.src.Interfaces.IVisual;
 
 import java.awt.*;
@@ -22,27 +24,28 @@ public class Bot_0 extends AbstractPlayer {
     }
 
     /**
-     * @return 0 - норма, 1 - проиграл, 2 - ход невозможен
+     * @return StepLog
      */
     @Override
-    public int step() {
+    public StepLog step() {
         if (this.scanner.isKingDead(this.Color)) {
-            this.Visual.sendMessage(this.Name + " проиграл на " + this.stepNumber + " ходе.", false, false);
-            return 1;
+            this.Visual.showMessage(this.Name + " проиграл на " + this.stepNumber + " ходе.", false, false);
+            return StepLog.DEFEAT;
         }
         int index = 0;
+        int squareNumber;
+        int targetSquareNumber;
         do {
             if (index == 1000) {
-                this.Visual.sendMessage(this.Name + " проиграл на " + this.stepNumber + " ходе.", false, false);
-                return 1;
+                this.Visual.showMessage(this.Name + " проиграл на " + this.stepNumber + " ходе.", false, false);
+                return StepLog.DEFEAT;
             } else index++;
+            do {
+                squareNumber = (int) (Math.random() * this.Area.getMaxSquareNumber());
+                targetSquareNumber = (int) (Math.random() * this.Area.getMaxSquareNumber());
 
-            while (true) {
-                if (this.Area.moveObjectSafe((int) (Math.random() * this.Area.getMaxSquareNumber()),
-                        (int) (Math.random() * this.Area.getMaxSquareNumber()),
-                        this.Color)) break;
-            }
+            } while (!this.Area.moveObjectSafe(squareNumber, targetSquareNumber, this.Color));
         } while (this.scanner.isKingUnderAttack(this.Color));
-        return this.returnZero(2500);
+        return this.finalize(squareNumber, targetSquareNumber, TimeSpan.TIME_SPAN);
     }
 }

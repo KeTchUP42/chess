@@ -19,12 +19,5 @@ public interface IVisual {
      * @param getAnswer Получить ответ?
      * @return String ответа/null
      */
-    String sendMessage(String message, boolean getAnswer, boolean afterClear);
-
-    /**
-     * config Clarification
-     *
-     * @return boolean
-     */
-    String configClarification();
+    String showMessage(String message, boolean getAnswer, boolean afterClear);
 }

@@ -1,7 +1,9 @@
 package brains.src.Abstract;
 
+import app.src.logger.Logger;
 import area.Interfaces.IArea;
 import brains.src.Interfaces.IPlayer;
+import brains.src.StepLog;
 import visual.src.Interfaces.IVisual;
 
 import java.awt.*;
@@ -54,7 +56,7 @@ public abstract class AbstractPlayer implements IPlayer {
     /**
      * @return Возвращает числовой лог
      */
-    public abstract int step();
+    public abstract StepLog step();
 
     /**
      * Метод возвращает цвет
@@ -68,13 +70,14 @@ public abstract class AbstractPlayer implements IPlayer {
     /**
      * @param timeMilSecs Кол-во миллисекунд
      */
-    protected int returnZero(int timeMilSecs) {
+    protected StepLog finalize(int squareNumber, int targetSquareNumber, int timeMilSecs) {
+        Logger.globalLogger.info(squareNumber + " => " + targetSquareNumber); //TODO
         try {
             Thread.sleep(timeMilSecs);
         } catch (Exception e) {
-            this.Visual.sendMessage(e.getMessage(), true, true);
+            this.Visual.showMessage(e.getMessage(), true, true);
         }
         this.stepNumber++;
-        return 0;
+        return StepLog.NORMAL;
     }
 }

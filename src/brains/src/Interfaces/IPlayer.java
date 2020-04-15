@@ -1,17 +1,20 @@
 package brains.src.Interfaces;
 
+import brains.src.StepLog;
+
 import java.awt.*;
 
 /**
  * @author Roman
  */
 public interface IPlayer {
+
     /**
      * Ход данного игрока
      *
-     * @return 0 - норма, 1 - проиграл, 2 - ход невозможен
+     * @return StepLog
      */
-    int step();
+    StepLog step();
 
     /**
      * Метод возвращает цвет

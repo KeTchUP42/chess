@@ -6,7 +6,7 @@ import objects.Interfaces.IObject;
 /**
  * @author Roman
  */
-abstract class AbstractAreaCore {
+abstract class AbstractAreaBase {
 
     /**
      * Максимальное кол-во клеток в области
@@ -37,7 +37,7 @@ abstract class AbstractAreaCore {
      * @param areaWidth  Ширина области
      * @param areaHeight Высота области
      */
-    public AbstractAreaCore(int areaWidth, int areaHeight) {
+    public AbstractAreaBase(int areaWidth, int areaHeight) {
         this.areaWidth = areaWidth;
         this.areaHeight = areaHeight;
         this.maxSquareNumber = this.areaWidth * this.areaHeight;
@@ -50,7 +50,7 @@ abstract class AbstractAreaCore {
      * @param SquareNumber Номер клетки
      * @return Возвращает валиден ли номер клетки
      */
-    protected boolean isValidNumber(int SquareNumber) {
+    public boolean isValidSquareNumber(int SquareNumber) {
         return SquareNumber >= 0 && SquareNumber < this.maxSquareNumber;
     }
 
@@ -58,22 +58,21 @@ abstract class AbstractAreaCore {
      * @return getObjectId
      */
     public long getObjectId() {
-        this.objectId++;
-        return objectId;
+        return ++this.objectId; //TODO
     }
 
     /**
-     * @return Возвращает ширину облатсти
+     * @return Возвращает ширину области
      */
     public int getAreaWidth() {
-        return areaWidth;
+        return this.areaWidth;
     }
 
     /**
      * @return Возвращает высоту области
      */
     public int getAreaHeight() {
-        return areaHeight;
+        return this.areaHeight;
     }
 
     /**
@@ -90,7 +89,7 @@ abstract class AbstractAreaCore {
      * @return Возвращает нужный объект
      */
     public IObject getObjectFromList(int ObjectSquareNumber) {
-        return this.isValidNumber(ObjectSquareNumber) ? this.ObjectList[ObjectSquareNumber] : null;
+        return this.isValidSquareNumber(ObjectSquareNumber) ? this.ObjectList[ObjectSquareNumber] : null;
     }
 
     /**
@@ -110,7 +109,7 @@ abstract class AbstractAreaCore {
      * @return Y
      */
     public int getYCoordinate(int SquareNumber) {
-        return SquareNumber / getAreaWidth();
+        return SquareNumber / this.getAreaWidth();
     }
 
     /**
@@ -121,17 +120,17 @@ abstract class AbstractAreaCore {
      * @return Номер клетки
      */
     public int getSquareNumber(int XCoordinate, int YCoordinate) {
-        return YCoordinate * getAreaWidth() + XCoordinate;
+        return YCoordinate * this.getAreaWidth() + XCoordinate;
     }
 
     /**
-     * Проверка на null не может быть замененна на аннотацию так как медот должен работать с null значениями
+     * Проверка на null не может быть заменённая на аннотацию так как метод должен работать с null значениями
      *
      * @param object Объект
      */
-    public void setObject(IObject object) {
+    public void putObject(IObject object) {
         boolean isOk = object != null &&
-                this.isValidNumber(object.getSquareNumber());
+                this.isValidSquareNumber(object.getSquareNumber());
         if (isOk) {
             this.ObjectList[object.getSquareNumber()] = object;
             object.setObjectIdSafe((IArea) this);
@@ -146,7 +145,7 @@ abstract class AbstractAreaCore {
      * @return Возвращает удачно ли прошло движение
      */
     public boolean moveObject(int ObjectSquareNumber, int SquareNumber) {
-        return this.isValidNumber(ObjectSquareNumber) && this.isValidNumber(SquareNumber)
+        return this.isValidSquareNumber(ObjectSquareNumber) && this.isValidSquareNumber(SquareNumber)
                 && this.ObjectList[ObjectSquareNumber] != null && ObjectSquareNumber != SquareNumber &&
                 this.ObjectList[ObjectSquareNumber].move(SquareNumber, (IArea) this, true);
     }
@@ -157,7 +156,7 @@ abstract class AbstractAreaCore {
      * @param ObjectSquareNumber Номер клетки на которой нужно "удалить" объект
      */
     public void deleteObject(int ObjectSquareNumber) {
-        if (this.isValidNumber(ObjectSquareNumber)) {
+        if (this.isValidSquareNumber(ObjectSquareNumber)) {
             this.ObjectList[ObjectSquareNumber] = null;
         }
     }

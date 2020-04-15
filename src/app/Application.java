@@ -7,8 +7,6 @@ import visual.src.Interfaces.IVisual;
  * @author Roman
  */
 class Application extends AbstractApplication {
-
-
     /**
      * Задается визуал
      *
@@ -16,19 +14,5 @@ class Application extends AbstractApplication {
      */
     public Application(IVisual Visual) {
         super(Visual);
-    }
-
-    /**
-     * Запуск приложения
-     */
-    public void run() {
-        try {
-            this.loadConfigFromFile(this.Visual.configClarification());
-            this.gameRun();
-        } catch (Exception | Error e) {
-            this.Visual.sendMessage(e.getMessage(), false, false);
-        } finally {
-            this.Visual.sendMessage("Завершение работы...", false, false);
-        }
     }
 }

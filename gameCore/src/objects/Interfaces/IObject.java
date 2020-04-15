@@ -43,14 +43,14 @@ public interface IObject {
     void setObjectIdSafe(IArea area);
 
     /**
-     * Метод задает уникальный id на конкретной облсти
+     * Метод задает уникальный id на конкретной области
      *
      * @param objectId IObject
      */
     void setObjectIdUnsafe(long objectId);
 
     /**
-     * Reset индентефикатора объекта
+     * Reset идентификатора объекта
      */
     void resetObjectId();
 
@@ -67,19 +67,19 @@ public interface IObject {
      * Реализация предполагается в классах потомках
      *
      * @param SquareNumber Номер клетки над которой производится действие
-     * @param Area         Область где стоит объект
+     * @param area         Область где стоит объект
      * @return Возвращает возможно ли это
      */
-    boolean action(int SquareNumber, IArea Area);
+    boolean action(int SquareNumber, IArea area);
 
     /**
-     * Метод реализует проеврку возможности для хода каждого объект
+     * Метод реализует проверку для хода каждого объект
      *
      * @param SquareNumber Куда объект хочет ударить
-     * @param Board        Область где стоит объект
+     * @param area         Область где стоит объект
      * @return Возвращает возможно ли это
      */
-    boolean isInRange(int SquareNumber, IArea Board);
+    boolean isInRange(int SquareNumber, IArea area);
 
     /**
      * Метод клонирования

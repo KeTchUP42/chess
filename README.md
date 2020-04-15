@@ -1,10 +1,10 @@
-# BGS
-Небольшая система на основе которой сделаны шахматы, но можно реализовать и другие настольные игры.
+ # BGS
+ Небольшая система на основе которой сделаны шахматы, но можно реализовать и другие настольные игры.
 
-### Точка входа
-Класс точка-входа находится в app/EntryPoint.java. При дальнейшем усовершенствовании основной класс Application можно использовать где-либо еще. 
+ ### Точка входа
+ Класс точка-входа находится в app/EntryPoint.java. При дальнейшем усовершенствовании основной класс Application можно использовать где-либо еще. 
 
-## Пример стандартной области в которой могут ноходиться объекты:
+ ## Пример стандартной области:
         
     | 56 | 57 | 58 | 59 | 60 | 61 | 62 | 63 |
     | 48 | 49 | 50 | 51 | 52 | 53 | 54 | 55 |
@@ -16,27 +16,30 @@
     | 00 | 01 | 02 | 03 | 04 | 05 | 06 | 07 |
 
  ### Для просмотра или изменения последовательности параметров в массиве:
-Смотрите файл INIParser.java, потом AbstractConfigSetter.java.
-Для изменения последовательности параметров для ручного ввода изменить массив входящих параметром в AbstractApplication.java и AbstractConfigSetter.java. 
+ Смотрите файл INIParser.java, потом AbstractApplicationCore.java.
+ Для изменения последовательности параметров ручного ввода изменить массив входящих 
+ параметром в AbstractApplication.java, AbstractApplicationCore.java и ConfigFields.java. 
 
  ### Для добавления новых ботов: 
  Для добавления новых ботов нужно прописать их логику в brains/bots и 
- в AbstractConfigSetter.java добавить вариант выбора для создания бота.
+ в AbstractApplicationCore.java добавить вариант выбора для создания бота.
+ 
  #### Пример: src/brains/bots/Bot_0.java
 
  ### Для добавления новых фигур или других игровых объектов:
- Новые классы объектов прописавыются в каталоге objects. Предварительно для этой новой группы объектов создается родительский абстрактный класс который наследуется от aбстрактного класса объекта в gameCore.
+ Новые классы объектов прописываются в каталоге objects. Предварительно для этой новой группы объектов создается родительский абстрактный класс который наследуется от aбстрактного класса в gameCore.
  Для добавления новых фигур или изменения их логики поведения
  изменять/добавлять классы фигур в пакет figures + добавлять методы
- в фабрику area/board/factory. В AbstractConfigSetter.java добавить вариант выбора для 
+ в фабрику area/board/factory. В AbstractApplicationCore.java добавить вариант выбора для 
  создания конкретной конфигурации области.
+ 
  ### Для динамической замены объектов:
  Пример правильной замены пешки на королеву в методе isInRange:
 
      if (stepValid && (Board.getYCoordinate(SquareNumber) == Board.getAreaHeight() - 1 ||
              Board.getYCoordinate(SquareNumber) == 0)) {
               //////////////////////////////////////////////////////////
-               Board.setObject(new Queen(this.squareNumber, this.color));
+               Board.putObject(new Queen(this.squareNumber, this.color));
                return true;
               //////////////////////////////////////////////////////////
             }
@@ -46,24 +49,28 @@
   Application с объектом нового визуала в конструкторе.
   Для изменения стандартного визуала заменить класс в пакете visual/standard. 
 
- ### Для добавления новых стандартных консольных комманд:
-  Для добавления новых стандартных консольных комманд править метод consoleAction в standard/CommandLine. 
+ ### Для добавления новых стандартных консольных команд:
+  Для добавления новых стандартных консольных команд править метод consoleAction в standard/ConsoleVisual. 
+  
  ### Для изменения стандартной конфигурации:
  Изменять файл app/configs/config.ini
 
  #### Настройки по умолчанию:
     
-    [defaultSettings]
-    firstBrainColor = standard
-    firstBrainType  = bot_0
-    firstBrainName = Player_1
+    [DefaultSettings]
+    ;Путь к лог файлу
+    logFilePath = /home/log.txt
+    
+    firstPlayerColor = standard
+    firstPlayerType  = bot_0
+    firstPlayerName = Player_1
 
-    secondBrainType = bot_0
-    secondBrainName = BOT
+    secondPlayerType = bot_0
+    secondPlayerName = BOT
 
     areaType     = standard
 
-    [colorSettings]
+    [ColorSettings]
     FirstColor   = white
     SecondColor  = black
 

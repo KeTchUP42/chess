@@ -1,8 +1,8 @@
 package objects.figures;
 
 import area.Interfaces.IArea;
+import area.factory.src.GameColors;
 import objects.figures.src.Abstract.AbstractFigure;
-import objects.src.colors.GameColors;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
@@ -28,7 +28,7 @@ public class Pawn extends AbstractFigure {
     }
 
     /**
-     * Метод проверки валадности хода для пешки
+     * Метод проверки валидности хода для пешки
      *
      * @param SquareNumber Номер клетки куда нужно походить
      * @param Board        Доска
@@ -36,7 +36,7 @@ public class Pawn extends AbstractFigure {
      */
     private boolean pawnStepValid(int SquareNumber, @NotNull IArea Board) {
         //Множитель решающий в каком направлении идет пешка
-        int multiplier = this.color == GameColors.firstColor ? 1 : -1;
+        int multiplier = this.color == GameColors.firstStepColor ? 1 : -1;
         //Один стандартный шаг
         int step = multiplier * Board.getAreaWidth();
         //Номер клетки при стандартном шаге
@@ -53,7 +53,7 @@ public class Pawn extends AbstractFigure {
 
         if (stepValid && (Board.getYCoordinate(SquareNumber) == Board.getAreaHeight() - 1 ||
                 Board.getYCoordinate(SquareNumber) == 0)) {
-            Board.setObject(new Queen(this.squareNumber, this.color));
+            Board.putObject(new Queen(this.squareNumber, this.color));
             return true;
         } else return stepValid;
     }

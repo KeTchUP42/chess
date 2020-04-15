@@ -11,6 +11,14 @@ import java.util.Iterator;
 public interface IArea {
 
     /**
+     * Проверка может ли существовать такая клетка
+     *
+     * @param SquareNumber Номер клетки
+     * @return Возвращает валиден ли номер клетки
+     */
+    boolean isValidSquareNumber(int SquareNumber);
+
+    /**
      * Метод удаляет объект на заданной клетке
      *
      * @param ObjectSquareNumber Номер клетки на которой нужно "удалить" объект
@@ -22,7 +30,7 @@ public interface IArea {
      *
      * @param object Объект
      */
-    void setObject(IObject object);
+    void putObject(IObject object);
 
     /**
      * Небезопасное движение объекта по области
@@ -35,7 +43,7 @@ public interface IArea {
 
     /**
      * Безопасное движение объекта по области
-     * Добавлено дополнительное сравниевание цветов для ограничения управления другими игроками
+     * Добавлено дополнительное сравнивание цветов для ограничения управления другими игроками
      *
      * @param ObjectSquareNumber Номер клетки с объектом
      * @param SquareNumber       Номер клетки куда нужно переместить объект
@@ -61,12 +69,12 @@ public interface IArea {
     long getObjectId();
 
     /**
-     * @return Возвращает ширину облатсти
+     * @return Возвращает ширину области
      */
     int getAreaWidth();
 
     /**
-     * @return Возвращает высоту облатсти
+     * @return Возвращает высоту области
      */
     int getAreaHeight();
 
@@ -119,14 +127,7 @@ public interface IArea {
     IObject getLastMovedObject();
 
     /**
-     * Метод возвращает итератор последних объектов которые двигались
-     *
-     * @return IObject
-     */
-    Iterator<IObject> getLastMovedObjectIterator();
-
-    /**
-     * Метод задает последний объект который двигался
+     * Метод задает последний двигаемый объект
      * Удаляем первый при переполнении
      *
      * @param SquareNumber int
@@ -134,7 +135,7 @@ public interface IArea {
     void setLastMovedObject(int SquareNumber);
 
     /**
-     * Задаем последний объект который двигался
+     * Задаем последний двигаемый объект
      * Удаляем первый при переполнении
      *
      * @param object IObject
@@ -142,26 +143,26 @@ public interface IArea {
     void setLastMovedObject(IObject object);
 
     /**
+     * Метод возвращает итератор последних двигаемых объектов
+     *
+     * @return IObject
+     */
+    Iterator<IObject> getLastMovedObjectIterator();
+
+    /**
      * @return LastKilledObjectArrayListSize
      */
     int getLastDestroyedObjectArrayListSize();
 
     /**
-     * Метод возвращает последний уничтоженый объект
+     * Метод возвращает последний уничтоженный объект
      *
      * @return IObject
      */
     IObject getLastDestroyedObject();
 
     /**
-     * Метод возвращает итератор последних объектов которых уничтожили
-     *
-     * @return IObject
-     */
-    Iterator<IObject> getLastDestroyedObjectIterator();
-
-    /**
-     * Метод задает последний объект которого уничтожили
+     * Метод задает последний уничтоженный объект
      * Удаляем первый при переполнении
      *
      * @param SquareNumber int
@@ -169,7 +170,7 @@ public interface IArea {
     void setLastDestroyedObject(int SquareNumber);
 
     /**
-     * Метод задает последний объект которого уничтожили
+     * Метод задает последний уничтоженный объект
      * Удаляем первый при переполнении
      *
      * @param object int
@@ -177,22 +178,29 @@ public interface IArea {
     void setLastDestroyedObject(IObject object);
 
     /**
+     * Метод возвращает итератор последних уничтоженных объектов
+     *
+     * @return IObject
+     */
+    Iterator<IObject> getLastDestroyedObjectIterator();
+
+    /**
      * Восстанавливает несколько последних ходов
      */
-    void recallStep(int loopTimes);
+    void undoStep(int loopTimes);
 
     /**
-     * Метод удалает последнюю полноценную запись клонов
+     * Метод удаляет последнюю полноценную запись клонов
      */
-    void lastDestroyedObjectDelete();
+    void deleteLastDestroyedObject();
 
     /**
-     * Метод удалает последнюю полноценную запись клонов
+     * Метод удаляет последнюю полноценную запись клонов
      */
-    void lastMovedObjectDelete();
+    void deleteLastMovedObject();
 
     /**
      * Метод очищает ArrayLists с клонами объектов
      */
-    void lastObjectArrayListsClear();
+    void clearLastObjectArrayLists();
 }
