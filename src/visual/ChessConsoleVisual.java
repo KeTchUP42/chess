@@ -1,8 +1,8 @@
 package visual;
 
-import area.Interfaces.IArea;
+import area.IArea;
 import area.factory.src.GameColors;
-import objects.Interfaces.IObject;
+import objects.IObject;
 import objects.figures.*;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;

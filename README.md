@@ -15,14 +15,14 @@
     | 08 | 09 | 10 | 11 | 12 | 13 | 14 | 15 |
     | 00 | 01 | 02 | 03 | 04 | 05 | 06 | 07 |
 
- ### Для просмотра или изменения последовательности параметров в массиве:
- Смотрите файл INIParser.java, потом AbstractApplicationCore.java.
+ ### Для просмотра или изменения последовательности запрашиваемых параметров:
+ Смотрите пакет INI, потом AbstractApplicationBase.java.
  Для изменения последовательности параметров ручного ввода изменить массив входящих 
- параметром в AbstractApplication.java, AbstractApplicationCore.java и ConfigFields.java. 
+ параметром в Application.java, AbstractApplicationBase.java и ConfigFields.java. 
 
  ### Для добавления новых ботов: 
  Для добавления новых ботов нужно прописать их логику в brains/bots и 
- в AbstractApplicationCore.java добавить вариант выбора для создания бота.
+ в AbstractApplicationBase.java добавить вариант выбора для создания бота.
  
  #### Пример: src/brains/bots/Bot_0.java
 
@@ -30,7 +30,7 @@
  Новые классы объектов прописываются в каталоге objects. Предварительно для этой новой группы объектов создается родительский абстрактный класс который наследуется от aбстрактного класса в gameCore.
  Для добавления новых фигур или изменения их логики поведения
  изменять/добавлять классы фигур в пакет figures + добавлять методы
- в фабрику area/board/factory. В AbstractApplicationCore.java добавить вариант выбора для 
+ в фабрику area/factory. В AbstractApplicationBase.java добавить вариант выбора для 
  создания конкретной конфигурации области.
  
  ### Для динамической замены объектов:
@@ -38,10 +38,10 @@
 
      if (stepValid && (Board.getYCoordinate(SquareNumber) == Board.getAreaHeight() - 1 ||
              Board.getYCoordinate(SquareNumber) == 0)) {
-              //////////////////////////////////////////////////////////
+              --------------------------
                Board.putObject(new Queen(this.squareNumber, this.color));
                return true;
-              //////////////////////////////////////////////////////////
+              --------------------------
             }
               
  ### Для добавления нового визуала:
@@ -51,27 +51,24 @@
 
  ### Для добавления новых стандартных консольных команд:
   Для добавления новых стандартных консольных команд править метод consoleAction в standard/ConsoleVisual. 
-  
- ### Для изменения стандартной конфигурации:
- Изменять файл app/configs/config.ini
-
- #### Настройки по умолчанию:
+   
+ #### Пример настроек:
+ 
+    [AreaSettings]
+    areaType         = standard
     
-    [DefaultSettings]
-    ;Путь к лог файлу
-    logFilePath = /home/log.txt
-    
+    [FirstPlayerSettings]
     firstPlayerColor = standard
     firstPlayerType  = bot_0
-    firstPlayerName = Player_1
-
+    firstPlayerName  = BOT
+    
+    [SecondPlayerSettings]
     secondPlayerType = bot_0
     secondPlayerName = BOT
-
-    areaType     = standard
-
+    
+    [LogSettings]
+    logFilePath      = var/log/source_log.txt
+    
     [ColorSettings]
-    FirstColor   = white
-    SecondColor  = black
-
-
+    FirstColor       = white
+    SecondColor      = black

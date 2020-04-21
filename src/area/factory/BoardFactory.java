@@ -1,10 +1,10 @@
 package area.factory;
 
-import app.src.logger.Logger;
-import area.Interfaces.IArea;
-import area.board.BoardArea;
+import app.logger.Logger;
+import area.BoardArea;
+import area.IArea;
 import area.factory.src.GameColors;
-import area.factory.src.Interfaces.IAreaFactory;
+import area.factory.src.IAreaFactory;
 import objects.figures.*;
 import org.jetbrains.annotations.NotNull;
 

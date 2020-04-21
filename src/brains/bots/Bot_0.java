@@ -1,11 +1,11 @@
 package brains.bots;
 
-import area.Interfaces.IArea;
-import brains.src.Abstract.AbstractPlayer;
-import brains.src.Scanners.ChessScanner;
-import brains.src.StepLog;
-import brains.src.TimeSpan;
-import visual.src.Interfaces.IVisual;
+import area.IArea;
+import brains.scanners.ChessScanner;
+import brains.src.AbstractPlayer;
+import brains.src.rep.StepLog;
+import brains.src.rep.TimeSpan;
+import visual.src.IVisual;
 
 import java.awt.*;
 

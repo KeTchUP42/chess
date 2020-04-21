@@ -1,7 +1,7 @@
 package objects.figures;
 
-import area.Interfaces.IArea;
-import objects.figures.src.Abstract.AbstractFigure;
+import area.IArea;
+import objects.figures.src.AbstractFigure;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;

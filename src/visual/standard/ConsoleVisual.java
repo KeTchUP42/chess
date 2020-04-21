@@ -1,7 +1,7 @@
 package visual.standard;
 
-import area.Interfaces.IArea;
-import visual.src.Interfaces.IVisual;
+import area.IArea;
+import visual.src.IVisual;
 
 import java.io.BufferedReader;
 import java.io.File;

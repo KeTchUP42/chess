@@ -3,7 +3,7 @@ package app;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import visual.ChessConsoleVisual;
-import visual.src.Interfaces.IVisual;
+import visual.src.IVisual;
 
 import java.io.File;
 
