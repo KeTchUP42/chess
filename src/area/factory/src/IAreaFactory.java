@@ -8,12 +8,16 @@ import area.IArea;
 public interface IAreaFactory {
 
     /**
-     * @return Возвращает стандартную область
+     * Method creates standard configured area
+     *
+     * @return IArea
      */
     IArea createStandardArea();
 
     /**
-     * @return Возвращает тестовую область
+     * Method creates test area
+     *
+     * @return IArea
      */
     IArea createTestArea();
 }

@@ -10,16 +10,11 @@ import java.awt.*;
 public interface IPlayer {
 
     /**
-     * Ход данного игрока
+     * Players step
      *
      * @return StepLog
      */
     StepLog step();
 
-    /**
-     * Метод возвращает цвет
-     *
-     * @return Тип Color
-     */
     Color getColor();
 }

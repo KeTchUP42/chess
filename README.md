@@ -32,18 +32,7 @@
  изменять/добавлять классы фигур в пакет figures + добавлять методы
  в фабрику area/factory. В AbstractApplicationBase.java добавить вариант выбора для 
  создания конкретной конфигурации области.
- 
- ### Для динамической замены объектов:
- Пример правильной замены пешки на королеву в методе isInRange:
 
-     if (stepValid && (Board.getYCoordinate(SquareNumber) == Board.getAreaHeight() - 1 ||
-             Board.getYCoordinate(SquareNumber) == 0)) {
-              --------------------------
-               Board.putObject(new Queen(this.squareNumber, this.color));
-               return true;
-              --------------------------
-            }
-              
  ### Для добавления нового визуала:
   Для добавления нового визуала добавлять классы исполняющие интерфейс IVisual в пакет visual. Создавать класс 
   Application с объектом нового визуала в конструкторе.

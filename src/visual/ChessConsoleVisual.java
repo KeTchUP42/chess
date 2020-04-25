@@ -1,11 +1,11 @@
 package visual;
 
 import area.IArea;
-import area.factory.src.GameColors;
 import objects.IObject;
 import objects.figures.*;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import src.GameColors;
 import visual.standard.ConsoleVisual;
 
 /**
@@ -13,24 +13,12 @@ import visual.standard.ConsoleVisual;
  */
 public class ChessConsoleVisual extends ConsoleVisual {
 
-    /**
-     * Цвет вывода для первого цвета
-     */
     private static final String ANSI_RED = "\u001B[31m";
 
-    /**
-     * Цвет вывода для второго цвета
-     */
     private static final String ANSI_BLUE = "\u001B[34m";
 
-    /**
-     * RESET на стандартный цвет консоли
-     */
     private static final String ANSI_RESET = "\u001B[0m";
 
-    /**
-     * @param area Область для отображения
-     */
     @Override
     public void Draw(@NotNull IArea area) {
         this.clearConsole();
@@ -46,10 +34,10 @@ public class ChessConsoleVisual extends ConsoleVisual {
     }
 
     /**
-     * Выбираем символ для каждой фигуры
+     * Method choose, how to draw figures
      *
-     * @param object Фигура
-     * @return Символ
+     * @param object figure
+     * @return symbol
      */
     @NotNull
     @Contract(pure = true)

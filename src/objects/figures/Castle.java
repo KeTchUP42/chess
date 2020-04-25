@@ -10,10 +10,7 @@ import java.awt.*;
  * @author Roman
  */
 public class Castle extends AbstractFigure {
-    /**
-     * @param squareNumber Номер клетки куда поставить фигуру
-     * @param color        Цвет фигуры
-     */
+
     public Castle(int squareNumber, Color color) {
         super(squareNumber, color);
     }

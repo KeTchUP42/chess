@@ -14,11 +14,6 @@ import java.util.Scanner;
  */
 public class ConsoleVisual implements IVisual {
 
-    /**
-     * Перерисовка области
-     *
-     * @param area Область для отрисовки
-     */
     @Override
     public void Draw(IArea area) {
     }
@@ -44,9 +39,9 @@ public class ConsoleVisual implements IVisual {
     }
 
     /**
-     * Метод реализующий реакцию консоли
+     * Console actions
      *
-     * @param input Вводимая строка
+     * @param input Output line
      */
     public boolean consoleAction(String input) {
         if (input.equals("exit") || input.equals("die")) System.exit(0);
@@ -67,9 +62,6 @@ public class ConsoleVisual implements IVisual {
         return false;
     }
 
-    /**
-     * Очистка консоли
-     */
     protected void clearConsole() {
         for (int clear = 0; clear < 3; clear++) {
             System.out.println("\b");

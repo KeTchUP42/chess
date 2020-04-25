@@ -1,9 +1,9 @@
 package objects.figures;
 
 import area.IArea;
-import area.factory.src.GameColors;
 import objects.figures.src.AbstractFigure;
 import org.jetbrains.annotations.NotNull;
+import src.GameColors;
 
 import java.awt.*;
 
@@ -12,14 +12,9 @@ import java.awt.*;
  */
 public class Pawn extends AbstractFigure {
 
-    /**
-     * @param squareNumber Номер клетки куда поставить фигуру
-     * @param color        Цвет фигуры
-     */
     public Pawn(int squareNumber, Color color) {
         super(squareNumber, color);
     }
-
 
     @Override
     public boolean isInRange(int SquareNumber, @NotNull IArea Board) {
@@ -27,13 +22,6 @@ public class Pawn extends AbstractFigure {
                 super.isInRange(SquareNumber, Board);
     }
 
-    /**
-     * Метод проверки валидности хода для пешки
-     *
-     * @param SquareNumber Номер клетки куда нужно походить
-     * @param Board        Доска
-     * @return Возможно ли это
-     */
     private boolean pawnStepValid(int SquareNumber, @NotNull IArea Board) {
         //Множитель решающий в каком направлении идет пешка
         int multiplier = this.color == GameColors.firstStepColor ? 1 : -1;
@@ -46,15 +34,10 @@ public class Pawn extends AbstractFigure {
         //Проверка пустоты клетки
         boolean nullSquare = Board.getObjectFromList(SquareNumber) == null;
 
-        boolean stepValid = ((SquareNumber == this.getSquareNumber() + step * 2) && this.getSquareNumber() == this.startPosition && nullSquare && this.isWayFreePerpendicular(SquareNumber, Board)) ||
+        return ((SquareNumber == this.getSquareNumber() + step * 2) && this.getSquareNumber() == this.startPosition && nullSquare && this.isWayFreePerpendicular(SquareNumber, Board)) ||
                 (attackValid && SquareNumber == ordStep + 1 && Board.getXCoordinate(ordStep + 1) == Board.getXCoordinate(this.squareNumber) + 1) ||
                 (attackValid && SquareNumber == ordStep - 1 && Board.getXCoordinate(ordStep - 1) == Board.getXCoordinate(this.squareNumber) - 1) ||
                 (SquareNumber == ordStep && nullSquare);
 
-        if (stepValid && (Board.getYCoordinate(SquareNumber) == Board.getAreaHeight() - 1 ||
-                Board.getYCoordinate(SquareNumber) == 0)) {
-            Board.putObject(new Queen(this.squareNumber, this.color));
-            return true;
-        } else return stepValid;
     }
 }

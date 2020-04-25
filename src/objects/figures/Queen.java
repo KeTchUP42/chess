@@ -10,10 +10,7 @@ import java.awt.*;
  * @author Roman
  */
 public class Queen extends AbstractFigure {
-    /**
-     * @param squareNumber Номер клетки куда поставить фигуру
-     * @param color        Цвет фигуры
-     */
+
     public Queen(int squareNumber, Color color) {
         super(squareNumber, color);
     }

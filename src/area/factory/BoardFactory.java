@@ -1,21 +1,18 @@
 package area.factory;
 
-import app.logger.Logger;
 import area.BoardArea;
 import area.IArea;
-import area.factory.src.GameColors;
 import area.factory.src.IAreaFactory;
+import logger.Logger;
 import objects.figures.*;
 import org.jetbrains.annotations.NotNull;
+import src.GameColors;
 
 /**
  * @author Roman
  */
 public class BoardFactory implements IAreaFactory {
 
-    /**
-     * @return Возвращает заполненную доску
-     */
     public IArea createStandardArea() {
         Logger.globalLogger.info("Board is 8x8"); //TODO
         IArea Board = new BoardArea(8, 8);
@@ -42,9 +39,9 @@ public class BoardFactory implements IAreaFactory {
     }
 
     /**
-     * Метод заполняет две линии Pawns
+     * Method fills lines of pawns
      *
-     * @param Board Объект доска
+     * @param Board Board object
      */
     private void fillPawns(@NotNull IArea Board) {
 
@@ -59,9 +56,6 @@ public class BoardFactory implements IAreaFactory {
         }
     }
 
-    /**
-     * @return Возвращает тестовую доску
-     */
     public IArea createTestArea() {
         IArea desk = new BoardArea(4, 4);
         desk.putObject(new King(15, GameColors.secondStepColor));
