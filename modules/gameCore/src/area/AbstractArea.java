@@ -22,8 +22,8 @@ public abstract class AbstractArea extends AbstractAreaBase implements IArea {
 
     public boolean runObjectAction(int ObjectSquareNumber, int SquareNumber) {
         return this.isValidSquareNumber(ObjectSquareNumber) && this.isValidSquareNumber(SquareNumber)
-                && this.ObjectList[ObjectSquareNumber] != null && ObjectSquareNumber != SquareNumber &&
-                this.ObjectList[ObjectSquareNumber].action(SquareNumber, this);
+                && this.ObjectList[ObjectSquareNumber] != null
+                && this.ObjectList[ObjectSquareNumber].action(SquareNumber, this);
     }
 }
 

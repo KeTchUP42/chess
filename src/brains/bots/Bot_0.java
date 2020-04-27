@@ -23,11 +23,10 @@ public class Bot_0 extends AbstractPlayer {
     @Override
     public StepLog step() {
         if (this.scanner.isKingDead(this.Color)) {
-            this.Visual.showMessage(this.Name + " defeat on " + this.stepNumber + " step.", false, false);
+            this.Visual.showMessage(this.Name + " defeat on " + this.stepNumber + " step.", false);
             return StepLog.DEFEAT;
         }
-        int squareNumber;
-        int targetSquareNumber;
+        int squareNumber, targetSquareNumber;
         do {
             squareNumber = (int) (Math.random() * this.Area.getMaxSquareNumber());
             targetSquareNumber = (int) (Math.random() * this.Area.getMaxSquareNumber());

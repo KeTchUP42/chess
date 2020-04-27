@@ -19,7 +19,7 @@ public abstract class AbstractFigure extends AbstractObject {
     }
 
     public boolean isInRange(int SquareNumber, @NotNull IArea area) {
-        return super.isInRange(SquareNumber, area) ||
-                area.getObjectFromList(SquareNumber).getColor() != this.getColor();
+        return area.isValidSquareNumber(SquareNumber) && (super.isInRange(SquareNumber, area) ||
+                area.getObjectFromList(SquareNumber).getColor() != this.getColor());
     }
 }

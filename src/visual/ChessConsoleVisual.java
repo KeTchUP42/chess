@@ -5,7 +5,7 @@ import objects.IObject;
 import objects.figures.*;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-import src.GameColors;
+import visual.src.GameColors;
 import visual.standard.ConsoleVisual;
 
 /**
@@ -34,7 +34,7 @@ public class ChessConsoleVisual extends ConsoleVisual {
     }
 
     /**
-     * Method choose, how to draw figures
+     * Method chooses, how to draw figure
      *
      * @param object figure
      * @return symbol
@@ -43,7 +43,7 @@ public class ChessConsoleVisual extends ConsoleVisual {
     @Contract(pure = true)
     protected String chooseVisual(IObject object) {
         if (object == null) return ANSI_RESET + " ";
-        String colorCode = object.getColor() == GameColors.firstStepColor ?
+        String colorCode = object.getColor() == GameColors.firstColor ?
                 ANSI_BLUE : ANSI_RED;
         if (object instanceof Pawn) return colorCode + "P";
         if (object instanceof Knight) return colorCode + "H";

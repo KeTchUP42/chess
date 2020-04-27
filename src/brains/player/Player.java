@@ -23,20 +23,19 @@ public class Player extends AbstractPlayer {
     @Override
     public StepLog step() {
         if (this.scanner.isKingDead(this.Color)) {
-            this.Visual.showMessage(this.Name + " defeat on " + this.stepNumber + " step.", false, false);
+            this.Visual.showMessage(this.Name + " defeat on " + this.stepNumber + " step.", false);
             return StepLog.DEFEAT;
         }
-        int squareNumber;
-        int figureSquareNumber;
+        int squareNumber, figureSquareNumber;
         try {
-            this.Visual.showMessage(this.Name + " turn.", false, false);
+            this.Visual.showMessage(this.Name + " turn.", false);
             String input = this.Visual.showMessage(
-                    "Please, write object square number.", true, false);
+                    "Please, write object square number.", true);
 
             squareNumber = Integer.parseInt(input);
 
             input = this.Visual.showMessage(
-                    "Please, write target square number.", true, false);
+                    "Please, write target square number.", true);
 
             figureSquareNumber = Integer.parseInt(input);
 

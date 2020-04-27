@@ -1,7 +1,7 @@
-package setup.INI;
+package bgs.setup.INI;
 
+import bgs.src.ConfigFields;
 import org.jetbrains.annotations.NotNull;
-import src.ConfigFields;
 
 import java.io.IOException;
 

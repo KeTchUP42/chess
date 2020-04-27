@@ -1,7 +1,7 @@
-package logger;
+package tools.logger;
 
-import logger.src.AbstractLogger;
-import logger.src.LoggerInterface;
+import tools.logger.src.AbstractLogger;
+import tools.logger.src.LoggerInterface;
 
 /**
  * @author Roman
@@ -19,7 +19,7 @@ public class Logger extends AbstractLogger {
     }
 
     /**
-     * global logger configure
+     * global tools.logger configure
      *
      * @param logFilePath New log file path
      */

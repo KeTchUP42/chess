@@ -17,8 +17,8 @@ public class Bishop extends AbstractFigure {
 
     @Override
     public boolean isInRange(int SquareNumber, @NotNull IArea Board) {
-        return super.isWayFreeDiagonal(SquareNumber, Board) &&
-                super.isInRange(SquareNumber, Board);
+        return super.isInRange(SquareNumber, Board) &&
+                super.isWayFreeDiagonal(SquareNumber, Board);
     }
 
 }

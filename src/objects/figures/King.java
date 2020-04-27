@@ -17,8 +17,8 @@ public class King extends AbstractFigure {
 
     @Override
     public boolean isInRange(int SquareNumber, @NotNull IArea Board) {
-        return this.kingStepValid(SquareNumber, Board) &&
-                super.isInRange(SquareNumber, Board);
+        return super.isInRange(SquareNumber, Board) &&
+                this.kingStepValid(SquareNumber, Board);
     }
 
     private boolean kingStepValid(int SquareNumber, @NotNull IArea Board) {

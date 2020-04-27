@@ -1,11 +1,11 @@
-package logger.src;
+package tools.logger.src;
 
 /**
  * @author psr-4
  */
 public interface LoggerInterface {
 
-    String STANDARD_LOG_FILE_PATH = "var/log/source_log.txt"; //TODO
+    String STANDARD_LOG_FILE_PATH = "var/logs/source_log.txt"; //TODO
 
     /**
      * System is unusable.

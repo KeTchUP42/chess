@@ -1,12 +1,13 @@
-package src;
+package bgs.src;
 
 import area.IArea;
 import area.factory.BoardFactory;
 import brains.bots.Bot_0;
 import brains.player.Player;
 import brains.src.IPlayer;
-import logger.Logger;
 import org.jetbrains.annotations.NotNull;
+import tools.logger.Logger;
+import visual.src.GameColors;
 import visual.src.IVisual;
 
 /**
@@ -19,6 +20,10 @@ abstract class AbstractApplicationBase {
     protected IArea Area;
 
     protected IPlayer[] Players;
+
+    public AbstractApplicationBase(IVisual Visual) {
+        this.Visual = Visual;
+    }
 
     protected IArea generateArea(@NotNull String factoryConfig) {
         switch (factoryConfig.toLowerCase()) {
@@ -34,13 +39,13 @@ abstract class AbstractApplicationBase {
         switch (typeConfig.toLowerCase()) {
             case "player":
                 return new Player(this.Area, colorConfig
-                        ? GameColors.firstStepColor :
-                        GameColors.secondStepColor, this.Visual, Name);
+                        ? GameColors.firstColor :
+                        GameColors.secondColor, this.Visual, Name);
             case "bot_0":
             default:
                 return new Bot_0(this.Area, colorConfig
-                        ? GameColors.firstStepColor :
-                        GameColors.secondStepColor, this.Visual, Name);
+                        ? GameColors.firstColor :
+                        GameColors.secondColor, this.Visual, Name);
         }
     }
 
@@ -52,13 +57,13 @@ abstract class AbstractApplicationBase {
     protected void applySettings(@NotNull String[] configData) {
         Logger.configureGlobalLogger(configData[ConfigFields.LOG_FILE_PATH]);
         this.Area = generateArea(configData[ConfigFields.AREA_TYPE]);
-        this.Players = new IPlayer[2];
-
         boolean colorPriority = configData[ConfigFields.FIRST_PLAYER_COLOR].equals("") || configData[1].equals("standard");
-
-        this.Players[0] = this.generatePlayer(configData[ConfigFields.FIRST_PLAYER_TYPE], configData[ConfigFields.FIRST_PLAYER_NAME],
-                colorPriority);
-        this.Players[1] = this.generatePlayer(configData[ConfigFields.SECOND_PLAYER_TYPE], configData[ConfigFields.SECOND_PLAYER_NAME],
-                !colorPriority);
+        this.Players = new IPlayer[]
+                {
+                        this.generatePlayer(configData[ConfigFields.FIRST_PLAYER_TYPE], configData[ConfigFields.FIRST_PLAYER_NAME],
+                                colorPriority),
+                        this.generatePlayer(configData[ConfigFields.SECOND_PLAYER_TYPE], configData[ConfigFields.SECOND_PLAYER_NAME],
+                                !colorPriority)
+                };
     }
 }

@@ -1,7 +1,7 @@
-package setup.recipient;
+package bgs.setup.recipient;
 
+import bgs.setup.recipient.src.AbstractConfigRecipient;
 import org.jetbrains.annotations.NotNull;
-import setup.recipient.src.AbstractConfigRecipient;
 import visual.src.IVisual;
 
 /**
@@ -17,7 +17,7 @@ public class ConfigRecipient extends AbstractConfigRecipient {
     public String[] getPlayerConfigs(@NotNull String[] configItems) {
         String[] configData = new String[configItems.length];
         for (int index = 0; index < configItems.length; index++) {
-            configData[index] = this.visual.showMessage("Please, write field: " + configItems[index], true, false).trim();
+            configData[index] = this.visual.showMessage("Please, write field: " + configItems[index], true).trim();
         }
         return configData;
     }

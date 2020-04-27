@@ -17,7 +17,7 @@ public class Queen extends AbstractFigure {
 
     @Override
     public boolean isInRange(int SquareNumber, @NotNull IArea Board) {
-        return (super.isWayFreePerpendicular(SquareNumber, Board) || super.isWayFreeDiagonal(SquareNumber, Board)) &&
-                super.isInRange(SquareNumber, Board);
+        return super.isInRange(SquareNumber, Board) &&
+                (super.isWayFreePerpendicular(SquareNumber, Board) || super.isWayFreeDiagonal(SquareNumber, Board));
     }
 }

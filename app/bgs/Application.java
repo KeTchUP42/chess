@@ -1,6 +1,8 @@
-import setup.INI.INIParser;
-import setup.recipient.ConfigRecipient;
-import src.AbstractApplication;
+package bgs;
+
+import bgs.setup.INI.INIParser;
+import bgs.setup.recipient.ConfigRecipient;
+import bgs.src.AbstractApplication;
 import visual.src.IVisual;
 
 import java.io.IOException;
@@ -8,7 +10,7 @@ import java.io.IOException;
 /**
  * @author Roman
  */
-class Application extends AbstractApplication {
+public class Application extends AbstractApplication {
 
     public Application(IVisual Visual) {
         super(Visual);
@@ -24,9 +26,9 @@ class Application extends AbstractApplication {
             });
             this.runGame();
         } catch (Exception | Error e) {
-            this.Visual.showMessage(e.getMessage(), false, false);
+            this.Visual.showMessage(e.getMessage(), false);
         } finally {
-            this.Visual.showMessage("Exiting...", false, false);
+            this.Visual.showMessage("Exiting...", false);
         }
     }
 

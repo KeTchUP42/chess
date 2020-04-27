@@ -17,8 +17,8 @@ public class Knight extends AbstractFigure {
 
     @Override
     public boolean isInRange(int SquareNumber, @NotNull IArea Board) {
-        return this.knightStepValid(SquareNumber, Board) &&
-                super.isInRange(SquareNumber, Board);
+        return super.isInRange(SquareNumber, Board) &&
+                this.knightStepValid(SquareNumber, Board);
     }
 
     private boolean knightStepValid(int SquareNumber, @NotNull IArea Board) {

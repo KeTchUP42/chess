@@ -1,4 +1,4 @@
-package tools;
+package tools.dictionary;
 
 import java.util.ArrayList;
 import java.util.NoSuchElementException;

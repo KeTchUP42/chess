@@ -1,8 +1,8 @@
-package setup.INI;
+package bgs.setup.INI;
 
 import org.ini4j.Wini;
 import org.jetbrains.annotations.NotNull;
-import src.GameColors;
+import visual.src.GameColors;
 
 import java.awt.*;
 import java.io.File;
@@ -24,7 +24,7 @@ public abstract class AbstractINIParser {
     public abstract String[] loadConfig(String @NotNull [] configFields);
 
     /**
-     * Method apply configs for  GameColors
+     * Method apply configs for GameColors
      */
     protected void applyColorConfig() {
         try {
@@ -33,8 +33,8 @@ public abstract class AbstractINIParser {
             Color secondColor = (Color) Color.class.getField(
                     this.ini.get("ColorSettings", "SecondColor", String.class)).get(null);
             if (firstColor == secondColor) return;
-            GameColors.firstStepColor = firstColor;
-            GameColors.secondStepColor = secondColor;
+            GameColors.firstColor = firstColor;
+            GameColors.secondColor = secondColor;
         } catch (Exception ignored) {
         }
     }

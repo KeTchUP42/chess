@@ -8,16 +8,16 @@ import area.IArea;
 public interface IVisual {
 
     /**
-     * Method draws the area
+     * Method draws(redraws) area with objects
      */
     void Draw(IArea area);
 
     /**
-     * Method have to communicate with player
+     * Method have to communicate with players
      *
      * @param message   Message
      * @param getAnswer get answer
      * @return answer
      */
-    String showMessage(String message, boolean getAnswer, boolean afterClear);
+    String showMessage(String message, boolean getAnswer);
 }

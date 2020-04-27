@@ -1,4 +1,4 @@
-package logger.src;
+package tools.logger.src;
 
 import org.jetbrains.annotations.NotNull;
 

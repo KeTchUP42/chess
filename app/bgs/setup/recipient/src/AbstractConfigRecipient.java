@@ -1,4 +1,4 @@
-package setup.recipient.src;
+package bgs.setup.recipient.src;
 
 import org.jetbrains.annotations.NotNull;
 import visual.src.IVisual;

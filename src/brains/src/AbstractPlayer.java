@@ -2,7 +2,7 @@ package brains.src;
 
 import area.IArea;
 import brains.src.rep.StepLog;
-import logger.Logger;
+import tools.logger.Logger;
 import visual.src.IVisual;
 
 import java.awt.*;
@@ -40,7 +40,7 @@ public abstract class AbstractPlayer implements IPlayer {
         try {
             Thread.sleep(timeMilSecs);
         } catch (Exception e) {
-            this.Visual.showMessage(e.getMessage(), true, true);
+            this.Visual.showMessage(e.getMessage(), true);
         }
         this.stepNumber++;
         return StepLog.NORMAL;

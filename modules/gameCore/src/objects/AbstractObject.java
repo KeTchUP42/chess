@@ -26,7 +26,7 @@ public abstract class AbstractObject extends AbstractObjectBase implements Clone
     }
 
     public boolean action(int SquareNumber, IArea area) {
-        return false;
+        return this.isActionable(SquareNumber, area);
     }
 
     /**
@@ -49,13 +49,13 @@ public abstract class AbstractObject extends AbstractObjectBase implements Clone
         int targetY = area.getYCoordinate(SquareNumber);
         //Gets multipliers
         int multiplier = targetX > objectX ? 1 : -1;
-        int sizeMn = targetY > objectY ? 1 : -1;
+        int sizeMp = targetY > objectY ? 1 : -1;
 
         boolean wayIsFree = true;
 
-        for (int index = this.getSquareNumber() + sizeMn * area.getAreaWidth() + multiplier;
+        for (int index = this.getSquareNumber() + sizeMp * area.getAreaWidth() + multiplier;
              index != SquareNumber;
-             index += sizeMn * area.getAreaWidth() + multiplier
+             index += sizeMp * area.getAreaWidth() + multiplier
         ) {
             if (area.getObjectFromList(index) != null) {
                 wayIsFree = false;

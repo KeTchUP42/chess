@@ -19,12 +19,12 @@ public class ConsoleVisual implements IVisual {
     }
 
     @Override
-    public String showMessage(String message, boolean getAnswer, boolean afterClear) {
+    public String showMessage(String message, boolean getAnswer) {
         System.out.println(message);
         String dialogResult = null;
         if (getAnswer) {
             Scanner in = new Scanner(System.in);
-            //Базовый функционал в консоли
+            //Base console func
             while (true) {
                 dialogResult = in.nextLine().trim();
                 if (this.consoleAction(dialogResult.toLowerCase())) {
@@ -34,7 +34,6 @@ public class ConsoleVisual implements IVisual {
                 break;
             }
         }
-        if (afterClear) this.clearConsole();
         return dialogResult;
     }
 
@@ -50,11 +49,11 @@ public class ConsoleVisual implements IVisual {
                 BufferedReader reader = new BufferedReader(new FileReader(new File("README.md")));
                 String line = reader.readLine();
                 while (line != null) {
-                    this.showMessage(line, false, false);
+                    this.showMessage(line, false);
                     line = reader.readLine();
                 }
             } catch (IOException e) {
-                this.showMessage(e.getMessage(), false, false);
+                this.showMessage(e.getMessage(), false);
             }
             return true;
         }

@@ -3,7 +3,7 @@ package objects.figures;
 import area.IArea;
 import objects.figures.src.AbstractFigure;
 import org.jetbrains.annotations.NotNull;
-import src.GameColors;
+import visual.src.GameColors;
 
 import java.awt.*;
 
@@ -18,13 +18,13 @@ public class Pawn extends AbstractFigure {
 
     @Override
     public boolean isInRange(int SquareNumber, @NotNull IArea Board) {
-        return this.pawnStepValid(SquareNumber, Board) &&
-                super.isInRange(SquareNumber, Board);
+        return super.isInRange(SquareNumber, Board) &&
+                this.pawnStepValid(SquareNumber, Board);
     }
 
     private boolean pawnStepValid(int SquareNumber, @NotNull IArea Board) {
         //Множитель решающий в каком направлении идет пешка
-        int multiplier = this.color == GameColors.firstStepColor ? 1 : -1;
+        int multiplier = this.color == GameColors.firstColor ? 1 : -1;
         //Один стандартный шаг
         int step = multiplier * Board.getAreaWidth();
         //Номер клетки при стандартном шаге

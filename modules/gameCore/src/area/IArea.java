@@ -18,6 +18,11 @@ public interface IArea {
      */
     boolean isValidSquareNumber(int SquareNumber);
 
+    /**
+     * Method deletes object on the area
+     *
+     * @param ObjectSquareNumber Object Square Number
+     */
     void deleteObject(int ObjectSquareNumber);
 
     /**

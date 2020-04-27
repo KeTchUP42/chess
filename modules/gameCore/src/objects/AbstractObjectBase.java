@@ -22,7 +22,11 @@ abstract class AbstractObjectBase {
     }
 
     public boolean isInRange(int SquareNumber, @NotNull IArea area) {
-        return area.getObjectFromList(SquareNumber) == null;
+        return area.isValidSquareNumber(SquareNumber) && area.getObjectFromList(SquareNumber) == null;
+    }
+
+    public boolean isActionable(int SquareNumber, @NotNull IArea area) {
+        return area.isValidSquareNumber(SquareNumber);
     }
 
     public int getSquareNumber() {
