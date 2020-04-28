@@ -1,4 +1,4 @@
-package brains.src.rep;
+package brains.src.repo;
 
 /**
  * @author Roman

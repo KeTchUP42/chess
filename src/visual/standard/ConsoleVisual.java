@@ -61,7 +61,7 @@ public class ConsoleVisual implements IVisual {
         return false;
     }
 
-    protected void clearConsole() {
+    protected void cleanConsole() {
         for (int clear = 0; clear < 3; clear++) {
             System.out.println("\b");
         }

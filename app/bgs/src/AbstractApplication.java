@@ -1,7 +1,7 @@
 package bgs.src;
 
 import brains.src.IPlayer;
-import brains.src.rep.StepLog;
+import brains.src.repo.StepLog;
 import visual.src.GameColors;
 import visual.src.IVisual;
 

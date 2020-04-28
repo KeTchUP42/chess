@@ -2,11 +2,8 @@ package tools.logger.src;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -15,14 +12,14 @@ import java.util.Date;
  */
 public abstract class AbstractLogger implements LoggerInterface {
 
-    protected String logFilePath;
+    protected FileWriter fileWriter;
 
     public AbstractLogger(@NotNull String logFilePath) {
-        this.logFilePath = logFilePath;
+        this.setLogWriter(logFilePath);
     }
 
     public AbstractLogger() {
-        this.logFilePath = STANDARD_LOG_FILE_PATH;
+        this.setLogWriter(STANDARD_LOG_FILE_PATH);
     }
 
     @Override
@@ -65,8 +62,12 @@ public abstract class AbstractLogger implements LoggerInterface {
         this.writeLogToFile(" DEBUG: " + message + "\n");
     }
 
-    public void setLogPath(String logPath) {
-        this.logFilePath = logPath;
+    public void setLogWriter(String logFilePath) {
+        try {
+            this.fileWriter = new FileWriter(logFilePath, true);
+        } catch (IOException ignored) {
+            this.setLogWriter(STANDARD_LOG_FILE_PATH);
+        }
     }
 
     /**
@@ -77,25 +78,11 @@ public abstract class AbstractLogger implements LoggerInterface {
     protected void writeLogToFile(String message) {
         message = this.generateDateTimeString() + message;
         try {
-            if (!new File(this.logFilePath).exists()) {
-                try {
-                    Files.createFile(Paths.get(this.logFilePath));
-                } catch (IOException ignored) {
-                }
-            }
-        } catch (Exception ignored) {
-        }
-        try {
-            File file = new File(this.logFilePath);
-            if (!file.exists() || !file.isFile() || !file.canWrite()) {
-                this.setLogPath(STANDARD_LOG_FILE_PATH);
-                try {
-                    Files.createFile(Paths.get(this.logFilePath));
-                } catch (IOException ignored) {
-                }
-            }
-            Files.write(Paths.get(this.logFilePath), message.getBytes(), StandardOpenOption.APPEND);
-        } catch (Exception ignored) {
+            this.fileWriter.write(message);
+            this.fileWriter.flush();
+        } catch (IOException exception) {
+            this.setLogWriter(STANDARD_LOG_FILE_PATH);
+            this.writeLogToFile(exception.getMessage());
         }
     }
 

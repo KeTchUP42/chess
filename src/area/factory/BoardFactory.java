@@ -14,7 +14,7 @@ import visual.src.GameColors;
 public class BoardFactory implements IAreaFactory {
 
     public IArea createStandardArea() {
-        Logger.globalLogger.info("Board is 8x8"); //TODO
+        Logger.getGlobalLogger().info("Board is 8x8"); //TODO
         IArea Board = new BoardArea(8, 8);
 
         Board.putObject(new Castle(0, GameColors.firstColor));

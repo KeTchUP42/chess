@@ -14,7 +14,7 @@ public class ConfigRecipient extends AbstractConfigRecipient {
     }
 
     @Override
-    public String[] getPlayerConfigs(@NotNull String[] configItems) {
+    public String[] findOutPlayersConfig(@NotNull String[] configItems) {
         String[] configData = new String[configItems.length];
         for (int index = 0; index < configItems.length; index++) {
             configData[index] = this.visual.showMessage("Please, write field: " + configItems[index], true).trim();

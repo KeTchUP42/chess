@@ -12,5 +12,5 @@ public interface IConfigRecipient {
      *
      * @return data for loadSettings
      */
-    String[] getPlayerConfigs(@NotNull String[] configItems);
+    String[] findOutPlayersConfig(@NotNull String[] configItems);
 }

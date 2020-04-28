@@ -8,7 +8,7 @@ import tools.logger.src.LoggerInterface;
  */
 public class Logger extends AbstractLogger {
 
-    public static final LoggerInterface globalLogger = new Logger();
+    protected static LoggerInterface globalLogger;
 
     public Logger(String logFilePath) {
         super(logFilePath);
@@ -19,13 +19,16 @@ public class Logger extends AbstractLogger {
     }
 
     /**
-     * global tools.logger configure
+     * Global logger configuring
      *
      * @param logFilePath New log file path
      */
     public static void configureGlobalLogger(String logFilePath) {
-        Logger logger = (Logger) Logger.globalLogger;
-        logger.setLogPath(logFilePath);
-        Logger.globalLogger.info("LOG_STARTED");
+        Logger.globalLogger = new Logger(logFilePath);
+        Logger.globalLogger.info("GLOBAL_LOGGER_CONFIGURED");
+    }
+
+    public static LoggerInterface getGlobalLogger() {
+        return Logger.globalLogger;
     }
 }

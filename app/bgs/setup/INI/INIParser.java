@@ -18,7 +18,7 @@ public class INIParser extends AbstractINIParser {
         this.applyColorConfig();
         return new String[]{
                 this.ini.get("AreaSettings", configFields[ConfigFields.AREA_TYPE], String.class),
-                this.ini.get("FirstPlayerSettings", configFields[ConfigFields.FIRST_PLAYER_COLOR], String.class),
+                this.ini.get("StepOrderSettings", configFields[ConfigFields.STEP_ORDER], String.class),
                 this.ini.get("FirstPlayerSettings", configFields[ConfigFields.FIRST_PLAYER_TYPE], String.class),
                 this.ini.get("FirstPlayerSettings", configFields[ConfigFields.FIRST_PLAYER_NAME], String.class),
                 this.ini.get("SecondPlayerSettings", configFields[ConfigFields.SECOND_PLAYER_TYPE], String.class),

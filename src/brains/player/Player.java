@@ -3,8 +3,8 @@ package brains.player;
 import area.IArea;
 import brains.scanners.ChessScanner;
 import brains.src.AbstractPlayer;
-import brains.src.rep.StepLog;
-import brains.src.rep.TimeSpan;
+import brains.src.repo.StepLog;
+import brains.src.repo.TimeSpan;
 import visual.src.IVisual;
 
 import java.awt.*;

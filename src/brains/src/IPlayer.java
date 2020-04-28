@@ -1,6 +1,6 @@
 package brains.src;
 
-import brains.src.rep.StepLog;
+import brains.src.repo.StepLog;
 
 import java.awt.*;
 

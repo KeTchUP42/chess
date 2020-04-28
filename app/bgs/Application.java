@@ -20,7 +20,8 @@ public class Application extends AbstractApplication {
         try {
             this.loadSettings(configFilePathOrNull, new String[]{
                     "areaType",
-                    "firstPlayerColor", "firstPlayerType", "firstPlayerName",
+                    "StepOrder",
+                    "firstPlayerType", "firstPlayerName",
                     "secondPlayerType", "secondPlayerName",
                     "logFilePath"
             });
@@ -41,7 +42,7 @@ public class Application extends AbstractApplication {
         if (configPath != null) {
             this.applySettings(new INIParser(configPath).loadConfig(configFields));
         } else {
-            this.applySettings(new ConfigRecipient(this.Visual).getPlayerConfigs(configFields));
+            this.applySettings(new ConfigRecipient(this.Visual).findOutPlayersConfig(configFields));
         }
     }
 }

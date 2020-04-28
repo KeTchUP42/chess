@@ -5,7 +5,7 @@ package tools.logger.src;
  */
 public interface LoggerInterface {
 
-    String STANDARD_LOG_FILE_PATH = "var/logs/source_log.txt"; //TODO
+    String STANDARD_LOG_FILE_PATH = "source.log";
 
     /**
      * System is unusable.

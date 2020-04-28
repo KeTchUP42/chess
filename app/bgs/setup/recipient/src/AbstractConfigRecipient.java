@@ -14,5 +14,5 @@ public abstract class AbstractConfigRecipient implements IConfigRecipient {
         this.visual = visual;
     }
 
-    public abstract String[] getPlayerConfigs(@NotNull String[] configItems);
+    public abstract String[] findOutPlayersConfig(@NotNull String[] configItems);
 }

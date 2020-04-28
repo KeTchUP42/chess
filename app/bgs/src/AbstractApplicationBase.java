@@ -10,6 +10,8 @@ import tools.logger.Logger;
 import visual.src.GameColors;
 import visual.src.IVisual;
 
+import java.awt.*;
+
 /**
  * @author Roman
  */
@@ -35,18 +37,23 @@ abstract class AbstractApplicationBase {
         }
     }
 
-    protected IPlayer generatePlayer(@NotNull String typeConfig, String Name, boolean colorConfig) {
+    protected IPlayer generatePlayer(@NotNull String typeConfig, String Name, Color color) {
         switch (typeConfig.toLowerCase()) {
             case "player":
-                return new Player(this.Area, colorConfig
-                        ? GameColors.firstColor :
-                        GameColors.secondColor, this.Visual, Name);
+                return new Player(this.Area, color, this.Visual, Name);
             case "bot_0":
             default:
-                return new Bot_0(this.Area, colorConfig
-                        ? GameColors.firstColor :
-                        GameColors.secondColor, this.Visual, Name);
+                return new Bot_0(this.Area, color, this.Visual, Name);
         }
+    }
+
+    protected Color[] chooseGameColorsSequence(@NotNull String param) {
+        if (param.equals("") || param.equals("standard") || param.equals("first")) return new Color[]{
+                GameColors.firstColor, GameColors.secondColor
+        };
+        return new Color[]{
+                GameColors.secondColor, GameColors.firstColor
+        };
     }
 
     /**
@@ -57,13 +64,13 @@ abstract class AbstractApplicationBase {
     protected void applySettings(@NotNull String[] configData) {
         Logger.configureGlobalLogger(configData[ConfigFields.LOG_FILE_PATH]);
         this.Area = generateArea(configData[ConfigFields.AREA_TYPE]);
-        boolean colorPriority = configData[ConfigFields.FIRST_PLAYER_COLOR].equals("") || configData[1].equals("standard");
         this.Players = new IPlayer[]
                 {
                         this.generatePlayer(configData[ConfigFields.FIRST_PLAYER_TYPE], configData[ConfigFields.FIRST_PLAYER_NAME],
-                                colorPriority),
+                                this.chooseGameColorsSequence(configData[ConfigFields.STEP_ORDER].toLowerCase())[0]),
+
                         this.generatePlayer(configData[ConfigFields.SECOND_PLAYER_TYPE], configData[ConfigFields.SECOND_PLAYER_NAME],
-                                !colorPriority)
+                                this.chooseGameColorsSequence(configData[ConfigFields.STEP_ORDER].toLowerCase())[1])
                 };
     }
 }
