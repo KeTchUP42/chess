@@ -1,9 +1,9 @@
 package bgs.src;
 
-import brains.src.IPlayer;
-import brains.src.repo.StepLog;
-import visual.src.GameColors;
-import visual.src.IVisual;
+import bgs.brains.src.IPlayer;
+import bgs.brains.src.repo.StepLog;
+import bgs.visual.src.GameColors;
+import bgs.visual.src.IVisual;
 
 /**
  * @author Roman
@@ -18,8 +18,8 @@ public abstract class AbstractApplication extends AbstractApplicationBase {
         try {
             this.applySettings(configData);
             this.runGame();
-        } catch (Exception | Error e) {
-            this.Visual.showMessage(e.getMessage(), false);
+        } catch (Exception | Error exception) {
+            this.Visual.showMessage(exception.getMessage(), false);
         } finally {
             this.Visual.showMessage("Exiting...", false);
         }
@@ -29,7 +29,6 @@ public abstract class AbstractApplication extends AbstractApplicationBase {
      * Game circle
      */
     protected void runGame() {
-        //First player choosing
         IPlayer[] players = new IPlayer[this.Players.length];
         for (IPlayer player : this.Players) {
             if (player.getColor() == GameColors.firstColor) players[0] = player;

@@ -3,7 +3,7 @@ package bgs;
 import bgs.setup.INI.INIParser;
 import bgs.setup.recipient.ConfigRecipient;
 import bgs.src.AbstractApplication;
-import visual.src.IVisual;
+import bgs.visual.src.IVisual;
 
 import java.io.IOException;
 
@@ -26,19 +26,20 @@ public class Application extends AbstractApplication {
                     "logFilePath"
             });
             this.runGame();
-        } catch (Exception | Error e) {
-            this.Visual.showMessage(e.getMessage(), false);
+        } catch (Exception | Error exception) {
+            this.Visual.showMessage(exception.getMessage(), false);
+            System.exit(-1);
         } finally {
             this.Visual.showMessage("Exiting...", false);
         }
     }
 
     /**
-     * null - player enters configs
+     * null - player enters config fields
      *
-     * @throws IOException Error output
+     * @throws IOException error output
      */
-    protected void loadSettings(String configPath, String[] configFields) throws IOException {
+    protected void loadSettings(String configPath, String[] configFields) throws Exception {
         if (configPath != null) {
             this.applySettings(new INIParser(configPath).loadConfig(configFields));
         } else {

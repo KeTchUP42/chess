@@ -1,8 +1,8 @@
 package bgs.setup.recipient;
 
 import bgs.setup.recipient.src.AbstractConfigRecipient;
+import bgs.visual.src.IVisual;
 import org.jetbrains.annotations.NotNull;
-import visual.src.IVisual;
 
 /**
  * @author Roman

@@ -1,14 +1,16 @@
 package bgs.src;
 
-import area.IArea;
-import area.factory.BoardFactory;
-import brains.bots.Bot_0;
-import brains.player.Player;
-import brains.src.IPlayer;
+import bgs.area.IArea;
+import bgs.brains.src.IPlayer;
+import bgs.setup.alias.AreaAliasList;
+import bgs.setup.alias.PlayerAliasList;
+import bgs.setup.alias.exception.AliasNotFoundException;
+import bgs.setup.alias.generators.AreaGenerator;
+import bgs.setup.alias.generators.PlayerGenerator;
+import bgs.tools.logger.Logger;
+import bgs.visual.src.GameColors;
+import bgs.visual.src.IVisual;
 import org.jetbrains.annotations.NotNull;
-import tools.logger.Logger;
-import visual.src.GameColors;
-import visual.src.IVisual;
 
 import java.awt.*;
 
@@ -27,24 +29,15 @@ abstract class AbstractApplicationBase {
         this.Visual = Visual;
     }
 
-    protected IArea generateArea(@NotNull String factoryConfig) {
-        switch (factoryConfig.toLowerCase()) {
-            case "test":
-                return new BoardFactory().createTestArea();
-            case "standard":
-            default:
-                return new BoardFactory().createStandardArea();
-        }
+    protected IArea generateArea(@NotNull String typeAlias) throws AliasNotFoundException, ReflectiveOperationException {
+        Logger.getGlobalLogger().info("Generating the area...");
+        return new AreaGenerator().generate(new AreaAliasList(), typeAlias);
     }
 
-    protected IPlayer generatePlayer(@NotNull String typeConfig, String Name, Color color) {
-        switch (typeConfig.toLowerCase()) {
-            case "player":
-                return new Player(this.Area, color, this.Visual, Name);
-            case "bot_0":
-            default:
-                return new Bot_0(this.Area, color, this.Visual, Name);
-        }
+    protected IPlayer generatePlayer(@NotNull String typeAlias, String Name, Color color) throws AliasNotFoundException, ReflectiveOperationException {
+        Logger.getGlobalLogger().info("Player generating...");
+        return new PlayerGenerator().generate(new PlayerAliasList(), typeAlias).setArea(this.Area).setColor(color)
+                .setVisual(this.Visual).setName(Name);
     }
 
     protected Color[] chooseGameColorsSequence(@NotNull String param) {
@@ -61,16 +54,21 @@ abstract class AbstractApplicationBase {
      *
      * @param configData params
      */
-    protected void applySettings(@NotNull String[] configData) {
+    protected void applySettings(@NotNull String[] configData) throws Exception {
         Logger.configureGlobalLogger(configData[ConfigFields.LOG_FILE_PATH]);
-        this.Area = generateArea(configData[ConfigFields.AREA_TYPE]);
-        this.Players = new IPlayer[]
-                {
-                        this.generatePlayer(configData[ConfigFields.FIRST_PLAYER_TYPE], configData[ConfigFields.FIRST_PLAYER_NAME],
-                                this.chooseGameColorsSequence(configData[ConfigFields.STEP_ORDER].toLowerCase())[0]),
-
-                        this.generatePlayer(configData[ConfigFields.SECOND_PLAYER_TYPE], configData[ConfigFields.SECOND_PLAYER_NAME],
-                                this.chooseGameColorsSequence(configData[ConfigFields.STEP_ORDER].toLowerCase())[1])
-                };
+        try {
+            this.Area = generateArea(configData[ConfigFields.AREA_TYPE]);
+            this.Players = new IPlayer[]
+                    {
+                            this.generatePlayer(configData[ConfigFields.FIRST_PLAYER_TYPE], configData[ConfigFields.FIRST_PLAYER_NAME],
+                                    this.chooseGameColorsSequence(configData[ConfigFields.STEP_ORDER].toLowerCase())[0]),
+                            this.generatePlayer(configData[ConfigFields.SECOND_PLAYER_TYPE], configData[ConfigFields.SECOND_PLAYER_NAME],
+                                    this.chooseGameColorsSequence(configData[ConfigFields.STEP_ORDER].toLowerCase())[1])
+                    };
+        } catch (AliasNotFoundException exception) {
+            Logger.getGlobalLogger().critical(exception.getMessage());
+            throw exception;
+        }
+        Logger.getGlobalLogger().info("Settings applied successfully!");
     }
 }

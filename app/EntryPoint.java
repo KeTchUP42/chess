@@ -1,8 +1,8 @@
 import bgs.Application;
+import bgs.visual.ChessConsoleVisual;
+import bgs.visual.src.IVisual;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import visual.ChessConsoleVisual;
-import visual.src.IVisual;
 
 import java.io.File;
 
@@ -12,13 +12,13 @@ import java.io.File;
 public class EntryPoint {
 
     public static @Nullable String configExplanation(@NotNull IVisual visual) {
-        if (!visual.showMessage("Load config from ini-file?\nY/N", true)
-                .toUpperCase()
-                .equals("N")) {
+        if (!visual.showMessage("Load config from ini-file?[Y]", true)
+                .toLowerCase()
+                .equals("n")) {
             while (true) {
                 String filePath = visual.showMessage("Please, write config file path.", true);
                 File file = new File(filePath.trim());
-                if (file.isFile() && file.exists() && file.canRead())
+                if (file.exists() && file.isFile() && file.canRead())
                     return filePath;
             }
         } else return null;

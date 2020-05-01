@@ -1,7 +1,7 @@
 package bgs.setup.recipient.src;
 
+import bgs.visual.src.IVisual;
 import org.jetbrains.annotations.NotNull;
-import visual.src.IVisual;
 
 /**
  * @author Roman
