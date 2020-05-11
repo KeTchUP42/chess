@@ -73,7 +73,7 @@ public abstract class AbstractLogger implements LoggerInterface {
     /**
      * Log writer
      *
-     * @param message log message
+     * @param message
      */
     protected void writeLogToFile(String message) {
         message = this.generateDateTimeString() + message;
@@ -89,7 +89,7 @@ public abstract class AbstractLogger implements LoggerInterface {
     /**
      * Method returns date and time in string
      *
-     * @return String
+     * @return
      */
     protected String generateDateTimeString() {
         return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());

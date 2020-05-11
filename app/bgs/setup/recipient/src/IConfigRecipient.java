@@ -10,7 +10,7 @@ public interface IConfigRecipient {
     /**
      * Method with config input logic
      *
-     * @return data for loadSettings
+     * @return
      */
     String[] findOutPlayersConfig(@NotNull String[] configItems);
 }

@@ -32,8 +32,8 @@ public abstract class AbstractObject extends AbstractObjectBase implements Clone
     /**
      * Method scans area and check is way free diagonal
      *
-     * @param SquareNumber Target square number
-     * @param area         Game area
+     * @param SquareNumber
+     * @param area
      * @return Result
      */
     protected boolean isWayFreeDiagonal(int SquareNumber, @NotNull IArea area) {
@@ -65,8 +65,8 @@ public abstract class AbstractObject extends AbstractObjectBase implements Clone
     /**
      * Method scans area and check is way free perpendicular
      *
-     * @param SquareNumber Target square number
-     * @param area         Game bgs.area
+     * @param SquareNumber
+     * @param area
      * @return Result
      */
     protected boolean isWayFreePerpendicular(int SquareNumber, @NotNull IArea area) {

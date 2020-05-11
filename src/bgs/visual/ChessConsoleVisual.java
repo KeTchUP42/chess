@@ -36,8 +36,8 @@ public class ChessConsoleVisual extends ConsoleVisual {
     /**
      * Method choose, how to draw figure
      *
-     * @param object figure
-     * @return symbol
+     * @param
+     * @return
      */
     @NotNull
     @Contract(pure = true)

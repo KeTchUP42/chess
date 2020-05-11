@@ -21,7 +21,7 @@ public class Logger extends AbstractLogger {
     /**
      * Global logger configuring
      *
-     * @param logFilePath New log file path
+     * @param logFilePath
      */
     public static void configureGlobalLogger(String logFilePath) {
         Logger.globalLogger = new Logger(logFilePath);

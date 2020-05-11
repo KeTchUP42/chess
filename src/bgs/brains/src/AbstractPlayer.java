@@ -11,7 +11,7 @@ import java.awt.*;
 /**
  * @author Roman
  */
-public abstract class AbstractPlayer implements IPlayer, IChangeablePlayer {
+public abstract class AbstractPlayer implements IPlayer {
 
     protected IArea Area;
 
@@ -33,15 +33,37 @@ public abstract class AbstractPlayer implements IPlayer, IChangeablePlayer {
     public AbstractPlayer() {
     }
 
+    /**
+     * Some step logic
+     *
+     * @return
+     */
     public abstract StepLog step();
 
     /**
-     * Correct normal log return
+     * Method reconfigures or builds new player
      *
-     * @param squareNumber       square number
-     * @param targetSquareNumber target square number
-     * @param timeMilSecs        time to wait
-     * @return StepLog.NORMAL
+     * @param area
+     * @param color
+     * @param visual
+     * @param name
+     * @return
+     */
+    public IPlayer rebuild(@NotNull IArea area, @NotNull Color color, @NotNull IVisual visual, String name) {
+        this.Area = area;
+        this.Color = color;
+        this.Visual = visual;
+        this.Name = name;
+        return this;
+    }
+
+    /**
+     * Correct step finalize
+     *
+     * @param squareNumber
+     * @param targetSquareNumber
+     * @param timeMilSecs
+     * @return
      */
     protected StepLog finalize(int squareNumber, int targetSquareNumber, int timeMilSecs) {
         try {
@@ -54,27 +76,10 @@ public abstract class AbstractPlayer implements IPlayer, IChangeablePlayer {
         return StepLog.NORMAL;
     }
 
+    /**
+     * @return
+     */
     public Color getColor() {
         return this.Color;
-    }
-
-    public IChangeablePlayer setArea(@NotNull IArea area) {
-        this.Area = area;
-        return this;
-    }
-
-    public IChangeablePlayer setColor(@NotNull Color color) {
-        this.Color = color;
-        return this;
-    }
-
-    public IChangeablePlayer setVisual(@NotNull IVisual visual) {
-        this.Visual = visual;
-        return this;
-    }
-
-    public IChangeablePlayer setName(String name) {
-        this.Name = name;
-        return this;
     }
 }

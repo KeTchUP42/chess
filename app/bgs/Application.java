@@ -16,6 +16,9 @@ public class Application extends AbstractApplication {
         super(Visual);
     }
 
+    /**
+     * @param configFilePathOrNull
+     */
     public void run(String configFilePathOrNull) {
         try {
             this.loadSettings(configFilePathOrNull, new String[]{
@@ -37,7 +40,7 @@ public class Application extends AbstractApplication {
     /**
      * null - player enters config fields
      *
-     * @throws IOException error output
+     * @throws IOException
      */
     protected void loadSettings(String configPath, String[] configFields) throws Exception {
         if (configPath != null) {

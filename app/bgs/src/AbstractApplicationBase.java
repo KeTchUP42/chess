@@ -25,21 +25,43 @@ abstract class AbstractApplicationBase {
 
     protected IPlayer[] Players;
 
+    /**
+     * @param Visual
+     */
     public AbstractApplicationBase(IVisual Visual) {
         this.Visual = Visual;
     }
 
+    /**
+     * @param typeAlias
+     * @return
+     * @throws AliasNotFoundException
+     * @throws ReflectiveOperationException
+     */
     protected IArea generateArea(@NotNull String typeAlias) throws AliasNotFoundException, ReflectiveOperationException {
         Logger.getGlobalLogger().info("Generating the area...");
         return new AreaGenerator().generate(new AreaAliasList(), typeAlias);
     }
 
+    /**
+     * @param typeAlias
+     * @param Name
+     * @param color
+     * @return
+     * @throws AliasNotFoundException
+     * @throws ReflectiveOperationException
+     */
     protected IPlayer generatePlayer(@NotNull String typeAlias, String Name, Color color) throws AliasNotFoundException, ReflectiveOperationException {
         Logger.getGlobalLogger().info("Player generating...");
-        return new PlayerGenerator().generate(new PlayerAliasList(), typeAlias).setArea(this.Area).setColor(color)
-                .setVisual(this.Visual).setName(Name);
+        return new PlayerGenerator().generate(new PlayerAliasList(), typeAlias).rebuild(this.Area, color, this.Visual, Name);
     }
 
+    /**
+     * Method returns correct color's array
+     *
+     * @param param
+     * @return
+     */
     protected Color[] chooseGameColorsSequence(@NotNull String param) {
         if (param.equals("") || param.equals("standard") || param.equals("first")) return new Color[]{
                 GameColors.firstColor, GameColors.secondColor
@@ -52,9 +74,10 @@ abstract class AbstractApplicationBase {
     /**
      * Main config applier
      *
-     * @param configData params
+     * @param configData
      */
     protected void applySettings(@NotNull String[] configData) throws Exception {
+
         Logger.configureGlobalLogger(configData[ConfigFields.LOG_FILE_PATH]);
         try {
             this.Area = generateArea(configData[ConfigFields.AREA_TYPE]);

@@ -12,11 +12,11 @@ public interface IGenerator<Type> {
     /**
      * Method generates new <Type> from alias
      *
-     * @param aliasList alias list
-     * @param alias     alias
-     * @return new object
-     * @throws ReflectiveOperationException some exception
-     * @throws AliasNotFoundException       some exception
+     * @param aliasList
+     * @param alias
+     * @return
+     * @throws ReflectiveOperationException
+     * @throws AliasNotFoundException
      */
     Type generate(@NotNull IAliasList aliasList, String alias)
             throws ReflectiveOperationException, AliasNotFoundException;

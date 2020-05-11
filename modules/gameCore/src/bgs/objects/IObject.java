@@ -17,8 +17,8 @@ public interface IObject {
     int getLastPosition();
 
     /**
-     * @param SquareNumber Direction
-     * @param area         Game area
+     * @param SquareNumber
+     * @param area
      * @return Result
      */
     boolean move(int SquareNumber, IArea area);
@@ -27,8 +27,8 @@ public interface IObject {
      * The method can implement any action, works in conjunction with this.isActionable
      * Implementation in another classes
      *
-     * @param SquareNumber Square number target
-     * @param area         Game area
+     * @param SquareNumber
+     * @param area
      * @return Result
      */
     boolean action(int SquareNumber, IArea area);
@@ -36,8 +36,8 @@ public interface IObject {
     /**
      * Method checks step valid for object
      *
-     * @param SquareNumber Direction
-     * @param area         Game area
+     * @param SquareNumber
+     * @param area
      * @return Result
      */
     boolean isInRange(int SquareNumber, IArea area);
@@ -45,8 +45,8 @@ public interface IObject {
     /**
      * Method checks action valid for object
      *
-     * @param SquareNumber Direction
-     * @param area         Game area
+     * @param SquareNumber
+     * @param area
      * @return Result
      */
     boolean isActionable(int SquareNumber, @NotNull IArea area);

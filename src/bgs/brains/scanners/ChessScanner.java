@@ -8,8 +8,6 @@ import java.awt.*;
 import java.util.ArrayList;
 
 /**
- * Class have functional to scan board
- *
  * @author Roman
  */
 public class ChessScanner {

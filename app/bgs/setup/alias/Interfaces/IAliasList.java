@@ -8,7 +8,7 @@ public interface IAliasList {
     /**
      * Method returns array of aliases
      *
-     * @return aliases array
+     * @return
      */
     String[][] getAliasList();
 }

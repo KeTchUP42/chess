@@ -8,16 +8,16 @@ import bgs.area.IArea;
 public interface IVisual {
 
     /**
-     * Method draws(redraws) area with objects
+     * Method draws area
      */
     void Draw(IArea area);
 
     /**
      * Method have to communicate with players
      *
-     * @param message   Message
-     * @param getAnswer get answer
-     * @return answer
+     * @param message
+     * @param getAnswer
+     * @return
      */
     String showMessage(String message, boolean getAnswer);
 }

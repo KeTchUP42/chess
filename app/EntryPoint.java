@@ -11,6 +11,10 @@ import java.io.File;
  */
 public class EntryPoint {
 
+    /**
+     * @param visual
+     * @return
+     */
     public static @Nullable String configExplanation(@NotNull IVisual visual) {
         if (!visual.showMessage("Load config from ini-file?[Y]", true)
                 .toLowerCase()

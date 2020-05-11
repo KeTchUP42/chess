@@ -40,11 +40,11 @@ public class ConsoleVisual implements IVisual {
     /**
      * Console actions
      *
-     * @param input Output line
+     * @param
      */
-    public boolean consoleAction(String input) {
-        if (input.equals("exit") || input.equals("die")) System.exit(0);
-        if (input.equals("help")) {
+    public boolean consoleAction(String inputData) {
+        if (inputData.equals("exit") || inputData.equals("die")) System.exit(0);
+        if (inputData.equals("help")) {
             try {
                 BufferedReader reader = new BufferedReader(new FileReader(new File("README.md")));
                 String line = reader.readLine();

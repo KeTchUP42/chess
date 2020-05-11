@@ -1,6 +1,9 @@
 package bgs.brains.src;
 
+import bgs.area.IArea;
 import bgs.brains.src.repo.StepLog;
+import bgs.visual.src.IVisual;
+import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 
@@ -10,12 +13,22 @@ import java.awt.*;
 public interface IPlayer {
 
     /**
-     * Players step
+     * Player step
      *
-     * @return StepLog
+     * @return
      */
     StepLog step();
 
-    Color getColor();
+    /**
+     * Method reconfigures or builds new player
+     *
+     * @param area
+     * @param color
+     * @param visual
+     * @param name
+     * @return
+     */
+    IPlayer rebuild(@NotNull IArea area, Color color, IVisual visual, String name);
 
+    Color getColor();
 }

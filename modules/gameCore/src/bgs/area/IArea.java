@@ -13,30 +13,30 @@ public interface IArea {
     /**
      * Method checks number of square
      *
-     * @param SquareNumber square number
-     * @return Result
+     * @param SquareNumber
+     * @return
      */
     boolean isValidSquareNumber(int SquareNumber);
 
     /**
      * Method deletes object on the area
      *
-     * @param ObjectSquareNumber Object Square Number
+     * @param ObjectSquareNumber
      */
     void deleteObject(int ObjectSquareNumber);
 
     /**
      * Method puts object on the area
      *
-     * @param object object
+     * @param object
      */
     void putObject(IObject object);
 
     /**
      * UnSafe moving on the area
      *
-     * @param ObjectSquareNumber Object square number
-     * @param SquareNumber       Target square number
+     * @param ObjectSquareNumber
+     * @param SquareNumber
      * @return Result
      */
     boolean moveObject(int ObjectSquareNumber, int SquareNumber);
@@ -44,9 +44,9 @@ public interface IArea {
     /**
      * Safe moving on the area with color comparison
      *
-     * @param ObjectSquareNumber ObjectSquareNumber
-     * @param SquareNumber       Target square number
-     * @param objectColor        object color
+     * @param ObjectSquareNumber
+     * @param SquareNumber
+     * @param objectColor
      * @return Result
      */
     boolean moveObjectSafe(int ObjectSquareNumber, int SquareNumber, Color objectColor);
@@ -54,14 +54,14 @@ public interface IArea {
     /**
      * Method runs object action
      *
-     * @param ObjectSquareNumber Object square number
-     * @param SquareNumber       Target square number
+     * @param ObjectSquareNumber
+     * @param SquareNumber
      * @return Result
      */
     boolean runObjectAction(int ObjectSquareNumber, int SquareNumber);
 
     /**
-     * @param ObjectSquareNumber ObjectSquareNumber
+     * @param ObjectSquareNumber
      * @return Result or null
      */
     IObject getObjectFromList(int ObjectSquareNumber);

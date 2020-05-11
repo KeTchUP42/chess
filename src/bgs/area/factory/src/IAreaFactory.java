@@ -10,14 +10,14 @@ public interface IAreaFactory {
     /**
      * Method creates standard configured area
      *
-     * @return IArea
+     * @return
      */
     IArea createStandardArea();
 
     /**
      * Method creates test area
      *
-     * @return IArea
+     * @return
      */
     IArea createTestArea();
 }
