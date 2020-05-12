@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * @author Roman
  */
-public class ChessConsoleVisual extends ConsoleVisual {
+public final class ChessConsoleVisual extends ConsoleVisual {
 
     private static final String ANSI_RED = "\u001B[31m";
 
@@ -41,7 +41,7 @@ public class ChessConsoleVisual extends ConsoleVisual {
      */
     @NotNull
     @Contract(pure = true)
-    private String chooseVisual(IObject object) {
+    private String chooseVisual(final IObject object) {
         if (object == null) return ANSI_RESET + " ";
         String colorCode = object.getColor() == GameColors.firstColor ?
                 ANSI_BLUE : ANSI_RED;

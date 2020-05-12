@@ -6,7 +6,7 @@ import bgs.tools.logger.src.LoggerInterface;
 /**
  * @author Roman
  */
-public class Logger extends AbstractLogger {
+public final class Logger extends AbstractLogger {
 
     private static LoggerInterface globalLogger;
 

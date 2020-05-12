@@ -10,9 +10,9 @@ import java.util.ArrayList;
 /**
  * @author Roman
  */
-public class ChessScanner {
+public final class ChessScanner {
 
-    protected final IArea Area;
+    private final IArea Area;
 
     public ChessScanner(IArea area) {
         this.Area = area;
@@ -38,7 +38,7 @@ public class ChessScanner {
         return false;
     }
 
-    protected ArrayList<King> searchKings(@NotNull Color color) {
+    private ArrayList<King> searchKings(@NotNull Color color) {
         ArrayList<King> kings = new ArrayList<>();
         for (int index = 0; index < this.Area.getMaxSquareNumber(); index++) {
             if (this.Area.getObjectFromList(index) != null && this.Area.getObjectFromList(index) instanceof King &&

@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 public class PlayerGenerator implements IGenerator<IPlayer> {
 
     @Override
-    public IPlayer generate(@NotNull IAliasList aliasList, String alias) throws ReflectiveOperationException, AliasNotFoundException {
+    public IPlayer generate(@NotNull IAliasList aliasList, final String alias) throws ReflectiveOperationException, AliasNotFoundException {
 
         for (String[] array : aliasList.getAliasList()) {
             if (array[0].equals(alias)) {

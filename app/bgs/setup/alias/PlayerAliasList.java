@@ -5,7 +5,7 @@ import bgs.setup.alias.Interfaces.IAliasList;
 /**
  * @author Roman
  */
-public class PlayerAliasList implements IAliasList {
+public final class PlayerAliasList implements IAliasList {
 
     @Override
     public String[][] getAliasList() {

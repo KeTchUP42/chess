@@ -2,6 +2,7 @@ package bgs.visual.standard;
 
 import bgs.area.IArea;
 import bgs.visual.src.IVisual;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -15,7 +16,7 @@ import java.util.Scanner;
 public class ConsoleVisual implements IVisual {
 
     @Override
-    public void Draw(IArea area) {
+    public void Draw(@NotNull IArea area) {
     }
 
     @Override
@@ -57,7 +58,6 @@ public class ConsoleVisual implements IVisual {
             }
             return true;
         }
-        //
         return false;
     }
 

@@ -38,7 +38,7 @@ abstract class AbstractApplicationBase {
      * @throws AliasNotFoundException
      * @throws ReflectiveOperationException
      */
-    protected IArea generateArea(@NotNull String typeAlias) throws AliasNotFoundException, ReflectiveOperationException {
+    protected IArea generateArea(final @NotNull String typeAlias) throws AliasNotFoundException, ReflectiveOperationException {
         Logger.getGlobalLogger().info("Generating the area...");
         return new AreaGenerator().generate(new AreaAliasList(), typeAlias);
     }
@@ -51,7 +51,7 @@ abstract class AbstractApplicationBase {
      * @throws AliasNotFoundException
      * @throws ReflectiveOperationException
      */
-    protected IPlayer generatePlayer(@NotNull String typeAlias, String Name, Color color) throws AliasNotFoundException, ReflectiveOperationException {
+    protected IPlayer generatePlayer(final @NotNull String typeAlias, String Name, Color color) throws AliasNotFoundException, ReflectiveOperationException {
         Logger.getGlobalLogger().info("Player generating...");
         return new PlayerGenerator().generate(new PlayerAliasList(), typeAlias).rebuild(this.Area, color, this.Visual, Name);
     }
@@ -62,7 +62,7 @@ abstract class AbstractApplicationBase {
      * @param param
      * @return
      */
-    protected Color[] chooseGameColorsSequence(@NotNull String param) {
+    protected Color[] chooseGameColorsSequence(final @NotNull String param) {
         if (param.equals("") || param.equals("standard") || param.equals("first")) return new Color[]{
                 GameColors.firstColor, GameColors.secondColor
         };
@@ -76,7 +76,7 @@ abstract class AbstractApplicationBase {
      *
      * @param configData
      */
-    protected void applySettings(@NotNull String[] configData) throws Exception {
+    protected void applySettings(final @NotNull String[] configData) throws Exception {
 
         Logger.configureGlobalLogger(configData[ConfigFields.LOG_FILE_PATH]);
         try {

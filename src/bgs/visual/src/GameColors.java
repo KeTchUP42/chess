@@ -5,7 +5,7 @@ import java.awt.*;
 /**
  * @author Roman
  */
-public class GameColors {
+public final class GameColors {
     public static Color firstColor = Color.WHITE;
     public static Color secondColor = Color.BLACK;
 }

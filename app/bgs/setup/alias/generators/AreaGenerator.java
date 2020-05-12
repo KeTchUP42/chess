@@ -6,14 +6,13 @@ import bgs.setup.alias.Interfaces.IGenerator;
 import bgs.setup.alias.exception.AliasNotFoundException;
 import org.jetbrains.annotations.NotNull;
 
-
 /**
  * @author Roman
  */
 public class AreaGenerator implements IGenerator<IArea> {
 
     @Override
-    public IArea generate(@NotNull IAliasList aliasList, String alias) throws ReflectiveOperationException, AliasNotFoundException {
+    public IArea generate(@NotNull IAliasList aliasList, final String alias) throws ReflectiveOperationException, AliasNotFoundException {
 
         for (String[] array : aliasList.getAliasList()) {
             if (array[0].equals(alias)) {

@@ -65,7 +65,7 @@ public abstract class AbstractPlayer implements IPlayer {
      * @param timeMilSecs
      * @return
      */
-    protected StepLog finalize(int squareNumber, int targetSquareNumber, int timeMilSecs) {
+    protected StepLog finalize(final int squareNumber, final int targetSquareNumber, int timeMilSecs) {
         try {
             Logger.getGlobalLogger().info(squareNumber + " => " + targetSquareNumber);
             Thread.sleep(timeMilSecs);
