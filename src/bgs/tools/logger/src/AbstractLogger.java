@@ -24,42 +24,42 @@ public abstract class AbstractLogger implements LoggerInterface {
 
     @Override
     public void emergency(String message) {
-        this.writeLogToFile(" EMERGENCY: " + message + "\n");
+        this.log(" EMERGENCY: " + message + "\n");
     }
 
     @Override
     public void alert(String message) {
-        this.writeLogToFile(" ALERT: " + message + "\n");
+        this.log(" ALERT: " + message + "\n");
     }
 
     @Override
     public void critical(String message) {
-        this.writeLogToFile(" CRITICAL: " + message + "\n");
+        this.log(" CRITICAL: " + message + "\n");
     }
 
     @Override
     public void error(String message) {
-        this.writeLogToFile(" ERROR: " + message + "\n");
+        this.log(" ERROR: " + message + "\n");
     }
 
     @Override
     public void warning(String message) {
-        this.writeLogToFile(" WARNING: " + message + "\n");
+        this.log(" WARNING: " + message + "\n");
     }
 
     @Override
     public void notice(String message) {
-        this.writeLogToFile(" NOTICE: " + message + "\n");
+        this.log(" NOTICE: " + message + "\n");
     }
 
     @Override
     public void info(String message) {
-        this.writeLogToFile(" INFO: " + message + "\n");
+        this.log(" INFO: " + message + "\n");
     }
 
     @Override
     public void debug(String message) {
-        this.writeLogToFile(" DEBUG: " + message + "\n");
+        this.log(" DEBUG: " + message + "\n");
     }
 
     public void setLogWriter(String logFilePath) {
@@ -75,14 +75,14 @@ public abstract class AbstractLogger implements LoggerInterface {
      *
      * @param message
      */
-    protected void writeLogToFile(String message) {
+    protected void log(String message) {
         message = this.generateDateTimeString() + message;
         try {
             this.fileWriter.write(message);
             this.fileWriter.flush();
         } catch (IOException exception) {
             this.setLogWriter(STANDARD_LOG_FILE_PATH);
-            this.writeLogToFile(exception.getMessage());
+            this.log(exception.getMessage());
         }
     }
 

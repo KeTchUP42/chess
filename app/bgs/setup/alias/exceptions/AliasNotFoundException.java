@@ -1,4 +1,4 @@
-package bgs.setup.alias.exception;
+package bgs.setup.alias.exceptions;
 
 /**
  * @author Roman

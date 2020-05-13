@@ -30,11 +30,6 @@
   Для изменения стандартного визуала заменять классы в пакете bgs/visual/standard. 
  
  ### Новый модульный функционал добавлять в папку modules или как библиотеку .jar в libs.
- 
- ### Для просмотра или изменения последовательности запрашиваемых параметров:
-  Смотрите пакет INI, AbstractApplicationBase.java.
-  Для изменения последовательности параметров ввода изменить массив входящих
-  параметром в Application.java, см. AbstractApplicationBase.java и ConfigFields.java. 
 
  ### Для добавления новых стандартных консольных команд:
   Для добавления новых консольных команд править метод consoleAction в bgs/visual/standard/ConsoleVisual.java 
@@ -43,23 +38,22 @@
   Блок ColorSettings позволяет переопределить цвета в GameColors.
 
     [AreaSettings]
-    areaType         = standard
+    area_type         = standard
 
     [StepOrderSettings]
-    StepOrder        = standard
+    step_order        = standard
 
     [FirstPlayerSettings]
-    firstPlayerType  = bot_0
-    firstPlayerName  = BOT
+    first_player_type  = bot_0
+    first_player_name  = BOT
 
     [SecondPlayerSettings]
-    secondPlayerType = bot_0
-    secondPlayerName = BOT
+    second_player_type = bot_0
+    second_player_name = BOT
 
     [LogSettings]
-    ;Заранее создавать структуру папок
-    logFilePath      = var/logs/source.log
+    log_file_path      = var/logs/source.log
 
     [ColorSettings]
-    FirstColor       = white
-    SecondColor      = black
+    first_color       = white
+    second_color      = black

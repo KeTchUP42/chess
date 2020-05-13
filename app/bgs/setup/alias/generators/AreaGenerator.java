@@ -3,7 +3,7 @@ package bgs.setup.alias.generators;
 import bgs.area.IArea;
 import bgs.setup.alias.Interfaces.IAliasList;
 import bgs.setup.alias.Interfaces.IGenerator;
-import bgs.setup.alias.exception.AliasNotFoundException;
+import bgs.setup.alias.exceptions.AliasNotFoundException;
 import org.jetbrains.annotations.NotNull;
 
 /**

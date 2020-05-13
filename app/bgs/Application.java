@@ -1,9 +1,12 @@
 package bgs;
 
 import bgs.setup.INI.INIParser;
+import bgs.setup.INI.configList.IConfigList;
+import bgs.setup.INI.configList.InIConfigList;
 import bgs.setup.recipient.ConfigRecipient;
 import bgs.src.AbstractApplication;
 import bgs.visual.src.IVisual;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
@@ -21,13 +24,7 @@ public class Application extends AbstractApplication {
      */
     public void run(String configFilePathOrNull) {
         try {
-            this.loadSettings(configFilePathOrNull, new String[]{
-                    "areaType",
-                    "StepOrder",
-                    "firstPlayerType", "firstPlayerName",
-                    "secondPlayerType", "secondPlayerName",
-                    "logFilePath"
-            });
+            this.loadSettings(configFilePathOrNull, new InIConfigList());
             this.runGame();
         } catch (Exception | Error exception) {
             this.Visual.showMessage(exception.getMessage(), false);
@@ -42,11 +39,11 @@ public class Application extends AbstractApplication {
      *
      * @throws IOException
      */
-    protected void loadSettings(String configPath, String[] configFields) throws Exception {
+    protected void loadSettings(String configPath, @NotNull IConfigList configList) throws Exception {
         if (configPath != null) {
-            this.applySettings(new INIParser(configPath).loadConfig(configFields));
+            this.applySettings(new INIParser(configPath).loadConfig(configList));
         } else {
-            this.applySettings(new ConfigRecipient(this.Visual).findOutPlayersConfig(configFields));
+            this.applySettings(new ConfigRecipient(this.Visual).findOutPlayersConfig(configList.getList()));
         }
     }
 }

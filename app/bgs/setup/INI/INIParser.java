@@ -1,6 +1,7 @@
 package bgs.setup.INI;
 
-import bgs.src.ConfigFields;
+import bgs.setup.INI.configList.ConfigFields;
+import bgs.setup.INI.configList.IConfigList;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -14,8 +15,9 @@ public class INIParser extends AbstractINIParser {
         super(filepath);
     }
 
-    public String[] loadConfig(String @NotNull [] configFields) {
-        this.applyColorConfig();
+    public String[] loadConfig(@NotNull IConfigList configList) {
+        this.applyColorConfig(configList.getColorList());
+        String[] configFields = configList.getList();
         return new String[]{
                 this.ini.get("AreaSettings", configFields[ConfigFields.AREA_TYPE], String.class),
                 this.ini.get("StepOrderSettings", configFields[ConfigFields.STEP_ORDER], String.class),

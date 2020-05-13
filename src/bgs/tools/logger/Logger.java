@@ -30,7 +30,7 @@ public final class Logger extends AbstractLogger {
 
     public static LoggerInterface getGlobalLogger() {
         if (Logger.globalLogger == null)
-            Logger.configureGlobalLogger(LoggerInterface.STANDARD_LOG_FILE_PATH);
+            Logger.configureGlobalLogger(STANDARD_LOG_FILE_PATH);
         return Logger.globalLogger;
     }
 

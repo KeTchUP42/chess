@@ -1,6 +1,6 @@
 package bgs.setup.alias.Interfaces;
 
-import bgs.setup.alias.exception.AliasNotFoundException;
+import bgs.setup.alias.exceptions.AliasNotFoundException;
 import org.jetbrains.annotations.NotNull;
 
 

@@ -2,9 +2,10 @@ package bgs.src;
 
 import bgs.area.IArea;
 import bgs.brains.src.IPlayer;
+import bgs.setup.INI.configList.ConfigFields;
 import bgs.setup.alias.AreaAliasList;
 import bgs.setup.alias.PlayerAliasList;
-import bgs.setup.alias.exception.AliasNotFoundException;
+import bgs.setup.alias.exceptions.AliasNotFoundException;
 import bgs.setup.alias.generators.AreaGenerator;
 import bgs.setup.alias.generators.PlayerGenerator;
 import bgs.tools.logger.Logger;
@@ -17,7 +18,7 @@ import java.awt.*;
 /**
  * @author Roman
  */
-abstract class AbstractApplicationBase {
+public abstract class AbstractApplicationBase {
 
     protected IVisual Visual;
 
@@ -70,6 +71,11 @@ abstract class AbstractApplicationBase {
                 GameColors.secondColor, GameColors.firstColor
         };
     }
+
+    /**
+     * @param configData
+     */
+    public abstract void run(String[] configData);
 
     /**
      * Main config applier
