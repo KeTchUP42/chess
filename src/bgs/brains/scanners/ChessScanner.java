@@ -38,7 +38,7 @@ public final class ChessScanner {
         return false;
     }
 
-    private ArrayList<King> searchKings(@NotNull Color color) {
+    private @NotNull ArrayList<King> searchKings(@NotNull Color color) {
         ArrayList<King> kings = new ArrayList<>();
         for (int index = 0; index < this.Area.getMaxSquareNumber(); index++) {
             if (this.Area.getObjectFromList(index) != null && this.Area.getObjectFromList(index) instanceof King &&

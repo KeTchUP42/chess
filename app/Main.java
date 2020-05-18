@@ -9,14 +9,14 @@ import java.io.File;
 /**
  * @author Roman
  */
-public class EntryPoint {
+public class Main {
 
     /**
      * @param visual
      * @return
      */
     public static @Nullable String configExplanation(@NotNull IVisual visual) {
-        if (!visual.showMessage("Load config from ini-file?[Y]", true)
+        if (!visual.showMessage("Load config from ini-file?[Y/N]", true)
                 .toLowerCase()
                 .equals("n")) {
             while (true) {

@@ -28,7 +28,7 @@ public interface IPlayer {
      * @param name
      * @return
      */
-    IPlayer rebuild(@NotNull IArea area, Color color, IVisual visual, String name);
+    IPlayer rebuild(@NotNull IArea area, @NotNull Color color, @NotNull IVisual visual, String name);
 
     Color getColor();
 }

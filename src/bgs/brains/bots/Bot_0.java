@@ -25,7 +25,6 @@ public class Bot_0 extends AbstractPlayer {
 
     @Override
     public StepLog step() {
-
         if (new ChessScanner(this.Area).isKingDead(this.Color)) {
             this.Visual.showMessage(this.Name + " defeat on " + this.stepNumber + " step.", false);
             return StepLog.DEFEAT;

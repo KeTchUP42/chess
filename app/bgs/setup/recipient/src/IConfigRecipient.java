@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 public interface IConfigRecipient {
 
     /**
-     * Method with config input logic
+     * Method contains config input logic
      *
      * @return
      */
