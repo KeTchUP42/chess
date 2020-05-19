@@ -38,15 +38,6 @@ public class Bot_0 extends AbstractPlayer {
         return this.finalize(squareNumber, targetSquareNumber, TimeSpan.TIME_SPAN);
     }
 
-    /**
-     * Method reconfigures or builds new player
-     *
-     * @param area
-     * @param color
-     * @param visual
-     * @param name
-     * @return
-     */
     @Override
     public IPlayer rebuild(@NotNull IArea area, @NotNull Color color, @NotNull IVisual visual, String name) {
         return new Bot_0(area, color, visual, name);

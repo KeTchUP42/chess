@@ -17,6 +17,8 @@ public interface IObject {
     int getLastPosition();
 
     /**
+     * Method move object on the area
+     *
      * @param SquareNumber
      * @param area
      * @return Result
@@ -24,7 +26,7 @@ public interface IObject {
     boolean move(int SquareNumber, IArea area);
 
     /**
-     * The method can implement any action, works in conjunction with this.isActionable
+     * Method can implement any action, works in conjunction with this.isActionable
      * Implementation in another classes
      *
      * @param SquareNumber

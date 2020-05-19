@@ -27,7 +27,7 @@ public class Pawn extends AbstractFigure {
         int multiplier = this.color == GameColors.firstColor ? 1 : -1;
         //One standard step
         int step = multiplier * Board.getAreaWidth();
-        //Step number with standard stap
+        //Step number with standard step
         int ordStep = this.getSquareNumber() + step;
         //Attack valid check
         boolean attackValid = Board.getObjectFromList(SquareNumber) != null && Board.getObjectFromList(SquareNumber).getColor() != this.getColor();

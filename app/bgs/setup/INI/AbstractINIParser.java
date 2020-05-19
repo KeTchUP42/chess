@@ -21,14 +21,16 @@ public abstract class AbstractINIParser {
     }
 
     /**
-     * Method gets data from ini file
+     * Method read configs from ini file
      *
-     * @return data from ini file
+     * @return
      */
     public abstract String[] loadConfig(@NotNull IConfigList configList);
 
     /**
      * Method apply configs for GameColors
+     *
+     * @param colorConfigList
      */
     protected void applyColorConfig(String[] colorConfigList) {
         try {

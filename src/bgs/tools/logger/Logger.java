@@ -33,5 +33,4 @@ public final class Logger extends AbstractLogger {
             Logger.configureGlobalLogger(STANDARD_LOG_FILE_PATH);
         return Logger.globalLogger;
     }
-
 }

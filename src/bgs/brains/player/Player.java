@@ -49,16 +49,6 @@ public class Player extends AbstractPlayer {
                 : StepLog.STEP_IS_IMPOSSIBLE;
     }
 
-
-    /**
-     * Method reconfigures or builds new player
-     *
-     * @param area
-     * @param color
-     * @param visual
-     * @param name
-     * @return
-     */
     @Override
     public IPlayer rebuild(@NotNull IArea area, @NotNull Color color, @NotNull IVisual visual, String name) {
         return new Player(area, color, visual, name);

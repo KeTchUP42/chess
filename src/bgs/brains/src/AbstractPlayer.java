@@ -34,14 +34,14 @@ public abstract class AbstractPlayer implements IPlayer {
     }
 
     /**
-     * Some step logic
+     * Method contains player's step logic
      *
      * @return
      */
     public abstract StepLog step();
 
     /**
-     * Method reconfigures or builds new player
+     * Method reconfigures this or builds a new player
      *
      * @param area
      * @param color
@@ -58,7 +58,7 @@ public abstract class AbstractPlayer implements IPlayer {
     }
 
     /**
-     * Correct step finalize
+     * Method have finalize logic to correct system work
      *
      * @param squareNumber
      * @param targetSquareNumber
@@ -76,9 +76,6 @@ public abstract class AbstractPlayer implements IPlayer {
         return StepLog.NORMAL;
     }
 
-    /**
-     * @return
-     */
     public Color getColor() {
         return this.Color;
     }

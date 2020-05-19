@@ -39,13 +39,13 @@ public class ConsoleVisual implements IVisual {
     }
 
     /**
-     * Console actions
+     * Method runs base console commands actions
      *
      * @param
      */
-    public boolean consoleAction(String inputData) {
-        if (inputData.equals("exit") || inputData.equals("die")) System.exit(0);
-        if (inputData.equals("help")) {
+    public boolean consoleAction(String inputMessage) {
+        if (inputMessage.equals("exit") || inputMessage.equals("die")) System.exit(0);
+        if (inputMessage.equals("help")) {
             try {
                 BufferedReader reader = new BufferedReader(new FileReader(new File("README.md")));
                 String line = reader.readLine();

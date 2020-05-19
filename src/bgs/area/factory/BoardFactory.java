@@ -37,7 +37,7 @@ public class BoardFactory implements IAreaFactory {
     }
 
     /**
-     * Method fills lines of pawns
+     * Method fill lines of pawns
      *
      * @param Board
      */

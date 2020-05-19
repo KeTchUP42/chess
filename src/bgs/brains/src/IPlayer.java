@@ -13,14 +13,14 @@ import java.awt.*;
 public interface IPlayer {
 
     /**
-     * Player step
+     * Method contains player's step logic
      *
      * @return
      */
     StepLog step();
 
     /**
-     * Method reconfigures or builds new player
+     * Method reconfigures this or builds a new player
      *
      * @param area
      * @param color

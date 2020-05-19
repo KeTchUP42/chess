@@ -14,9 +14,6 @@ public abstract class AbstractApplication extends AbstractApplicationBase {
         super(Visual);
     }
 
-    /**
-     * @param configData
-     */
     public void run(String[] configData) {
         try {
             this.applySettings(configData);

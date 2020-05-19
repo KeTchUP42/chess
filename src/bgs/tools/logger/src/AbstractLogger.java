@@ -71,7 +71,7 @@ public abstract class AbstractLogger implements LoggerInterface {
     }
 
     /**
-     * Log writer
+     * Method write message to log file
      *
      * @param message
      */
@@ -87,7 +87,7 @@ public abstract class AbstractLogger implements LoggerInterface {
     }
 
     /**
-     * Method returns date and time in string
+     * Method return current date and time in string format
      *
      * @return
      */

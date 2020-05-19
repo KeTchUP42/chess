@@ -19,9 +19,6 @@ public class Application extends AbstractApplication {
         super(Visual);
     }
 
-    /**
-     * @param configFilePathOrNull
-     */
     public void run(String configFilePathOrNull) {
         try {
             this.loadSettings(configFilePathOrNull, new InIConfigList());
@@ -35,6 +32,7 @@ public class Application extends AbstractApplication {
     }
 
     /**
+     * Method load setting from ini file or console
      * null - player enters config fields
      *
      * @throws IOException

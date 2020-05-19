@@ -60,10 +60,6 @@ public interface IArea {
      */
     boolean runObjectAction(int ObjectSquareNumber, int SquareNumber);
 
-    /**
-     * @param ObjectSquareNumber
-     * @return Result or null
-     */
     IObject getObjectFromList(int ObjectSquareNumber);
 
     int getAreaWidth();
