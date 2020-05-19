@@ -1,5 +1,7 @@
- ## Пример настроек:
-  
+ ## Пример настроек: 
+   * *Блок ColorSettings позволяет переопределить цвета в GameColors.*  
+   * *Для log_file_path - предварительно нужно создать структуру каталогов.*
+    
     [AreaSettings]
     area_type         = standard
     
@@ -20,6 +22,3 @@
     [ColorSettings]
     first_color       = white
     second_color      = black
-
-  *Блок ColorSettings позволяет переопределить цвета в GameColors.  
-  *Для log_file_path - предварительно нужно создать структуру каталогов.
