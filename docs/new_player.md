@@ -10,7 +10,7 @@
   
 #### Пример:
  Это пример тестового бота БЕЗ какой-либо либо логики поведения:  
- [test bot](../../src/bgs/brains/bots/Bot_0.java) 
+ [test bot](../src/bgs/brains/bots/Bot_0.java) 
  
  Пример игрока:  
- [real_player](../../src/bgs/brains/players/Player.java) 
+ [real_player](../src/bgs/brains/players/Player.java) 

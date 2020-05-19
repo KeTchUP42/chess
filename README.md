@@ -10,14 +10,14 @@
     
  ### Docs: 
     
- [Как добавить нового бота?](docs/dev/new_player.md) 
+ [Как добавить нового бота?](docs/new_player.md) 
 
- [Как добавить новую игровую область?](docs/dev/new_area.md) 
+ [Как добавить новую игровую область?](docs/new_area.md) 
 
- [Как добавить новое визуальное отображение?](docs/dev/new_visual.md) 
+ [Как добавить новое визуальное отображение?](docs/new_visual.md) 
  
- [Как добавить новый игровой объект?](docs/dev/new_player.md) 
+ [Как добавить новый игровой объект?](docs/new_player.md) 
 
- [Пример настроек.](docs/dev/config_example.md) 
+ [Пример настроек.](docs/config_example.md) 
  
- [Общие рекомендации.](docs/dev/general_recom.md)
+ [Общие рекомендации.](docs/general_recom.md)
