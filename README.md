@@ -1,59 +1,23 @@
- # BGS
+ # BGS 
+ ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/bwormguy/chess)
+ ![GitHub search hit counter](https://img.shields.io/github/search/bwormguy/chess/class)
+ ![Read the Docs](https://img.shields.io/readthedocs/docs)  
  Небольшая система на основе которой сделаны шахматы, но можно реализовать и другие настольные игры.
 
- ### Точка входа
- Класс точка-входа находится в app/Main.java. При дальнейшем усовершенствовании основной класс Application можно изменять в зависимости от требований.
- ## Пример стандартной области:
+ ### Запуск:
 
-    | 56 | 57 | 58 | 59 | 60 | 61 | 62 | 63 |
-    | 48 | 49 | 50 | 51 | 52 | 53 | 54 | 55 |
-    | 40 | 41 | 42 | 43 | 44 | 45 | 46 | 47 |
-    | 32 | 33 | 34 | 35 | 36 | 37 | 38 | 39 |
-    | 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31 |
-    | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 |
-    | 08 | 09 | 10 | 11 | 12 | 13 | 14 | 15 |
-    | 00 | 01 | 02 | 03 | 04 | 05 | 06 | 07 |
+ Класс точка-входа находится в app/Main.java.  
+    
+ ### Docs: 
+    
+ [Как добавить нового бота?](docs/dev/new_player.md) 
 
- ### Для добавления новых ботов:
- Для добавления новых ботов нужно прописать их логику в bgs/brains/bots и 
- в bgs/setup/alias/PlayerAliasList добавить новый алиас.
+ [Как добавить новую игровую область?](docs/dev/new_area.md) 
+
+ [Как добавить новое визуальное отображение?](docs/dev/new_visual.md) 
  
- #### Пример тестового бота: bgs/brains/bots/Bot_0.java
+ [Как добавить новый игровой объект?](docs/dev/new_player.md) 
 
- ### Для добавления новых фигур или других игровых объектов:
- Новые классы объектов прописываются в каталоге bgs/objects. Предварительно, для этой новой группы объектов создается родительский абстрактный класс который наследуется от aбстрактного класса в gameCore. В нем может быть прописана базовая логика группы. 
- Для добавления новых фигур или изменения их логики поведения изменять/добавлять классы фигур в пакет figures + добавлять/изменять методы в bgs/area/factory. В bgs/setup/alias/AreaAliasList добавить новый алиас для создания конкретной конфигурации области.
-
- ### Для добавления нового визуала:
-  Для добавления нового визуала добавлять классы исполняющие интерфейс IVisual в пакет bgs/visual. 
-  Создавать класс Application с объектом нового визуала в конструкторе.
-  Для изменения стандартного визуала заменять классы в пакете bgs/visual/standard. 
+ [Пример настроек.](docs/dev/config_example.md) 
  
- ### Новый модульный функционал добавлять в папку modules или как библиотеку .jar в libs.
-
- ### Для добавления новых стандартных консольных команд:
-  Для добавления новых консольных команд править метод consoleAction в bgs/visual/standard/ConsoleVisual.java 
-   
- #### Пример настроек:
-  Блок ColorSettings позволяет переопределить цвета в GameColors.
-
-    [AreaSettings]
-    area_type         = standard
-
-    [StepOrderSettings]
-    step_order        = standard
-
-    [FirstPlayerSettings]
-    first_player_type  = bot_0
-    first_player_name  = BOT
-
-    [SecondPlayerSettings]
-    second_player_type = bot_0
-    second_player_name = BOT
-
-    [LogSettings]
-    log_file_path      = var/logs/source.log
-
-    [ColorSettings]
-    first_color       = white
-    second_color      = black
+ [Общие рекомендации.](docs/dev/general_recom.md)

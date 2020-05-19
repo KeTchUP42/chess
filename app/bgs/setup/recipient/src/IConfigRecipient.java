@@ -9,8 +9,6 @@ public interface IConfigRecipient {
 
     /**
      * Method contains config input logic
-     *
-     * @return
      */
     String[] findOutPlayersConfig(@NotNull String[] configItems);
 }

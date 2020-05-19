@@ -35,19 +35,11 @@ public abstract class AbstractPlayer implements IPlayer {
 
     /**
      * Method contains player's step logic
-     *
-     * @return
      */
     public abstract StepLog step();
 
     /**
      * Method reconfigures this or builds a new player
-     *
-     * @param area
-     * @param color
-     * @param visual
-     * @param name
-     * @return
      */
     public IPlayer rebuild(@NotNull IArea area, @NotNull Color color, @NotNull IVisual visual, String name) {
         this.Area = area;
@@ -59,11 +51,6 @@ public abstract class AbstractPlayer implements IPlayer {
 
     /**
      * Method have finalize logic to correct system work
-     *
-     * @param squareNumber
-     * @param targetSquareNumber
-     * @param timeMilSecs
-     * @return
      */
     protected StepLog finalize(final int squareNumber, final int targetSquareNumber, int timeMilSecs) {
         try {

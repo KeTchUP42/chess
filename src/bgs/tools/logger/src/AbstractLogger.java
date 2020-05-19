@@ -72,8 +72,6 @@ public abstract class AbstractLogger implements LoggerInterface {
 
     /**
      * Method write message to log file
-     *
-     * @param message
      */
     protected void log(String message) {
         message = this.generateDateTimeString() + message;
@@ -88,8 +86,6 @@ public abstract class AbstractLogger implements LoggerInterface {
 
     /**
      * Method return current date and time in string format
-     *
-     * @return
      */
     protected String generateDateTimeString() {
         return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());

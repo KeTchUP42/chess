@@ -25,9 +25,6 @@ public abstract class AbstractApplication extends AbstractApplicationBase {
         }
     }
 
-    /**
-     * Game circle
-     */
     protected void runGame() {
         IPlayer[] players = new IPlayer[this.Players.length];
         for (IPlayer player : this.Players) {

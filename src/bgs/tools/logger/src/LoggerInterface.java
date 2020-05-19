@@ -14,16 +14,11 @@ public interface LoggerInterface {
 
     /**
      * Action must be taken immediately.
-     * <p>
-     * Example: Entire project down, database unavailable, etc. This should
-     * trigger the SMS alerts and wake you up.
      */
     void alert(String message);
 
     /**
      * Critical conditions.
-     * <p>
-     * Example: Application component unavailable, unexpected exception.
      */
     void critical(String message);
 
@@ -35,9 +30,6 @@ public interface LoggerInterface {
 
     /**
      * Exceptional occurrences that are not errors.
-     * <p>
-     * Example: Use of deprecated APIs, poor use of an API, undesirable things
-     * that are not necessarily wrong.
      */
     void warning(String message);
 
@@ -48,8 +40,6 @@ public interface LoggerInterface {
 
     /**
      * Interesting events.
-     * <p>
-     * Example: User logs in, SQL logs.
      */
     void info(String message);
 

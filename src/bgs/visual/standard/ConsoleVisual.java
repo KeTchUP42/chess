@@ -39,9 +39,7 @@ public class ConsoleVisual implements IVisual {
     }
 
     /**
-     * Method runs base console commands actions
-     *
-     * @param
+     * Method runs base console commands
      */
     public boolean consoleAction(String inputMessage) {
         if (inputMessage.equals("exit") || inputMessage.equals("die")) System.exit(0);

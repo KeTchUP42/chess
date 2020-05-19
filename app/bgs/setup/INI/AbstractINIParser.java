@@ -22,8 +22,6 @@ public abstract class AbstractINIParser {
 
     /**
      * Method read configs from ini file
-     *
-     * @return
      */
     public abstract String[] loadConfig(@NotNull IConfigList configList);
 

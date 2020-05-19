@@ -17,10 +17,6 @@ public interface IVisual {
 
     /**
      * Method have to communicate with players
-     *
-     * @param message
-     * @param getAnswer
-     * @return
      */
     String showMessage(String message, boolean getAnswer);
 }

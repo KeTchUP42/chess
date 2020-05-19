@@ -1,4 +1,4 @@
-package bgs.brains.player;
+package bgs.brains.players;
 
 import bgs.area.IArea;
 import bgs.brains.scanners.ChessScanner;
