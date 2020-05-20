@@ -1,7 +1,7 @@
-package bgs.setup.INI;
+package bgs.setup.Ini;
 
-import bgs.setup.INI.configList.ConfigFields;
-import bgs.setup.INI.configList.IConfigList;
+import bgs.setup.Ini.configList.ConfigFields;
+import bgs.setup.Ini.configList.IConfigList;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -9,9 +9,9 @@ import java.io.IOException;
 /**
  * @author Roman
  */
-public class INIParser extends AbstractINIParser {
+public class IniParser extends AbstractIniParser {
 
-    public INIParser(String filepath) throws IOException {
+    public IniParser(String filepath) throws IOException {
         super(filepath);
     }
 

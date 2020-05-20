@@ -1,4 +1,4 @@
-package bgs.brains.src.repo;
+package bgs.brains.vars;
 
 /**
  * @author Roman

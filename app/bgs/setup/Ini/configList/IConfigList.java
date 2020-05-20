@@ -1,7 +1,10 @@
-package bgs.setup.INI.configList;
+package bgs.setup.Ini.configList;
 
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * @author Roman
+ */
 public interface IConfigList {
 
     String @NotNull [] getList();

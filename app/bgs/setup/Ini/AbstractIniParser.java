@@ -1,6 +1,6 @@
-package bgs.setup.INI;
+package bgs.setup.Ini;
 
-import bgs.setup.INI.configList.IConfigList;
+import bgs.setup.Ini.configList.IConfigList;
 import bgs.visual.src.GameColors;
 import org.ini4j.Wini;
 import org.jetbrains.annotations.NotNull;
@@ -12,11 +12,11 @@ import java.io.IOException;
 /**
  * @author Roman
  */
-public abstract class AbstractINIParser {
+public abstract class AbstractIniParser {
 
     protected final Wini ini;
 
-    public AbstractINIParser(String filepath) throws IOException {
+    public AbstractIniParser(String filepath) throws IOException {
         this.ini = new Wini(new File(filepath));
     }
 

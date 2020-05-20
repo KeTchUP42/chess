@@ -1,4 +1,4 @@
-package bgs.setup.INI.configList;
+package bgs.setup.Ini.configList;
 
 /**
  * @author Roman

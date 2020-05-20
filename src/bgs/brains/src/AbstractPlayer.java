@@ -1,8 +1,7 @@
 package bgs.brains.src;
 
 import bgs.area.IArea;
-import bgs.brains.src.repo.StepLog;
-import bgs.tools.logger.Logger;
+import bgs.brains.vars.StepLog;
 import bgs.visual.src.IVisual;
 import org.jetbrains.annotations.NotNull;
 
@@ -52,9 +51,8 @@ public abstract class AbstractPlayer implements IPlayer {
     /**
      * Method have finalize logic to correct system work
      */
-    protected StepLog finalize(final int squareNumber, final int targetSquareNumber, int timeMilSecs) {
+    protected StepLog finalize(int timeMilSecs) {
         try {
-            Logger.getGlobalLogger().info(squareNumber + " => " + targetSquareNumber);
             Thread.sleep(timeMilSecs);
         } catch (Exception e) {
             this.Visual.showMessage(e.getMessage(), true);

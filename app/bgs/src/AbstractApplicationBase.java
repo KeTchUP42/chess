@@ -2,7 +2,7 @@ package bgs.src;
 
 import bgs.area.IArea;
 import bgs.brains.src.IPlayer;
-import bgs.setup.INI.configList.ConfigFields;
+import bgs.setup.Ini.configList.ConfigFields;
 import bgs.setup.alias.AreaAliasList;
 import bgs.setup.alias.PlayerAliasList;
 import bgs.setup.alias.exceptions.AliasNotFoundException;
@@ -60,7 +60,6 @@ public abstract class AbstractApplicationBase {
      * @param configData
      */
     protected void applySettings(final @NotNull String[] configData) throws Exception {
-
         Logger.configureGlobalLogger(configData[ConfigFields.LOG_FILE_PATH]);
         try {
             this.Area = generateArea(configData[ConfigFields.AREA_TYPE]);
@@ -75,6 +74,6 @@ public abstract class AbstractApplicationBase {
             Logger.getGlobalLogger().critical(exception.getMessage());
             throw exception;
         }
-        Logger.getGlobalLogger().info("Settings applied successfully!");
+        Logger.getGlobalLogger().info("Settings applied successfully");
     }
 }

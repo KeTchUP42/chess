@@ -4,8 +4,8 @@ import bgs.area.IArea;
 import bgs.brains.scanners.ChessScanner;
 import bgs.brains.src.AbstractPlayer;
 import bgs.brains.src.IPlayer;
-import bgs.brains.src.repo.StepLog;
-import bgs.brains.src.repo.TimeSpan;
+import bgs.brains.vars.StepLog;
+import bgs.brains.vars.TimeSpan;
 import bgs.visual.src.IVisual;
 import org.jetbrains.annotations.NotNull;
 
@@ -45,7 +45,7 @@ public class Player extends AbstractPlayer {
             return StepLog.STEP_IS_IMPOSSIBLE;
         }
         return this.Area.moveObjectSafe(squareNumber, figureSquareNumber, this.Color)
-                ? this.finalize(squareNumber, figureSquareNumber, TimeSpan.NO_TIME_SPAN)
+                ? this.finalize(TimeSpan.NO_TIME_SPAN)
                 : StepLog.STEP_IS_IMPOSSIBLE;
     }
 

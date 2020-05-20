@@ -1,7 +1,7 @@
 package bgs.brains.src;
 
 import bgs.area.IArea;
-import bgs.brains.src.repo.StepLog;
+import bgs.brains.vars.StepLog;
 import bgs.visual.src.IVisual;
 import org.jetbrains.annotations.NotNull;
 

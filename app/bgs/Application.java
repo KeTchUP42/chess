@@ -1,8 +1,8 @@
 package bgs;
 
-import bgs.setup.INI.INIParser;
-import bgs.setup.INI.configList.IConfigList;
-import bgs.setup.INI.configList.InIConfigList;
+import bgs.setup.Ini.IniParser;
+import bgs.setup.Ini.configList.IConfigList;
+import bgs.setup.Ini.configList.InIConfigList;
 import bgs.setup.recipient.ConfigRecipient;
 import bgs.src.AbstractApplication;
 import bgs.visual.src.IVisual;
@@ -39,7 +39,7 @@ public class Application extends AbstractApplication {
      */
     protected void loadSettings(String configPath, @NotNull IConfigList configList) throws Exception {
         if (configPath != null) {
-            this.applySettings(new INIParser(configPath).loadConfig(configList));
+            this.applySettings(new IniParser(configPath).loadConfig(configList));
         } else {
             this.applySettings(new ConfigRecipient(this.Visual).findOutPlayersConfig(configList.getList()));
         }

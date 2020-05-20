@@ -4,8 +4,8 @@ import bgs.area.IArea;
 import bgs.brains.scanners.ChessScanner;
 import bgs.brains.src.AbstractPlayer;
 import bgs.brains.src.IPlayer;
-import bgs.brains.src.repo.StepLog;
-import bgs.brains.src.repo.TimeSpan;
+import bgs.brains.vars.StepLog;
+import bgs.brains.vars.TimeSpan;
 import bgs.visual.src.IVisual;
 import org.jetbrains.annotations.NotNull;
 
@@ -35,7 +35,7 @@ public class Bot_0 extends AbstractPlayer {
             targetSquareNumber = (int) (Math.random() * this.Area.getMaxSquareNumber());
 
         } while (!this.Area.moveObjectSafe(squareNumber, targetSquareNumber, this.Color));
-        return this.finalize(squareNumber, targetSquareNumber, TimeSpan.TIME_SPAN);
+        return this.finalize(TimeSpan.TIME_SPAN);
     }
 
     @Override
