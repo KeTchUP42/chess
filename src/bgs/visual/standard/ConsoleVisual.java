@@ -4,10 +4,6 @@ import bgs.area.IArea;
 import bgs.visual.src.IVisual;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -22,41 +18,19 @@ public class ConsoleVisual implements IVisual {
     @Override
     public String showMessage(String message, boolean getAnswer) {
         System.out.println(message);
-        String dialogResult = null;
+        String result = null;
         if (getAnswer) {
             Scanner in = new Scanner(System.in);
-            //Base console func
             while (true) {
-                dialogResult = in.nextLine().trim();
-                if (this.consoleAction(dialogResult.toLowerCase())) {
+                result = in.nextLine().trim();
+                if (new CommandAnalyzer(this).analyze(result.toLowerCase())) {
                     System.out.println("\n" + message);
                     continue;
                 }
                 break;
             }
         }
-        return dialogResult;
-    }
-
-    /**
-     * Method runs base console commands
-     */
-    public boolean consoleAction(String inputMessage) {
-        if (inputMessage.equals("exit") || inputMessage.equals("die")) System.exit(0);
-        if (inputMessage.equals("help")) {
-            try {
-                BufferedReader reader = new BufferedReader(new FileReader(new File("README.md")));
-                String line = reader.readLine();
-                while (line != null) {
-                    this.showMessage(line, false);
-                    line = reader.readLine();
-                }
-            } catch (IOException e) {
-                this.showMessage(e.getMessage(), false);
-            }
-            return true;
-        }
-        return false;
+        return result;
     }
 
     protected void cleanConsole() {

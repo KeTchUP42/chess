@@ -56,8 +56,6 @@ public abstract class AbstractApplicationBase {
 
     /**
      * Main bgs config applier
-     *
-     * @param configData
      */
     protected void applySettings(final @NotNull String[] configData) throws Exception {
         Logger.configureGlobalLogger(configData[ConfigFields.LOG_FILE_PATH]);

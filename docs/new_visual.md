@@ -4,10 +4,10 @@
   1. Добавить класс исполняющий интерфейс IVisual в пакет bgs.visual. 
   
   2. Для использования нового визуального отображения нужно создавать объект Application, заменив стандартный визуал новым.  
-  ![chess](images/app_start.png)  
+  ![app_start](images/app_start.png)  
   
   3. Для изменения стандартного визуального отображения заменять классы в bgs.visual.standard.  
      
   ### Стандартное консольное отображение:
   
-  ![chess](images/chess_console.png) 
+  ![chess_console](images/chess_console.png) 

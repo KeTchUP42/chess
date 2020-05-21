@@ -8,8 +8,6 @@ import bgs.src.AbstractApplication;
 import bgs.visual.src.IVisual;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
-
 /**
  * @author Roman
  */
@@ -34,8 +32,6 @@ public class Application extends AbstractApplication {
     /**
      * Method load setting from ini file or console
      * null - player enters config fields
-     *
-     * @throws IOException
      */
     protected void loadSettings(String configPath, @NotNull IConfigList configList) throws Exception {
         if (configPath != null) {

@@ -3,16 +3,16 @@
  
  1. Создать новый класс области и добавить его в bgs.area
  2. Для добавления базового функционала требуется наследовать новый класс от AbstractArea.
- ![chess](images/area_parent.png)  
+ ![area_parent](images/area_parent.png)  
  3. Реализовать нужный функционал.
  4. Добавить новую фабрику или изменить методы старой в bgs.area.factory. 
  5. В bgs.setup.alias.AreaAliasList добавить новый алиас на метод фабрики для создания конкретной конфигурации области.  
-  ![chess](images/area_alias.png)
+  ![area_alias](images/area_alias.png)
  
  ### Общая информация:
  
  #### Нумерация клеток:
  
- ![chess](images/area_squares.png)
+ ![area_squares](images/area_squares.png)
 
   
