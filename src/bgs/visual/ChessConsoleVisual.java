@@ -21,7 +21,7 @@ public final class ChessConsoleVisual extends ConsoleVisual {
 
     @Override
     public void Draw(@NotNull IArea area) {
-        this.cleanConsole();
+        this.clearConsole();
         for (int Y = area.getAreaHeight() - 1; Y >= 0; Y--) {
             System.out.print(ANSI_RESET + "|");
             for (int X = 0; X < area.getAreaWidth(); X++) {

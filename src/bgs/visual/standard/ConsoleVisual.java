@@ -33,8 +33,8 @@ public class ConsoleVisual implements IVisual {
         return result;
     }
 
-    protected void cleanConsole() {
-        for (int clear = 0; clear < 3; clear++) {
+    protected void clearConsole() {
+        for (int index = 0; index < 3; index++) {
             System.out.println("\b");
         }
     }

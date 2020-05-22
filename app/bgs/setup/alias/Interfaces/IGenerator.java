@@ -12,9 +12,6 @@ public interface IGenerator<Type> {
     /**
      * Method generates new <Type> from alias
      *
-     * @param aliasList
-     * @param alias
-     * @return
      * @throws ReflectiveOperationException
      * @throws AliasNotFoundException
      */
