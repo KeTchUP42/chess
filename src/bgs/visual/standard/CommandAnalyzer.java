@@ -5,6 +5,7 @@ import bgs.setup.alias.PlayerAliasList;
 import bgs.visual.src.IVisual;
 
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 
 /**
  * @author Roman
@@ -32,7 +33,8 @@ public final class CommandAnalyzer extends AbstractCommandAnalyzer {
         System.out.println("Available console commands:");
         for (Method method : CommandAnalyzer.class.getDeclaredMethods()
         ) {
-            if (method.getReturnType().getName().equals("void")) System.out.println("* " + method.getName());
+            if (method.getReturnType().getName().equals("void") && method.getModifiers() == Modifier.PRIVATE)
+                System.out.println("* " + method.getName());
         }
     }
 }

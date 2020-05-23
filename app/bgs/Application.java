@@ -8,6 +8,8 @@ import bgs.src.AbstractApplication;
 import bgs.visual.src.IVisual;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
+
 /**
  * @author Roman
  */
@@ -17,9 +19,9 @@ public class Application extends AbstractApplication {
         super(Visual);
     }
 
-    public void run(String configFilePathOrNull) {
+    public void run(String configFilePath) {
         try {
-            this.loadSettings(configFilePathOrNull, new InIConfigList());
+            this.loadSettings(configFilePath, new InIConfigList());
             this.runGame();
         } catch (Exception | Error exception) {
             this.Visual.showMessage(exception.getMessage(), false);
@@ -33,8 +35,9 @@ public class Application extends AbstractApplication {
      * Method load setting from ini file or console
      * null - player enters config fields
      */
-    protected void loadSettings(String configPath, @NotNull IConfigList configList) throws Exception {
-        if (configPath != null) {
+    private void loadSettings(String configPath, @NotNull IConfigList configList) throws Exception {
+
+        if (configPath != null && new File(configPath).exists()) {
             this.applySettings(new IniParser(configPath).loadConfig(configList));
         } else {
             this.applySettings(new ConfigRecipient(this.Visual).findOutPlayersConfig(configList.getList()));

@@ -9,5 +9,7 @@ public interface IConfigList {
 
     String @NotNull [] getList();
 
-    String @NotNull [] getColorList();
+    String @NotNull [][] getFullList();
+
+    String @NotNull [][] getColorList();
 }

@@ -17,16 +17,15 @@ public class IniParser extends AbstractIniParser {
 
     public String[] loadConfig(@NotNull IConfigList configList) {
         this.applyColorConfig(configList.getColorList());
-        String[] configFields = configList.getList();
+        String[][] configFields = configList.getFullList();
         return new String[]{
-                this.ini.get("AreaSettings", configFields[ConfigFields.AREA_TYPE], String.class),
-                this.ini.get("StepOrderSettings", configFields[ConfigFields.STEP_ORDER], String.class),
-                this.ini.get("FirstPlayerSettings", configFields[ConfigFields.FIRST_PLAYER_TYPE], String.class),
-                this.ini.get("FirstPlayerSettings", configFields[ConfigFields.FIRST_PLAYER_NAME], String.class),
-                this.ini.get("SecondPlayerSettings", configFields[ConfigFields.SECOND_PLAYER_TYPE], String.class),
-                this.ini.get("SecondPlayerSettings", configFields[ConfigFields.SECOND_PLAYER_NAME], String.class),
-                this.ini.get("LogSettings", configFields[ConfigFields.LOG_FILE_PATH], String.class),
+                this.ini.get(configFields[ConfigFields.AREA_TYPE][0], configFields[ConfigFields.AREA_TYPE][1], String.class),
+                this.ini.get(configFields[ConfigFields.STEP_ORDER][0], configFields[ConfigFields.STEP_ORDER][1], String.class),
+                this.ini.get(configFields[ConfigFields.LOG_FILE_PATH][0], configFields[ConfigFields.LOG_FILE_PATH][1], String.class),
+                this.ini.get(configFields[ConfigFields.FIRST_PLAYER_TYPE][0], configFields[ConfigFields.FIRST_PLAYER_TYPE][1], String.class),
+                this.ini.get(configFields[ConfigFields.FIRST_PLAYER_NAME][0], configFields[ConfigFields.FIRST_PLAYER_NAME][1], String.class),
+                this.ini.get(configFields[ConfigFields.SECOND_PLAYER_TYPE][0], configFields[ConfigFields.SECOND_PLAYER_TYPE][1], String.class),
+                this.ini.get(configFields[ConfigFields.SECOND_PLAYER_NAME][0], configFields[ConfigFields.SECOND_PLAYER_NAME][1], String.class),
         };
     }
-
 }

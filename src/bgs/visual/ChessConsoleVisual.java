@@ -25,8 +25,7 @@ public final class ChessConsoleVisual extends ConsoleVisual {
         for (int Y = area.getAreaHeight() - 1; Y >= 0; Y--) {
             System.out.print(ANSI_RESET + "|");
             for (int X = 0; X < area.getAreaWidth(); X++) {
-                int SquareNumber = area.getSquareNumber(X, Y);
-                System.out.print(this.chooseVisual(area.getObjectFromList(SquareNumber)));
+                System.out.print(this.chooseVisual(area.getObjectFromList(area.getSquareNumber(X, Y))));
                 System.out.print(ANSI_RESET + "|");
             }
             System.out.println();

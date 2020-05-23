@@ -1,5 +1,6 @@
 package bgs.setup.Ini;
 
+import bgs.setup.Ini.configList.ConfigFields;
 import bgs.setup.Ini.configList.IConfigList;
 import bgs.visual.src.GameColors;
 import org.ini4j.Wini;
@@ -26,16 +27,14 @@ public abstract class AbstractIniParser {
     public abstract String[] loadConfig(@NotNull IConfigList configList);
 
     /**
-     * Method apply configs for GameColors
-     *
-     * @param colorConfigList
+     * Method applies configs for GameColors
      */
-    protected void applyColorConfig(String[] colorConfigList) {
+    protected void applyColorConfig(String[][] colorConfigList) {
         try {
             Color firstColor = (Color) Color.class.getField(
-                    this.ini.get("ColorSettings", colorConfigList[0], String.class)).get(null);
+                    this.ini.get(colorConfigList[ConfigFields.FIRST_COLOR][0], colorConfigList[ConfigFields.FIRST_COLOR][1], String.class)).get(null);
             Color secondColor = (Color) Color.class.getField(
-                    this.ini.get("ColorSettings", colorConfigList[1], String.class)).get(null);
+                    this.ini.get(colorConfigList[ConfigFields.SECOND_COLOR][0], colorConfigList[ConfigFields.SECOND_COLOR][1], String.class)).get(null);
             if (firstColor == secondColor) return;
             GameColors.firstColor = firstColor;
             GameColors.secondColor = secondColor;
