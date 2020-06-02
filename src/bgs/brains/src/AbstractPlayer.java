@@ -29,29 +29,15 @@ public abstract class AbstractPlayer implements IPlayer {
         this.Name = Name;
     }
 
-    public AbstractPlayer() {
-    }
-
     /**
      * Method contains player's step logic
      */
     public abstract StepLog step();
 
     /**
-     * Method reconfigures this or builds a new player
-     */
-    public IPlayer rebuild(@NotNull IArea area, @NotNull Color color, @NotNull IVisual visual, String name) {
-        this.Area = area;
-        this.Color = color;
-        this.Visual = visual;
-        this.Name = name;
-        return this;
-    }
-
-    /**
      * Method have finalize logic to correct system work
      */
-    protected StepLog finalize(int timeMilSecs) {
+    protected StepLog sendNormalLog(int timeMilSecs) {
         try {
             Thread.sleep(timeMilSecs);
         } catch (Exception e) {

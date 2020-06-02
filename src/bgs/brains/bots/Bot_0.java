@@ -3,11 +3,9 @@ package bgs.brains.bots;
 import bgs.area.IArea;
 import bgs.brains.scanners.ChessScanner;
 import bgs.brains.src.AbstractPlayer;
-import bgs.brains.src.IPlayer;
 import bgs.brains.vars.StepLog;
 import bgs.brains.vars.TimeSpan;
 import bgs.visual.src.IVisual;
-import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 
@@ -18,9 +16,6 @@ import java.awt.*;
 public class Bot_0 extends AbstractPlayer {
     public Bot_0(IArea area, Color color, IVisual visual, String name) {
         super(area, color, visual, name);
-    }
-
-    public Bot_0() {
     }
 
     @Override
@@ -35,11 +30,6 @@ public class Bot_0 extends AbstractPlayer {
             targetSquareNumber = (int) (Math.random() * this.Area.getMaxSquareNumber());
 
         } while (!this.Area.moveObjectSafe(squareNumber, targetSquareNumber, this.Color));
-        return this.finalize(TimeSpan.TIME_SPAN);
-    }
-
-    @Override
-    public IPlayer rebuild(@NotNull IArea area, @NotNull Color color, @NotNull IVisual visual, String name) {
-        return new Bot_0(area, color, visual, name);
+        return this.sendNormalLog(TimeSpan.TIME_SPAN);
     }
 }

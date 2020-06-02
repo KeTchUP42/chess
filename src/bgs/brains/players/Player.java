@@ -3,11 +3,9 @@ package bgs.brains.players;
 import bgs.area.IArea;
 import bgs.brains.scanners.ChessScanner;
 import bgs.brains.src.AbstractPlayer;
-import bgs.brains.src.IPlayer;
 import bgs.brains.vars.StepLog;
 import bgs.brains.vars.TimeSpan;
 import bgs.visual.src.IVisual;
-import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 
@@ -17,9 +15,6 @@ import java.awt.*;
 public class Player extends AbstractPlayer {
     public Player(IArea area, Color color, IVisual visual, String name) {
         super(area, color, visual, name);
-    }
-
-    public Player() {
     }
 
     @Override
@@ -45,12 +40,7 @@ public class Player extends AbstractPlayer {
             return StepLog.STEP_IS_IMPOSSIBLE;
         }
         return this.Area.moveObjectSafe(squareNumber, figureSquareNumber, this.Color)
-                ? this.finalize(TimeSpan.NO_TIME_SPAN)
+                ? this.sendNormalLog(TimeSpan.NO_TIME_SPAN)
                 : StepLog.STEP_IS_IMPOSSIBLE;
-    }
-
-    @Override
-    public IPlayer rebuild(@NotNull IArea area, @NotNull Color color, @NotNull IVisual visual, String name) {
-        return new Player(area, color, visual, name);
     }
 }

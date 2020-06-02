@@ -37,7 +37,7 @@ public abstract class AbstractApplicationBase {
 
     protected IPlayer generatePlayer(final @NotNull String typeAlias, String Name, Color color) throws AliasNotFoundException, ReflectiveOperationException {
         Logger.getGlobalLogger().info("Player generating...");
-        return new PlayerGenerator().generate(new PlayerAliasList(), typeAlias).rebuild(this.Area, color, this.Visual, Name);
+        return (IPlayer) new PlayerGenerator().generate(new PlayerAliasList(), typeAlias).newInstance(this.Area, color, this.Visual, Name);
     }
 
     /**
