@@ -17,7 +17,7 @@ public abstract class AbstractApplication extends AbstractApplicationBase {
     public void run(String[] configData) {
         try {
             this.applySettings(configData);
-            this.runGame();
+            this.start();
         } catch (Exception | Error exception) {
             this.Visual.showMessage(exception.getMessage(), false);
         } finally {
@@ -25,7 +25,7 @@ public abstract class AbstractApplication extends AbstractApplicationBase {
         }
     }
 
-    protected void runGame() {
+    protected void start() {
         IPlayer[] players = new IPlayer[this.Players.length];
         for (IPlayer player : this.Players) {
             if (player.getColor() == GameColors.firstColor) players[0] = player;

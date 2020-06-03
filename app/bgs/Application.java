@@ -8,12 +8,13 @@ import bgs.src.AbstractApplication;
 import bgs.visual.src.IVisual;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 /**
  * @author Roman
  */
-public class Application extends AbstractApplication {
+public final class Application extends AbstractApplication {
 
     public Application(IVisual Visual) {
         super(Visual);
@@ -22,7 +23,7 @@ public class Application extends AbstractApplication {
     public void run(String configFilePath) {
         try {
             this.loadSettings(configFilePath, new InIConfigList());
-            this.runGame();
+            this.start();
         } catch (Exception | Error exception) {
             this.Visual.showMessage(exception.getMessage(), false);
             System.exit(-1);
@@ -32,15 +33,17 @@ public class Application extends AbstractApplication {
     }
 
     /**
-     * Method load setting from ini file or console
-     * null - player enters config fields
+     * Method loads settings from ini file or console
      */
     private void loadSettings(String configPath, @NotNull IConfigList configList) throws Exception {
-
-        if (configPath != null && new File(configPath).exists()) {
+        if (this.configPathValidation(configPath)) {
             this.applySettings(new IniParser(configPath).loadConfig(configList));
         } else {
             this.applySettings(new ConfigRecipient(this.Visual).findOutPlayersConfig(configList.getList()));
         }
+    }
+
+    private boolean configPathValidation(String configPath) {
+        return configPath != null && Files.exists(Path.of(configPath));
     }
 }

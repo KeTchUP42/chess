@@ -5,7 +5,7 @@ package bgs.tools.logger.src;
  */
 public interface LoggerInterface {
 
-    String STANDARD_LOG_FILE_PATH = "source.log";
+    String STANDARD_LOG_FILE_PATH = "process.main.log";
 
     /**
      * System is unusable.

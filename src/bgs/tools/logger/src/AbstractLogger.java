@@ -64,6 +64,7 @@ public abstract class AbstractLogger implements LoggerInterface {
 
     public void setLogWriter(String logFilePath) {
         try {
+            if (this.fileWriter != null) this.fileWriter.close();
             this.fileWriter = new FileWriter(logFilePath, true);
         } catch (IOException ignored) {
             this.setLogWriter(STANDARD_LOG_FILE_PATH);
@@ -74,9 +75,8 @@ public abstract class AbstractLogger implements LoggerInterface {
      * Method write message to log file
      */
     protected void log(String message) {
-        message = this.generateDateTimeString() + message;
         try {
-            this.fileWriter.write(message);
+            this.fileWriter.write(this.generateDateTimeString() + message);
             this.fileWriter.flush();
         } catch (IOException exception) {
             this.setLogWriter(STANDARD_LOG_FILE_PATH);
