@@ -9,7 +9,8 @@ import bgs.visual.src.IVisual;
 import org.jetbrains.annotations.NotNull;
 
 import java.nio.file.Files;
-import java.nio.file.Path;
+import java.nio.file.LinkOption;
+import java.nio.file.Paths;
 
 /**
  * @author Roman
@@ -44,6 +45,6 @@ public final class Application extends AbstractApplication {
     }
 
     private boolean configPathValidation(String configPath) {
-        return configPath != null && Files.exists(Path.of(configPath));
+        return configPath != null && Files.exists(Paths.get(configPath), LinkOption.NOFOLLOW_LINKS);
     }
 }
