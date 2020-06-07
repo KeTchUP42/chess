@@ -10,14 +10,8 @@ import java.awt.*;
  */
 public interface IObject {
 
-    int getSquareNumber();
-
-    Color getColor();
-
-    int getLastPosition();
-
     /**
-     * Method move object on the area
+     * Method moves object on the area
      *
      * @param SquareNumber
      * @param area
@@ -54,4 +48,10 @@ public interface IObject {
     boolean isActionable(int SquareNumber, @NotNull IArea area);
 
     IObject clone() throws CloneNotSupportedException;
+
+    int getSquareNumber();
+
+    Color getColor();
+
+    int getLastPosition();
 }

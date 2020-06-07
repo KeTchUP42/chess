@@ -10,8 +10,6 @@ public interface IVisual {
 
     /**
      * Method draws area
-     *
-     * @param area
      */
     void Draw(@NotNull IArea area);
 

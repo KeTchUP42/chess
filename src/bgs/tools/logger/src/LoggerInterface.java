@@ -23,8 +23,7 @@ public interface LoggerInterface {
     void critical(String message);
 
     /**
-     * Runtime errors that do not require immediate action but should typically
-     * be logged and monitored.
+     * Runtime errors that do not require immediate action but should typically be logged and monitored.
      */
     void error(String message);
 

@@ -18,6 +18,12 @@ public final class ChessScanner {
         this.Area = area;
     }
 
+    /**
+     * Method checks is any king alive
+     *
+     * @param color King color
+     * @return Result
+     */
     public boolean isKingDead(Color color) {
         for (int index = 0; index < this.Area.getMaxSquareNumber(); index++) {
             if (this.Area.getObjectFromList(index) instanceof King && this.Area.getObjectFromList(index).getColor() == color)
@@ -26,6 +32,12 @@ public final class ChessScanner {
         return true;
     }
 
+    /**
+     * Method checks in any king under attack
+     *
+     * @param color King color
+     * @return Result
+     */
     public boolean isKingUnderAttack(Color color) {
         for (King king : this.searchKings(color)) {
             for (int index = 0; index < this.Area.getMaxSquareNumber(); index++) {
@@ -38,6 +50,12 @@ public final class ChessScanner {
         return false;
     }
 
+    /**
+     * Method searches all kings on the area
+     *
+     * @param color King color
+     * @return Result
+     */
     private @NotNull ArrayList<King> searchKings(@NotNull Color color) {
         ArrayList<King> kings = new ArrayList<>();
         for (int index = 0; index < this.Area.getMaxSquareNumber(); index++) {

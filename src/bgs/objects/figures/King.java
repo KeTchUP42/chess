@@ -24,6 +24,6 @@ public class King extends AbstractFigure {
     private boolean kingStepValid(int SquareNumber, @NotNull IArea Board) {
         int yRange = Math.abs(Board.getYCoordinate(this.getSquareNumber()) - Board.getYCoordinate(SquareNumber));
         int xRange = Math.abs(Board.getXCoordinate(this.getSquareNumber()) - Board.getXCoordinate(SquareNumber));
-        return (yRange == 1 && xRange == 1) || (yRange == 1 && xRange == 0) || (yRange == 0 && xRange == 1);
+        return ((yRange == 1) && (xRange == 1)) || ((yRange == 1) && (xRange == 0)) || ((yRange == 0) && (xRange == 1));
     }
 }

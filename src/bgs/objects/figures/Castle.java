@@ -20,5 +20,4 @@ public class Castle extends AbstractFigure {
         return super.isInRange(SquareNumber, Board) &&
                 super.isWayFreePerpendicular(SquareNumber, Board);
     }
-
 }

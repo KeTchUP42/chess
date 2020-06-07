@@ -30,8 +30,7 @@ public abstract class AbstractObject extends AbstractObjectBase implements Clone
     }
 
     /**
-     * The method scans the area for the possibility of
-     * diagonal movement
+     * The method scans the area for the possibility of diagonal movement
      *
      * @param SquareNumber
      * @param area
@@ -64,8 +63,7 @@ public abstract class AbstractObject extends AbstractObjectBase implements Clone
     }
 
     /**
-     * The method scans the area for the possibility of
-     * vertical or horizontal movement
+     * The method scans the area for the possibility of vertical or horizontal movement
      *
      * @param SquareNumber
      * @param area

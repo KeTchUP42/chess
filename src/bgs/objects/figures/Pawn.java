@@ -38,6 +38,5 @@ public class Pawn extends AbstractFigure {
                 (attackValid && SquareNumber == ordStep + 1 && Board.getXCoordinate(ordStep + 1) == Board.getXCoordinate(this.squareNumber) + 1) ||
                 (attackValid && SquareNumber == ordStep - 1 && Board.getXCoordinate(ordStep - 1) == Board.getXCoordinate(this.squareNumber) - 1) ||
                 (SquareNumber == ordStep && nullSquare);
-
     }
 }

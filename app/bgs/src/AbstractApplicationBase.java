@@ -41,7 +41,7 @@ public abstract class AbstractApplicationBase {
     }
 
     /**
-     * Method returns correct color's array
+     * Method returns correct color array
      */
     protected Color[] chooseGameColorsSequence(final @NotNull String param) {
         if (param.equals("") || param.equals("standard") || param.equals("first")) return new Color[]{
