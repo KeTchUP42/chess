@@ -4,7 +4,7 @@ import bgs.area.IArea;
 import bgs.objects.IObject;
 import bgs.objects.figures.*;
 import bgs.visual.src.GameColors;
-import bgs.visual.standard.ConsoleVisual;
+import bgs.visual.standard.console.ConsoleVisual;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -13,11 +13,11 @@ import org.jetbrains.annotations.NotNull;
  */
 public final class ChessConsoleVisual extends ConsoleVisual {
 
-    private static final String ANSI_RED = "\u001B[31m";
+    private final String ANSI_RED = "\u001B[31m";
 
-    private static final String ANSI_BLUE = "\u001B[34m";
+    private final String ANSI_BLUE = "\u001B[34m";
 
-    private static final String ANSI_RESET = "\u001B[0m";
+    private final String ANSI_RESET = "\u001B[0m";
 
     @Override
     public void Draw(@NotNull IArea area) {
@@ -39,7 +39,7 @@ public final class ChessConsoleVisual extends ConsoleVisual {
     @Contract(pure = true)
     private String chooseVisual(final IObject object) {
         if (object == null) return ANSI_RESET + " ";
-        String colorCode = object.getColor() == GameColors.firstColor ?
+        String colorCode = (object.getColor() == GameColors.firstColor) ?
                 ANSI_BLUE : ANSI_RED;
         if (object instanceof Pawn) return colorCode + "P";
         if (object instanceof Knight) return colorCode + "H";

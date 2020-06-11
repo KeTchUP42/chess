@@ -1,7 +1,8 @@
-package bgs.visual.standard;
+package bgs.visual.standard.console;
 
 import bgs.area.IArea;
 import bgs.visual.src.IVisual;
+import bgs.visual.standard.command.CommandAnalyzer;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Scanner;

@@ -1,4 +1,4 @@
-package bgs.visual.standard;
+package bgs.visual.standard.command;
 
 import bgs.setup.alias.AreaAliasList;
 import bgs.setup.alias.PlayerAliasList;
@@ -13,6 +13,19 @@ import java.lang.reflect.Modifier;
 public final class CommandAnalyzer extends AbstractCommandAnalyzer {
     public CommandAnalyzer(IVisual visual) {
         super(visual);
+    }
+
+    /**
+     * Method overrides abstract method with reflection methods call
+     */
+    protected void commandAnalyze(String command) {
+        try {
+            Method method = CommandAnalyzer.class.getDeclaredMethod(command);
+            method.setAccessible(true);
+            method.invoke(this);
+        } catch (Exception ignored) {
+            this.visual.showMessage("Hey, no such command!", false);
+        }
     }
 
     private void player_alias() {
@@ -30,11 +43,11 @@ public final class CommandAnalyzer extends AbstractCommandAnalyzer {
     }
 
     private void help() {
-        System.out.println("Available console commands:");
+        this.visual.showMessage("Available console commands:", false);
         for (Method method : CommandAnalyzer.class.getDeclaredMethods()
         ) {
             if (method.getReturnType().getName().equals("void") && method.getModifiers() == Modifier.PRIVATE)
-                System.out.println("* " + method.getName());
+                this.visual.showMessage("* " + method.getName(), false);
         }
     }
 }

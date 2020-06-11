@@ -48,8 +48,8 @@ public abstract class AbstractObject extends AbstractObjectBase implements Clone
         int targetX = area.getXCoordinate(SquareNumber);
         int targetY = area.getYCoordinate(SquareNumber);
         //Gets multipliers
-        int multiplier = targetX > objectX ? 1 : -1;
-        int sizeMp = targetY > objectY ? 1 : -1;
+        int multiplier = (targetX > objectX) ? 1 : -1;
+        int sizeMp = (targetY > objectY) ? 1 : -1;
 
         for (int index = this.getSquareNumber() + sizeMp * area.getAreaWidth() + multiplier;
              index != SquareNumber;
@@ -81,11 +81,11 @@ public abstract class AbstractObject extends AbstractObjectBase implements Clone
         int targetY = area.getYCoordinate(SquareNumber);
         //Gets multiplier
         int multiplier = 0;
-        boolean numAlg = objectX == targetX;
+        boolean numAlg = (objectX == targetX);
         if (objectX == targetX)
-            multiplier = targetY > objectY ? 1 : -1;
+            multiplier = (targetY > objectY) ? 1 : -1;
         else if (objectY == targetY)
-            multiplier = targetX > objectX ? 1 : -1;
+            multiplier = (targetX > objectX) ? 1 : -1;
 
         for (int index = numAlg ?
                 this.getSquareNumber() + multiplier * area.getAreaWidth() :
