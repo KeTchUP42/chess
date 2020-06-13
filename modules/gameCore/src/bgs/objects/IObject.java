@@ -47,8 +47,6 @@ public interface IObject {
      */
     boolean isActionable(int SquareNumber, @NotNull IArea area);
 
-    IObject clone() throws CloneNotSupportedException;
-
     int getSquareNumber();
 
     Color getColor();

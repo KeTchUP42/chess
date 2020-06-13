@@ -1,7 +1,7 @@
 package bgs.brains.bots;
 
 import bgs.area.IArea;
-import bgs.brains.scanners.ChessScanner;
+import bgs.brains.scanners.ChessKingScanner;
 import bgs.brains.src.AbstractPlayer;
 import bgs.brains.vars.StepLog;
 import bgs.brains.vars.TimeSpan;
@@ -20,7 +20,7 @@ public class Bot_0 extends AbstractPlayer {
 
     @Override
     public StepLog step() {
-        if (new ChessScanner(this.Area).isKingDead(this.Color)) {
+        if (new ChessKingScanner(this.Area).isKingDead(this.Color)) {
             this.Visual.showMessage(this.Name + " defeat on " + this.stepNumber + " step.", false);
             return StepLog.DEFEAT;
         }

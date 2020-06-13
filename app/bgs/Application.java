@@ -34,7 +34,7 @@ public final class Application extends AbstractApplication {
     }
 
     /**
-     * Method loads settings from ini file or console
+     * Method gets settings from ini file or console
      */
     private void loadSettings(String configPath, @NotNull IConfigList configList) throws Exception {
         if (this.configPathValidation(configPath)) {

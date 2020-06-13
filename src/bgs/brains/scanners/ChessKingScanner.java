@@ -10,11 +10,11 @@ import java.util.ArrayList;
 /**
  * @author Roman
  */
-public final class ChessScanner {
+public final class ChessKingScanner {
 
     private final IArea Area;
 
-    public ChessScanner(IArea area) {
+    public ChessKingScanner(IArea area) {
         this.Area = area;
     }
 

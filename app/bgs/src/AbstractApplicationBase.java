@@ -41,7 +41,7 @@ public abstract class AbstractApplicationBase {
     }
 
     /**
-     * Method returns correct color array
+     * Method returns correct color array which uses for players step order decide
      */
     protected Color[] chooseGameColorsSequence(final @NotNull String param) {
         if (param.equals("") || param.equals("standard") || param.equals("first")) return new Color[]{
@@ -64,9 +64,9 @@ public abstract class AbstractApplicationBase {
             this.Players = new IPlayer[]
                     {
                             this.generatePlayer(configData[ConfigFields.FIRST_PLAYER_TYPE], configData[ConfigFields.FIRST_PLAYER_NAME],
-                                    this.chooseGameColorsSequence(configData[ConfigFields.STEP_ORDER].toLowerCase())[0]),
+                                    this.chooseGameColorsSequence(configData[ConfigFields.STEP_ORDER])[0]),
                             this.generatePlayer(configData[ConfigFields.SECOND_PLAYER_TYPE], configData[ConfigFields.SECOND_PLAYER_NAME],
-                                    this.chooseGameColorsSequence(configData[ConfigFields.STEP_ORDER].toLowerCase())[1])
+                                    this.chooseGameColorsSequence(configData[ConfigFields.STEP_ORDER])[1])
                     };
         } catch (AliasNotFoundException exception) {
             Logger.getGlobalLogger().critical(exception.getMessage());

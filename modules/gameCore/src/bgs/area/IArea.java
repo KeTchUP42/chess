@@ -62,15 +62,15 @@ public interface IArea {
 
     IObject getObjectFromList(int ObjectSquareNumber);
 
+    int getMaxSquareNumber();
+
     int getAreaWidth();
 
     int getAreaHeight();
 
-    int getMaxSquareNumber();
+    int getSquareNumber(int XCoordinate, int YCoordinate);
 
     int getXCoordinate(int SquareNumber);
 
     int getYCoordinate(int SquareNumber);
-
-    int getSquareNumber(int XCoordinate, int YCoordinate);
 }

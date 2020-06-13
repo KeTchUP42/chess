@@ -20,5 +20,4 @@ public class Bishop extends AbstractFigure {
         return super.isInRange(SquareNumber, Board) &&
                 super.isWayFreeDiagonal(SquareNumber, Board);
     }
-
 }

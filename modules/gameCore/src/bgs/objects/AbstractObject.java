@@ -8,16 +8,23 @@ import java.awt.*;
 /**
  * @author Roman
  */
-public abstract class AbstractObject extends AbstractObjectBase implements Cloneable, IObject {
+public abstract class AbstractObject implements IObject {
+
+    protected int lastPosition;
+
+    protected int squareNumber;
+
+    protected Color color;
 
     public AbstractObject(int squareNumber, Color color) {
-        super(squareNumber, color);
+        this.squareNumber = squareNumber;
+        this.color = color;
     }
 
     public boolean move(int SquareNumber, IArea area) {
         boolean isInRange = this.isInRange(SquareNumber, area);
         if (isInRange) {
-            this.lastPosition = this.getSquareNumber();
+            this.lastPosition = this.squareNumber;
             this.squareNumber = SquareNumber;
             area.putObject(this);
             area.deleteObject(this.lastPosition);
@@ -29,78 +36,23 @@ public abstract class AbstractObject extends AbstractObjectBase implements Clone
         return this.isActionable(SquareNumber, area);
     }
 
-    /**
-     * The method scans the area for the possibility of diagonal movement
-     *
-     * @param SquareNumber
-     * @param area
-     * @return Result
-     */
-    protected boolean isWayFreeDiagonal(int SquareNumber, @NotNull IArea area) {
-        //Base step check
-        if (!(Math.abs(area.getYCoordinate(this.getSquareNumber()) - area.getYCoordinate(SquareNumber)) ==
-                Math.abs(area.getXCoordinate(this.getSquareNumber()) - area.getXCoordinate(SquareNumber))))
-            return false;
-        //Gets object coordinates
-        int objectX = area.getXCoordinate(this.getSquareNumber());
-        int objectY = area.getYCoordinate(this.getSquareNumber());
-        //Gets target coordinates
-        int targetX = area.getXCoordinate(SquareNumber);
-        int targetY = area.getYCoordinate(SquareNumber);
-        //Gets multipliers
-        int multiplier = (targetX > objectX) ? 1 : -1;
-        int sizeMp = (targetY > objectY) ? 1 : -1;
-
-        for (int index = this.getSquareNumber() + sizeMp * area.getAreaWidth() + multiplier;
-             index != SquareNumber;
-             index += sizeMp * area.getAreaWidth() + multiplier
-        ) {
-            if (area.getObjectFromList(index) != null) {
-                return false;
-            }
-        }
-        return true;
+    public boolean isInRange(int SquareNumber, @NotNull IArea area) {
+        return area.isValidSquareNumber(SquareNumber) && area.getObjectFromList(SquareNumber) == null;
     }
 
-    /**
-     * The method scans the area for the possibility of vertical or horizontal movement
-     *
-     * @param SquareNumber
-     * @param area
-     * @return Result
-     */
-    protected boolean isWayFreePerpendicular(int SquareNumber, @NotNull IArea area) {
-        //Base step check
-        if (!(area.getYCoordinate(this.getSquareNumber()) == area.getYCoordinate(SquareNumber)
-                || area.getXCoordinate(this.getSquareNumber()) == area.getXCoordinate(SquareNumber))) return false;
-        //Gets object coordinates
-        int objectX = area.getXCoordinate(this.getSquareNumber());
-        int objectY = area.getYCoordinate(this.getSquareNumber());
-        //Gets target coordinates
-        int targetX = area.getXCoordinate(SquareNumber);
-        int targetY = area.getYCoordinate(SquareNumber);
-        //Gets multiplier
-        int multiplier = 0;
-        boolean numAlg = (objectX == targetX);
-        if (objectX == targetX)
-            multiplier = (targetY > objectY) ? 1 : -1;
-        else if (objectY == targetY)
-            multiplier = (targetX > objectX) ? 1 : -1;
-
-        for (int index = numAlg ?
-                this.getSquareNumber() + multiplier * area.getAreaWidth() :
-                this.getSquareNumber() + multiplier;
-             index != SquareNumber;
-             index += numAlg ? multiplier * area.getAreaWidth() : multiplier
-        ) {
-            if (area.getObjectFromList(index) != null) {
-                return false;
-            }
-        }
-        return true;
+    public boolean isActionable(int SquareNumber, @NotNull IArea area) {
+        return area.isValidSquareNumber(SquareNumber);
     }
 
-    public IObject clone() throws CloneNotSupportedException {
-        return (IObject) super.clone();
+    public int getSquareNumber() {
+        return this.squareNumber;
+    }
+
+    public Color getColor() {
+        return this.color;
+    }
+
+    public int getLastPosition() {
+        return this.lastPosition;
     }
 }
