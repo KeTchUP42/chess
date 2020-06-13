@@ -20,7 +20,7 @@ public abstract class AbstractFigure extends AbstractObject {
 
     public boolean isInRange(int SquareNumber, @NotNull IArea area) {
         return area.isValidSquareNumber(SquareNumber) && (super.isInRange(SquareNumber, area) ||
-                area.getObjectFromList(SquareNumber).getColor() != this.getColor());
+                area.getObjectFromList(SquareNumber).getColor() != this.color);
     }
 
     /**
@@ -32,12 +32,11 @@ public abstract class AbstractFigure extends AbstractObject {
      */
     protected boolean isWayFreeDiagonal(int SquareNumber, @NotNull IArea area) {
         //Base step check
-        if (!(Math.abs(area.getYCoordinate(this.getSquareNumber()) - area.getYCoordinate(SquareNumber)) ==
-                Math.abs(area.getXCoordinate(this.getSquareNumber()) - area.getXCoordinate(SquareNumber))))
-            return false;
+        if (!(Math.abs(area.getYCoordinate(this.squareNumber) - area.getYCoordinate(SquareNumber)) ==
+                Math.abs(area.getXCoordinate(this.squareNumber) - area.getXCoordinate(SquareNumber)))) return false;
         //Gets object coordinates
-        int objectX = area.getXCoordinate(this.getSquareNumber());
-        int objectY = area.getYCoordinate(this.getSquareNumber());
+        int objectX = area.getXCoordinate(this.squareNumber);
+        int objectY = area.getYCoordinate(this.squareNumber);
         //Gets target coordinates
         int targetX = area.getXCoordinate(SquareNumber);
         int targetY = area.getYCoordinate(SquareNumber);
@@ -45,7 +44,7 @@ public abstract class AbstractFigure extends AbstractObject {
         int multiplier = (targetX > objectX) ? 1 : -1;
         int sizeMp = (targetY > objectY) ? 1 : -1;
 
-        for (int index = this.getSquareNumber() + sizeMp * area.getAreaWidth() + multiplier;
+        for (int index = this.squareNumber + sizeMp * area.getAreaWidth() + multiplier;
              index != SquareNumber;
              index += sizeMp * area.getAreaWidth() + multiplier
         ) {
@@ -65,11 +64,11 @@ public abstract class AbstractFigure extends AbstractObject {
      */
     protected boolean isWayFreePerpendicular(int SquareNumber, @NotNull IArea area) {
         //Base step check
-        if (!(area.getYCoordinate(this.getSquareNumber()) == area.getYCoordinate(SquareNumber)
-                || area.getXCoordinate(this.getSquareNumber()) == area.getXCoordinate(SquareNumber))) return false;
+        if (!(area.getYCoordinate(this.squareNumber) == area.getYCoordinate(SquareNumber)
+                || area.getXCoordinate(this.squareNumber) == area.getXCoordinate(SquareNumber))) return false;
         //Gets object coordinates
-        int objectX = area.getXCoordinate(this.getSquareNumber());
-        int objectY = area.getYCoordinate(this.getSquareNumber());
+        int objectX = area.getXCoordinate(this.squareNumber);
+        int objectY = area.getYCoordinate(this.squareNumber);
         //Gets target coordinates
         int targetX = area.getXCoordinate(SquareNumber);
         int targetY = area.getYCoordinate(SquareNumber);
@@ -82,8 +81,8 @@ public abstract class AbstractFigure extends AbstractObject {
             multiplier = (targetX > objectX) ? 1 : -1;
 
         for (int index = numAlg ?
-                this.getSquareNumber() + multiplier * area.getAreaWidth() :
-                this.getSquareNumber() + multiplier;
+                this.squareNumber + multiplier * area.getAreaWidth() :
+                this.squareNumber + multiplier;
              index != SquareNumber;
              index += numAlg ? multiplier * area.getAreaWidth() : multiplier
         ) {

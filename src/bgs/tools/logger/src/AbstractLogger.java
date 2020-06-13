@@ -72,7 +72,7 @@ public abstract class AbstractLogger implements LoggerInterface {
     }
 
     /**
-     * Method write message to log file
+     * Method writes message to log file
      */
     protected void log(String message) {
         try {
@@ -80,12 +80,12 @@ public abstract class AbstractLogger implements LoggerInterface {
             this.fileWriter.flush();
         } catch (IOException exception) {
             this.setLogWriter(STANDARD_LOG_FILE_PATH);
-            this.log(exception.getMessage());
+            this.error(exception.getMessage());
         }
     }
 
     /**
-     * Method return current date and time in string format
+     * Method returns current date and time in string format
      */
     protected String generateDateTimeString() {
         return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());

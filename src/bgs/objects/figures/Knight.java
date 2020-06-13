@@ -22,8 +22,8 @@ public class Knight extends AbstractFigure {
     }
 
     private boolean knightStepValid(int SquareNumber, @NotNull IArea Board) {
-        int absY = Math.abs(Board.getYCoordinate(this.getSquareNumber()) - Board.getYCoordinate(SquareNumber));
-        int absX = Math.abs(Board.getXCoordinate(this.getSquareNumber()) - Board.getXCoordinate(SquareNumber));
+        int absY = Math.abs(Board.getYCoordinate(this.squareNumber) - Board.getYCoordinate(SquareNumber));
+        int absX = Math.abs(Board.getXCoordinate(this.squareNumber) - Board.getXCoordinate(SquareNumber));
         return ((absY == 2) && (absX == 1)) || ((absX == 2) && (absY == 1));
     }
 }
