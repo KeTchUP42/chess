@@ -24,7 +24,8 @@ public class Bot_0 extends AbstractPlayer {
             this.Visual.showMessage(this.Name + " defeat on " + this.stepNumber + " step.", false);
             return StepLog.DEFEAT;
         }
-        int squareNumber, targetSquareNumber;
+        int squareNumber;
+        int targetSquareNumber;
         do {
             squareNumber = (int) (Math.random() * this.Area.getMaxSquareNumber());
             targetSquareNumber = (int) (Math.random() * this.Area.getMaxSquareNumber());

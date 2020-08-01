@@ -9,11 +9,11 @@
  2. В bgs.setup.alias.PlayerAliasList добавить новый алиас для его создания.
  
  * Пример массива алиасов:  
- ![chess](images/player_alias.png) 
+ ![player_alias](images/player_alias.png) 
   
 #### Примеры:  
  * Пример тестового бота БЕЗ какой-либо либо логики поведения:  
- [test bot](../src/bgs/brains/bots/Bot_0.java) 
+ [test_bot](../src/bgs/brains/bots/Bot_0.java) 
  
  * Пример игрока:  
  [real_player](../src/bgs/brains/players/Player.java) 

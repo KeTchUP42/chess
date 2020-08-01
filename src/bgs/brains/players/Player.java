@@ -23,7 +23,8 @@ public class Player extends AbstractPlayer {
             this.Visual.showMessage(this.Name + " defeat on " + this.stepNumber + " step.", false);
             return StepLog.DEFEAT;
         }
-        int squareNumber, figureSquareNumber;
+        int squareNumber;
+        int figureSquareNumber;
         try {
             this.Visual.showMessage(this.Name + " turn.", false);
             String input = this.Visual.showMessage(

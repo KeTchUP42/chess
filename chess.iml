@@ -8,8 +8,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="annotations-18.0.0" level="project" />
-    <orderEntry type="library" exported="" name="ini4j-0.5.4" level="project" />
-    <orderEntry type="module" module-name="gameCore" exported="" />
+    <orderEntry type="library" name="libs" level="project" />
+    <orderEntry type="module" module-name="gameCore" />
   </component>
 </module>
