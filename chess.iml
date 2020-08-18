@@ -9,6 +9,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="libs" level="project" />
-    <orderEntry type="module" module-name="gameCore" />
+    <orderEntry type="module" module-name="kernel" />
   </component>
 </module>
