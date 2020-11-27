@@ -25,7 +25,7 @@ public final class Logger extends AbstractLogger {
      */
     public static void configureGlobalLogger(String logFilePath) {
         Logger.globalLogger = new Logger(logFilePath);
-        Logger.globalLogger.info("Global logger configured");
+        Logger.globalLogger.info("Global logger configured.");
     }
 
     public static LoggerInterface getGlobalLogger() {

@@ -1,6 +1,7 @@
  ## Пример настроек: 
    * *Блок ColorSettings позволяет переопределить цвета в GameColors.*  
    * *Для log_file_path - предварительно нужно создать структуру каталогов.*
+   * *The turn sequence depends on the player’s color.*
     
     [AreaSettings]
     area_type         = standard
